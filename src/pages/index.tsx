@@ -8,6 +8,7 @@ export default function Home () {
       <Head>
         <title>Netflix clone</title>
         <meta name="description" content="..." />
+        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <main className={styles.container}>
