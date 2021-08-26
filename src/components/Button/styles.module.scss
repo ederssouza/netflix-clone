@@ -9,11 +9,16 @@
   font-weight: bold;
   justify-content: center;
   line-height: 2.4rem;
-  padding: 0.8rem;
+  padding: 0.8rem 2.4rem 0.8rem 2rem;
   position: relative;
   user-select: none;
   word-break: break-word;
   white-space: nowrap;
+
+  svg {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
 
   &:not(:disabled):focus::before {
     border: 2px solid white;
