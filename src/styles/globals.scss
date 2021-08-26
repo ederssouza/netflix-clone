@@ -1,9 +1,29 @@
-html,
-body {
-  padding: 0;
+:root {
+  --body-text-color: #fff;
+  --bg-color: #141414;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--body-text-color);
+  line-height: 1.2;
+  user-select: none;
+}
+
+body, input, textarea, select, button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+button {
+  cursor: pointer;
 }
 
 a {
@@ -11,6 +31,8 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+@media screen and (min-width: 1601px) and (max-width: 1920px) and (orientation: landscape) {
+  body, html {
+    font-size: .75vw;
+  }
 }
