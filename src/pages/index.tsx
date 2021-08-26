@@ -2,13 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from './home.module.scss'
 
-export default function Home() {
+export default function Home () {
   return (
     <>
       <Head>
         <title>Netflix clone</title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/assets/img/favicon.ico" />
+        <meta name="description" content="..." />
       </Head>
 
       <main className={styles.container}>
