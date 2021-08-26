@@ -1,3 +1,4 @@
+import { IoMdPlay, IoMdInformationCircleOutline } from 'react-icons/io'
 import { Button } from '../Button'
 
 export function FeaturedMovie () {
@@ -6,8 +7,13 @@ export function FeaturedMovie () {
       FeaturedMovie component
 
       <div>
-        <Button color="primary">Assistir</Button>
-        <Button color="secondary">Mais informações</Button>
+        <Button color="primary" icon={<IoMdPlay />}>
+          Assistir
+        </Button>
+
+        <Button color="secondary" icon={<IoMdInformationCircleOutline />}>
+          Mais informações
+        </Button>
       </div>
     </div>
   )
