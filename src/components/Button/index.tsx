@@ -2,12 +2,12 @@ import { ReactNode, ReactElement } from 'react'
 import styles from './styles.module.scss'
 
 interface IButton {
-  color: 'primary' | 'secondary'
+  color?: 'primary' | 'secondary'
   icon?: ReactElement
   children: ReactNode
 }
 
-export function Button ({ color, icon, children }: IButton) {
+export function Button ({ color = 'primary', icon, children }: IButton) {
   function renderButtonColorStyle (color: string) {
     const colors = {
       primary: 'btnPrimary',
