@@ -1,5 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { FeaturedMovie } from '../components/FeaturedMovie'
+import { Header } from '../components/Header'
+import { MoviesCarousel } from '../components/MoviesCarousel'
+import { Footer } from '../components/Footer'
 import styles from './home.module.scss'
 
 export default function Home () {
@@ -12,15 +15,10 @@ export default function Home () {
       </Head>
 
       <main className={styles.container}>
-        <h1 className={styles.title}>
-          <Image
-            src="/assets/img/netflix.png"
-            width="92.5px"
-            height="31px"
-            alt="Netflix logo"
-          />
-          Netflix clone
-        </h1>
+        <Header />
+        <FeaturedMovie />
+        <MoviesCarousel />
+        <Footer />
       </main>
     </>
   )
