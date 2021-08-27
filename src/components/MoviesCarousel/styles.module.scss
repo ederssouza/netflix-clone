@@ -1,0 +1,32 @@
+.container {}
+
+.title {
+  display: table-cell;
+  vertical-align: bottom;
+  line-height: 1.25vw;
+  font-size: 1.4vw;
+
+  color: #e5e5e5;
+  font-weight: bold;
+  margin: 0.5em 0;
+  text-decoration: none;
+  display: inline-block;
+  min-width: 6em;
+}
+
+.list {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+
+  li {
+    margin: 0 2px;
+    min-width: 255px;
+
+    a {
+      border-radius: 4px;
+      overflow: hidden;
+      display: block;
+    }
+  }
+}
