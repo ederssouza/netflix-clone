@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+
 import styles from './styles.module.scss'
 
 interface IMoviesCarousel {
@@ -24,13 +26,14 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
 
   function handleScroll ({ orientation }: IHandleScrollParams): void {
     const $movieList = refContainer?.current?.querySelector(`.${styles.list}`)
+    const scrollLeft = getMaxWidthScrollByClick() * imageWidth
 
     if ($movieList && orientation === 'left') {
-      $movieList.scrollLeft -= getMaxWidthScrollByClick() * imageWidth
+      $movieList.scrollLeft -= scrollLeft
     }
 
     if ($movieList && orientation === 'right') {
-      $movieList.scrollLeft += getMaxWidthScrollByClick() * imageWidth
+      $movieList.scrollLeft += scrollLeft
     }
   }
 
@@ -56,7 +59,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
           data-testid="button-prev-movies"
           onClick={() => handleScroll({ orientation: 'left' })}
         >
-          Anterior
+          <IoIosArrowBack />
         </button>
 
         <div
@@ -83,7 +86,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
           data-testid="button-next-movies"
           onClick={() => handleScroll({ orientation: 'right' })}
         >
-          Próximo
+          <IoIosArrowForward />
         </button>
       </div>
     </div>
