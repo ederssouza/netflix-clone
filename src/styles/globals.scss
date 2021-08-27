@@ -31,6 +31,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  max-width: 100%;
+}
+
 @media screen and (min-width: 1601px) and (max-width: 1920px) and (orientation: landscape) {
   body, html {
     font-size: .75vw;
