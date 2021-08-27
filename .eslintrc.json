@@ -22,9 +22,12 @@
     "@typescript-eslint"
   ],
   "globals": {
+    "jest": true,
     "describe": true,
     "it": true,
-    "expect": true
+    "expect": true,
+    "beforeAll": true,
+    "afterAll": true
   },
   "rules": {
     "react/react-in-jsx-scope": "off"
