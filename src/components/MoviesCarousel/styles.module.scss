@@ -1,4 +1,5 @@
-.container {}
+.container {
+}
 
 .title {
   display: table-cell;
@@ -14,13 +15,19 @@
   min-width: 6em;
 }
 
+.listContainer {
+  position: relative;
+}
+
 .list {
   display: flex;
   overflow: hidden;
+  scroll-behavior: smooth;
   white-space: nowrap;
 
-  li {
-    margin: 0 2px;
+  .listItem {
+    display: inline-block;
+    padding: 0 2px;
     min-width: 255px;
 
     a {
@@ -29,4 +36,20 @@
       display: block;
     }
   }
+}
+
+.prevButton,
+.nextButton {
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.prevButton {
+  left: 0;
+}
+
+.nextButton {
+  right: 0;
 }
