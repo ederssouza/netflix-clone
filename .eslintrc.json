@@ -21,6 +21,11 @@
     "react",
     "@typescript-eslint"
   ],
+  "globals": {
+    "describe": true,
+    "it": true,
+    "expect": true
+  },
   "rules": {
     "react/react-in-jsx-scope": "off"
   }
