@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "yarn jest",
-    "test:coverage": "yarn jest --coverage"
+    "test": "jest --maxWorkers=50%",
+    "test:watch": "jest --watch --maxWorkers=25%",
+    "test:ci": "jest --runInBand",
+    "test:coverage": "jest --coverage  --maxWorkers=50%"
   },
   "dependencies": {
     "next": "11.1.0",
