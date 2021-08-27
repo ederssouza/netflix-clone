@@ -10,7 +10,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.(scss|css|sass)$': 'identity-obj-proxy'
   },
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.tsx',
     '!src/**/*.spec.tsx',
