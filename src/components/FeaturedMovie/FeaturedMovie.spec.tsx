@@ -4,6 +4,6 @@ import { FeaturedMovie } from '.'
 describe('FeaturedMovie component', () => {
   it('should render with success', () => {
     render(<FeaturedMovie />)
-    expect(screen.getByText('FeaturedMovie component')).toBeInTheDocument()
+    expect(screen.getByText(/Lorem ipsum/i)).toBeInTheDocument()
   })
 })
