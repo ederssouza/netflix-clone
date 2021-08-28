@@ -18,6 +18,11 @@ export function offsetBeforeAll () {
     configurable: true,
     value: 200
   })
+
+  Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+    configurable: true,
+    value: 1000
+  })
 }
 
 export function offsetAfterAll () {
