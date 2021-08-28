@@ -27,7 +27,13 @@ export default function Home () {
       <main className={styles.container}>
         <Header />
         <FeaturedMovie />
-        <MoviesCarousel title="Adventure" movies={movies} />
+
+        <MoviesCarousel title="Populares Netflix" movies={movies} />
+        <MoviesCarousel title="Em alta" movies={movies} />
+        <MoviesCarousel title="Lançamentos" movies={movies} />
+        <MoviesCarousel title="Assistir novamente" movies={movies} />
+        <MoviesCarousel title="Documentários" movies={movies} />
+
         <Footer />
       </main>
     </>
