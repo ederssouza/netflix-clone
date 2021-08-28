@@ -1,8 +1,10 @@
 import Image from 'next/image'
 
+import styles from './styles.module.scss'
+
 export function Header () {
   return (
-    <header>
+    <header className={styles.container}>
       <Image
         src="/assets/img/netflix.png"
         width="92.5px"
