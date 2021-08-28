@@ -28,11 +28,13 @@ export default function Home () {
         <Header />
         <FeaturedMovie />
 
-        <MoviesCarousel title="Populares Netflix" movies={movies} />
-        <MoviesCarousel title="Em alta" movies={movies} />
-        <MoviesCarousel title="Lançamentos" movies={movies} />
-        <MoviesCarousel title="Assistir novamente" movies={movies} />
-        <MoviesCarousel title="Documentários" movies={movies} />
+        <div style={{ position: 'relative', top: '-256px' }}>
+          <MoviesCarousel title="Populares Netflix" movies={movies} />
+          <MoviesCarousel title="Em alta" movies={movies} />
+          <MoviesCarousel title="Lançamentos" movies={movies} />
+          <MoviesCarousel title="Assistir novamente" movies={movies} />
+          <MoviesCarousel title="Documentários" movies={movies} />
+        </div>
 
         <Footer />
       </main>
