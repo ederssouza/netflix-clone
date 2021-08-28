@@ -28,6 +28,22 @@ describe('MoviesCarouselArrow component', () => {
     expect(container.querySelector('svg')).toBeInTheDocument()
   })
 
+  it('should be hidden when receive `visible={false}` prop', () => {
+    const handleClickMock = jest.fn()
+
+    render(
+      <MoviesCarouselArrow
+        orientation="right"
+        visible={false}
+        handleClick={() => handleClickMock()}
+      />
+    )
+
+    const $arrowButton = screen.getByTestId('button-next-movies')
+
+    expect($arrowButton).not.toBeVisible()
+  })
+
   it('should execute a function on click', () => {
     const handleClickMock = jest.fn()
 
