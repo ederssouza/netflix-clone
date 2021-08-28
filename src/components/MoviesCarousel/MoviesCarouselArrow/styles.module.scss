@@ -1,9 +1,24 @@
 .prevButton,
 .nextButton {
+  align-items: center;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: none;
   bottom: 0;
+  color: var(--body-text-color);
+  display: flex;
+  font-size: 3.5rem;
+  justify-content: center;
   position: absolute;
   top: 0;
+  width: 60px;
   z-index: 1;
+
+  &:hover {
+
+    svg {
+      transform: scale(1.3);
+    }
+  }
 }
 
 .prevButton {
