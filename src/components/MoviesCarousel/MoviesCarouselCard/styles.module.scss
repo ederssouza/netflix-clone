@@ -1,11 +1,28 @@
 .listItem {
   display: inline-block;
-  padding: 0 2px;
-  min-width: 255px;
+  width: 260px;
+
+  &:first-child {
+    margin-left: 60px;
+  }
+
+  &:last-child {
+    margin-right: 60px;
+  }
 
   a {
-    border-radius: 4px;
-    overflow: hidden;
     display: block;
+    height: 144px;
+    position: relative;
+    width: 260px;
+
+    > div {
+      overflow: hidden;
+      padding: 0 2px;
+    }
+
+    img {
+      border-radius: 6px;
+    }
   }
 }

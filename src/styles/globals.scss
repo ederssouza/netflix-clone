@@ -14,6 +14,7 @@ body {
   color: var(--body-text-color);
   line-height: 1.2;
   user-select: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 body, input, textarea, select, button {
@@ -35,8 +36,16 @@ img {
   max-width: 100%;
 }
 
-@media screen and (min-width: 1601px) and (max-width: 1920px) and (orientation: landscape) {
-  body, html {
-    font-size: .75vw;
+@media (max-width: 1080px) {
+
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 720px) {
+
+  html {
+    font-size: 87.5%;
   }
 }
