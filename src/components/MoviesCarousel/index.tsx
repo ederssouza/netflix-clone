@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { MoviesCarouselArrow } from './MoviesCarouselArrow'
+import { MoviesCarouselCard } from './MoviesCarouselCard'
 
 import styles from './styles.module.scss'
 
@@ -38,12 +38,19 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
   }
 
   useEffect(() => {
-    const container = refContainer.current
-    const movieList = container.querySelector(`.${styles.list}`)
-    const imageWidth = container.querySelector(`.${styles.listItem}`).offsetWidth
+    function handleResize () {
+      const container = refContainer.current
+      const movieList = container.querySelector(`.${styles.list}`)
+      const imageWidth = container.querySelector(`.${styles.list} > div`).offsetWidth
 
-    setMovieListWidth(movieList.offsetWidth)
-    setImageWidth(imageWidth)
+      setMovieListWidth(movieList.offsetWidth)
+      setImageWidth(imageWidth)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
@@ -54,40 +61,19 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
         className={styles.listContainer}
         ref={refContainer}
       >
-        <button
-          className={styles.prevButton}
-          data-testid="button-prev-movies"
-          onClick={() => handleScroll({ orientation: 'left' })}
-        >
-          <IoIosArrowBack />
-        </button>
+        <MoviesCarouselArrow
+          orientation="left"
+          handleClick={() => handleScroll({ orientation: 'left' })}
+        />
 
-        <div
-          className={styles.list}
-          data-testid="movie-list"
-        >
-          {movies.map(movie => (
-            <div key={movie.id} className={styles.listItem}>
-              <a href="#" title={movie.title}>
-                <Image
-                  src={movie.image}
-                  alt={movie.title}
-                  width="251"
-                  height="141.31"
-                  data-testid="movie-img"
-                />
-              </a>
-            </div>
-          ))}
+        <div className={styles.list} data-testid="movie-list">
+          {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
         </div>
 
-        <button
-          className={styles.nextButton}
-          data-testid="button-next-movies"
-          onClick={() => handleScroll({ orientation: 'right' })}
-        >
-          <IoIosArrowForward />
-        </button>
+        <MoviesCarouselArrow
+          orientation="right"
+          handleClick={() => handleScroll({ orientation: 'right' })}
+        />
       </div>
     </div>
   )
