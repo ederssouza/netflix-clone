@@ -17,6 +17,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
   const refContainer = useRef(null)
   const [movieListWidth, setMovieListWidth] = useState(0)
   const [imageWidth, setImageWidth] = useState(0)
+  const [scrollPosition, setScrollPosition] = useState('start')
 
   function getMaxWidthScrollByClick () {
     return movieListWidth && imageWidth
@@ -35,6 +36,23 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
     if ($movieList && orientation === 'right') {
       $movieList.scrollLeft += scrollLeft
     }
+  }
+
+  function getScrollPosition (e) {
+    const scrollLeft = e.target.scrollLeft
+    const listWidth = e.target.scrollWidth - movieListWidth
+
+    if (scrollLeft === 0) {
+      setScrollPosition('start')
+      return
+    }
+
+    if (scrollLeft >= listWidth) {
+      setScrollPosition('end')
+      return
+    }
+
+    setScrollPosition('middle')
   }
 
   useEffect(() => {
@@ -63,15 +81,21 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
       >
         <MoviesCarouselArrow
           orientation="left"
+          visible={scrollPosition !== 'start'}
           handleClick={() => handleScroll({ orientation: 'left' })}
         />
 
-        <div className={styles.list} data-testid="movie-list">
+        <div
+          className={styles.list}
+          data-testid="movie-list"
+          onScroll={getScrollPosition}
+        >
           {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
         </div>
 
         <MoviesCarouselArrow
           orientation="right"
+          visible={scrollPosition !== 'end'}
           handleClick={() => handleScroll({ orientation: 'right' })}
         />
       </div>
