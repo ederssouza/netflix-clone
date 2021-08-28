@@ -20,9 +20,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
   const [scrollPosition, setScrollPosition] = useState('start')
 
   function getMaxWidthScrollByClick () {
-    return movieListWidth && imageWidth
-      ? Math.floor(movieListWidth / imageWidth)
-      : 0
+    return Math.floor(movieListWidth / imageWidth) || 0
   }
 
   function handleScroll ({ orientation }: IHandleScrollParams): void {
