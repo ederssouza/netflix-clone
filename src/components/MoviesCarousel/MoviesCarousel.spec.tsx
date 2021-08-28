@@ -28,7 +28,7 @@ describe('MoviesCarousel component', () => {
     expect($containerList.scrollLeft).toEqual(200)
   })
 
-  it('should move the scroll movie list to X, when click prev button', () => {
+  it('should move the scroll movie list when click prev button', () => {
     render(<MoviesCarousel title="Adventure" movies={movies} />)
 
     const $containerList = screen.getByTestId('movie-list')
