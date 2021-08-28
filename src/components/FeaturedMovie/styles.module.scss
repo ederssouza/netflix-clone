@@ -1,0 +1,41 @@
+.container {
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  height: 100vh;
+}
+
+.info {
+  justify-content: center;
+  background-image: linear-gradient(to right, rgba(#000, 0.7), transparent);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 60px;
+  max-width: 40%;
+}
+
+.infoActions {
+}
+
+.infoText {
+
+  p {
+    color: var(--body-text-color);
+    font-weight: 400;
+    line-height: normal;
+    font-size: 1.4vw;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+    width: 100%;
+  }
+}
+
+.infoActions {
+  display: flex;
+  margin-top: 1.5rem;
+
+  button {
+    margin: 0 1rem 1rem 0;
+  }
+}
