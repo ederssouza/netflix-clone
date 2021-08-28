@@ -13,7 +13,7 @@ describe('MoviesCarousel component', () => {
 
   it('should render a movie list', () => {
     render(<MoviesCarousel title="Adventure" movies={movies} />)
-    const $moviesImageList = screen.getAllByTestId('movie-img')
+    const $moviesImageList = screen.getAllByTestId('movie-card')
     expect($moviesImageList.length).toBe(20)
   })
 
