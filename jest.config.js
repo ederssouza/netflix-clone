@@ -17,5 +17,5 @@ module.exports = {
     '!src/pages/_app.tsx',
     '!src/pages/_document.tsx'
   ],
-  coverageReporters: ['json', 'lcov']
+  coverageReporters: ['json', 'lcov', 'text', 'clover']
 }
