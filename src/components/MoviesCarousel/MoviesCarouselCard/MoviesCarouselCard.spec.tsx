@@ -9,6 +9,6 @@ describe('MoviesCarouselCard component', () => {
     const $movieCardImage = screen.getByAltText(movie.title)
 
     expect(container.querySelector('a')).toHaveAttribute('title', movie.title)
-    expect($movieCardImage).toHaveAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+    expect($movieCardImage).toHaveAttribute('src', movie.image)
   })
 })
