@@ -17,7 +17,7 @@ describe('MoviesCarousel component', () => {
     expect($moviesImageList.length).toBe(20)
   })
 
-  it('should move the scroll movie list to X, when click next button', () => {
+  it('should move the scroll movie list when click next button', () => {
     render(<MoviesCarousel title="Adventure" movies={movies} />)
 
     const $containerList = screen.getByTestId('movie-list')
