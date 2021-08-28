@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { memo } from 'react'
 
 import styles from './styles.module.scss'
@@ -15,12 +14,10 @@ function MoviesCarouselCardComponent ({ movie }: IMoviesCarouselCardProps) {
   return (
     <div className={styles.listItem} data-testid="movie-card">
       <a href="#" title={movie.title}>
-        <Image
-          src={movie.image}
-          alt={movie.title}
-          width="251"
-          height="141.31"
-        />
+        <div>
+
+          <img src={movie.image} alt={movie.title} />
+        </div>
       </a>
     </div>
   )
