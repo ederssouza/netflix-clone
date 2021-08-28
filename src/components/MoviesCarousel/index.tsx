@@ -23,7 +23,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
     return Math.floor(movieListWidth / imageWidth) || 0
   }
 
-  function handleScroll ({ orientation }: IHandleScrollParams): void {
+  function handleScroll ({ orientation }: IHandleScrollParams) {
     const $movieList = refContainer?.current?.querySelector(`.${styles.list}`)
     const scrollLeft = getMaxWidthScrollByClick() * imageWidth
 
