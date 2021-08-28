@@ -8,7 +8,7 @@ interface IArrowProps {
   handleClick: () => void
 }
 
-export function MoviesCarouselArrow ({ orientation, visible, handleClick }: IArrowProps) {
+export function MoviesCarouselArrow ({ orientation, visible = true, handleClick }: IArrowProps) {
   return (
     <button
       className={`${orientation === 'left' ? styles.prevButton : styles.nextButton}`}
