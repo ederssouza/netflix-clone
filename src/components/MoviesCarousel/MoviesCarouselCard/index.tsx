@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { memo } from 'react'
 
 import styles from './styles.module.scss'
 
@@ -10,7 +11,7 @@ interface IMoviesCarouselCardProps {
   }
 }
 
-export function MoviesCarouselCard ({ movie }: IMoviesCarouselCardProps) {
+function MoviesCarouselCardComponent ({ movie }: IMoviesCarouselCardProps) {
   return (
     <div className={styles.listItem} data-testid="movie-card">
       <a href="#" title={movie.title}>
@@ -24,3 +25,7 @@ export function MoviesCarouselCard ({ movie }: IMoviesCarouselCardProps) {
     </div>
   )
 }
+
+export const MoviesCarouselCard = memo(MoviesCarouselCardComponent, (oldProps, newProps) => {
+  return Object.is(oldProps.movie, newProps.movie)
+})
