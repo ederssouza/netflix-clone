@@ -1,0 +1,11 @@
+.listItem {
+  display: inline-block;
+  padding: 0 2px;
+  min-width: 255px;
+
+  a {
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }
+}
