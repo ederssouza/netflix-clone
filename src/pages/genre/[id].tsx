@@ -26,8 +26,8 @@ export default function Genre ({ id }: IGenreProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { id } = query
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { id } = params
 
   return {
     props: {
