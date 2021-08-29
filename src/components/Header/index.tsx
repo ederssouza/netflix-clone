@@ -19,7 +19,7 @@ export function Header () {
   }, [])
 
   return (
-    <header className={fixedClass}>
+    <header className={fixedClass} data-testid="main-header">
       <Image
         src="/assets/img/netflix.png"
         width="92.5px"
