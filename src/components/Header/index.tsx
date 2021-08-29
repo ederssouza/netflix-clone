@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 
 export function Header () {
-  const [fixedClass, setFixedClass] = useState(styles.container)
+  const [className, setClassName] = useState(styles.container)
 
   useEffect(() => {
     function handleScroll () {
       const pageYOffset = window.pageYOffset
       const fixedClassValue = pageYOffset > 0 ? `${styles.container} ${styles.containerFillBackground}` : styles.container
-      setFixedClass(fixedClassValue)
+      setClassName(fixedClassValue)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -19,11 +19,11 @@ export function Header () {
   }, [])
 
   return (
-    <header className={fixedClass} data-testid="main-header">
+    <header className={className} data-testid="main-header">
       <Image
         src="/assets/img/netflix.png"
-        width="92.5px"
-        height="31px"
+        width="92.5"
+        height="25"
         alt="Netflix logo"
       />
     </header>
