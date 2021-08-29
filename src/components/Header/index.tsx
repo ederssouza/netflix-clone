@@ -1,10 +1,37 @@
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { Logo } from './Logo'
+import { Menu } from './Menu'
 
 import styles from './styles.module.scss'
 
 export function Header () {
   const [className, setClassName] = useState(styles.container)
+  const menuItems = [
+    {
+      href: '/',
+      title: 'Início'
+    },
+    {
+      href: '/genre/1',
+      title: 'Séries'
+    },
+    {
+      href: '/genre/2',
+      title: 'Filmes'
+    },
+    {
+      href: '/genre/3',
+      title: 'Bombando'
+    },
+    {
+      href: '/genre/4',
+      title: 'Minha lista'
+    },
+    {
+      href: '/genre/5',
+      title: 'Assista de novo'
+    }
+  ]
 
   useEffect(() => {
     function handleScroll () {
@@ -23,12 +50,8 @@ export function Header () {
 
   return (
     <header className={className} data-testid="main-header">
-      <Image
-        src="/assets/img/netflix.png"
-        width="92.5"
-        height="25"
-        alt="Netflix logo"
-      />
+      <Logo />
+      <Menu items={menuItems} />
     </header>
   )
 }
