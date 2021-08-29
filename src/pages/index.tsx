@@ -5,6 +5,7 @@ import { FeaturedMovie } from '../components/FeaturedMovie'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { Footer } from '../components/Footer'
 
+import common from '../styles/common.module.scss'
 import styles from './home.module.scss'
 
 export default function Home () {
@@ -28,7 +29,7 @@ export default function Home () {
         <Header />
         <FeaturedMovie />
 
-        <div style={{ position: 'relative', top: '-256px' }}>
+        <div className={common.moviesContainer}>
           <MoviesCarousel title="Populares Netflix" movies={movies} />
           <MoviesCarousel title="Em alta" movies={movies} />
           <MoviesCarousel title="Lançamentos" movies={movies} />
