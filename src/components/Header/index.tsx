@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Logo } from './Logo'
 import { Menu } from './Menu'
+import { SearchBox } from './SearchBox'
+import { Profile } from './Profile'
 
 import styles from './styles.module.scss'
 
@@ -52,6 +54,8 @@ export function Header () {
     <header className={className} data-testid="main-header">
       <Logo />
       <Menu items={menuItems} />
+      <SearchBox />
+      <Profile />
     </header>
   )
 }
