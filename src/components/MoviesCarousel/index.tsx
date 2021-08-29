@@ -21,7 +21,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
 
   function getMaxWidthScrollByClick () {
     // ~~ (double-tilde) => force convert NaN to 0
-    return ~~Math.floor(movieListWidth / imageWidth)
+    return ~~(movieListWidth / imageWidth)
   }
 
   function handleScroll ({ orientation }: IHandleScrollParams) {
