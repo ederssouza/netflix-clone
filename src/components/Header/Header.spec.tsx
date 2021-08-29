@@ -2,6 +2,10 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '.'
 
 describe('Header component', () => {
+  afterEach(() => {
+    Object.defineProperty(window, 'pageYOffset', { value: 0 })
+  })
+
   it('should render with success', () => {
     render(<Header />)
     expect(screen.getByAltText('Netflix logo')).toBeInTheDocument()
@@ -10,10 +14,7 @@ describe('Header component', () => {
   it('should add `containerFillBackground` CSS class when pageYOffset is greater than zero', () => {
     render(<Header />)
 
-    Object.defineProperty(window, 'pageYOffset', { value: 0 })
-
     const $header = screen.getByTestId('main-header')
-
     Object.defineProperty(window, 'pageYOffset', { value: 100 })
     fireEvent.scroll(window)
 
@@ -22,8 +23,6 @@ describe('Header component', () => {
 
   it('should remove `containerFillBackground` CSS class when pageYOffset equals zero', () => {
     render(<Header />)
-
-    Object.defineProperty(window, 'pageYOffset', { value: 0 })
 
     const $header = screen.getByTestId('main-header')
 
