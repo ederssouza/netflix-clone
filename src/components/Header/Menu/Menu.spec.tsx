@@ -12,6 +12,16 @@ const menuItems = [
   }
 ]
 
+jest.mock('next/router', () => {
+  return {
+    useRouter () {
+      return {
+        asPath: '/genre/1'
+      }
+    }
+  }
+})
+
 describe('Menu component', () => {
   it('should render with success', () => {
     render(<Menu items={menuItems} />)
@@ -31,5 +41,15 @@ describe('Menu component', () => {
 
     expect(getMenuItem(0)).toHaveAttribute('href', menuItems[0].href)
     expect(getMenuItem(1)).toHaveAttribute('href', menuItems[1].href)
+  })
+
+  it('should have an active link when href equals asPath', () => {
+    render(<Menu items={menuItems} />)
+
+    const $menu = screen.getByTestId('menu')
+    const getMenuItem = (index: number) => $menu.querySelectorAll('ul li')[index]
+
+    expect(getMenuItem(0)).not.toHaveClass('navbarMenuItemActive')
+    expect(getMenuItem(1)).toHaveClass('navbarMenuItemActive')
   })
 })
