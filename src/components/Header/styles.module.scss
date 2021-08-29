@@ -16,4 +16,9 @@
   &.containerFillBackground {
     background-position: 0 0;
   }
+
+  a[class*=logo] {
+    display: flex;
+    margin-right: 25px;
+  }
 }
