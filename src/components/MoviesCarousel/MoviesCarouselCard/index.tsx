@@ -15,7 +15,6 @@ function MoviesCarouselCardComponent ({ movie }: IMoviesCarouselCardProps) {
     <div className={styles.listItem} data-testid="movie-card">
       <a href="#" title={movie.title}>
         <div>
-
           <img src={movie.image} alt={movie.title} />
         </div>
       </a>
