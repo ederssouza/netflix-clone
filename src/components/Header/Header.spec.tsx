@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '.'
 
 describe('Header component', () => {
@@ -7,25 +7,32 @@ describe('Header component', () => {
     expect(screen.getByAltText('Netflix logo')).toBeInTheDocument()
   })
 
-  // TODO: should add `containerFillBackground` CSS class when pageYOffset is greater than zero
   it('should add `containerFillBackground` CSS class when pageYOffset is greater than zero', () => {
-    const { container } = render(<Header />)
+    render(<Header />)
 
     Object.defineProperty(window, 'pageYOffset', { value: 0 })
 
     const $header = screen.getByTestId('main-header')
 
-    console.log(container.innerHTML)
-    console.log(window.pageYOffset)
-
     Object.defineProperty(window, 'pageYOffset', { value: 100 })
+    fireEvent.scroll(window)
 
-    console.log(container.innerHTML)
-    console.log(window.pageYOffset)
+    expect($header).toHaveClass('containerFillBackground')
   })
 
-  // TODO: should remove `containerFillBackground` CSS class when pageYOffset equals zero
   it('should remove `containerFillBackground` CSS class when pageYOffset equals zero', () => {
+    render(<Header />)
 
+    Object.defineProperty(window, 'pageYOffset', { value: 0 })
+
+    const $header = screen.getByTestId('main-header')
+
+    Object.defineProperty(window, 'pageYOffset', { value: 100 })
+    fireEvent.scroll(window)
+
+    Object.defineProperty(window, 'pageYOffset', { value: 0 })
+    fireEvent.scroll(window)
+
+    expect($header).not.toHaveClass('containerFillBackground')
   })
 })
