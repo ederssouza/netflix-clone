@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Header } from '../components/Header'
+import { FeaturedMovie } from '../components/FeaturedMovie'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { Footer } from '../components/Footer'
 
