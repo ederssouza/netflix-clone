@@ -9,8 +9,11 @@ export function Header () {
   useEffect(() => {
     function handleScroll () {
       const pageYOffset = window.pageYOffset
-      const fixedClassValue = pageYOffset > 0 ? `${styles.container} ${styles.containerFillBackground}` : styles.container
-      setClassName(fixedClassValue)
+      const classNameValue = pageYOffset > 0
+        ? `${styles.container} ${styles.containerFillBackground}`
+        : styles.container
+
+      setClassName(classNameValue)
     }
 
     window.addEventListener('scroll', handleScroll)
