@@ -6,7 +6,7 @@
 
 ```bash
 # install dependnecies
-yarn add -D jest jest-dom @testing-library/jest-dom @testing-library/dom @testing-library/react babel-jest identity-obj-proxy
+yarn add -D jest jest-dom @testing-library/jest-dom @testing-library/dom @testing-library/react babel-jest identity-obj-proxy ts-jest
 ```
 
 ```js
