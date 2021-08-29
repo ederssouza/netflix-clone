@@ -1,0 +1,33 @@
+.container {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: 20px;
+  position: relative;
+  width: 268px;
+
+  label {
+    left: -999em;
+    position: absolute;
+    top: -999em;
+  }
+
+  svg {
+    font-size: 1.5rem;
+    left: 0.5rem;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+  }
+
+  input {
+    background: rgba(0,0,0,.75);
+    border: solid 1px rgba(255,255,255,.85);
+    color: #fff;
+    display: inline-block;
+    font-size: 0.875rem;
+    outline: 0;
+    padding: 7px 14px 7px 40px;
+    width: 100%
+  }
+}
