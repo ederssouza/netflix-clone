@@ -1,33 +1,58 @@
 .container {
   align-items: center;
+  cursor: pointer;
   display: flex;
   margin-left: auto;
   margin-right: 20px;
   position: relative;
-  width: 268px;
+  overflow: hidden;
+  transition: width 0.3s ease-out;
+  width: 30px;
 
-  label {
-    left: -999em;
-    position: absolute;
-    top: -999em;
-  }
-
-  svg {
+  .searchIcon {
     font-size: 1.5rem;
-    left: 0.5rem;
+    left: 50%;
     position: absolute;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
   }
 
+  .closeIcon {
+    display: none;
+    font-size: 1.5rem;
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   input {
-    background: rgba(0,0,0,.75);
-    border: solid 1px rgba(255,255,255,.85);
+    background-color: transparent;
+    border: 1px solid transparent;
     color: #fff;
     display: inline-block;
     font-size: 0.875rem;
     outline: 0;
     padding: 7px 14px 7px 40px;
-    width: 100%
+    transition: background 0.3s ease-out, border 0.3s ease-out;
+    width: 100%;
+  }
+
+  &.containerOpen {
+    width: 268px;
+
+    .searchIcon {
+      left: 0.5rem;
+      transform: translate(0%, -50%);
+    }
+
+    .closeIcon {
+      display: block;
+    }
+
+    input {
+      background: rgba(0,0,0,.75);
+      border-color: rgba(255,255,255,.85);
+    }
   }
 }
