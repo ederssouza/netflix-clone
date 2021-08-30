@@ -22,6 +22,7 @@ export function SearchBox () {
   return (
     <label
       className={className}
+      data-testid="search-box"
       onClick={() => handleClick()}
     >
       <IoSearch className={styles.searchIcon} />
