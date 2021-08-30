@@ -36,6 +36,10 @@
     padding: 7px 14px 7px 40px;
     transition: background 0.3s ease-out, border 0.3s ease-out;
     width: 100%;
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
   }
 
   &.containerOpen {
