@@ -1,103 +1,87 @@
-import { useState, useEffect, useRef } from 'react'
+// https://www.npmjs.com/package/react-multi-carousel
+import { useEffect, useRef, useState } from 'react'
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+
 import { MoviesCarouselArrow } from './MoviesCarouselArrow'
-import { MoviesCarouselCard } from './MoviesCarouselCard'
 
 import styles from './styles.module.scss'
 
-interface IMoviesCarousel {
+interface IMovie {
+  id: number
   title: string
-  movies: any[]
+  image: string
 }
 
-interface IHandleScrollParams {
-  orientation: 'left' | 'right'
+interface IMoviesCarouselProps {
+  title: string
+  movies: IMovie[]
 }
 
-export function MoviesCarousel ({ title, movies }: IMoviesCarousel) {
-  const refContainer = useRef(null)
-  const [movieListWidth, setMovieListWidth] = useState(0)
-  const [imageWidth, setImageWidth] = useState(0)
-  const [scrollPosition, setScrollPosition] = useState('start')
-
-  function getMaxWidthScrollByClick () {
-    // ~~ (double-tilde) => force convert NaN to 0
-    return ~~(movieListWidth / imageWidth)
+const defaultResponsiveProps = {
+  superLargeDesktop: {
+    breakpoint: { min: 3001, max: 4000 },
+    items: 6,
+    slidesToSlide: 6,
+    partialVisibilityGutter: 10
+  },
+  desktop: {
+    breakpoint: { min: 1025, max: 3000 },
+    items: 6,
+    slidesToSlide: 6,
+    partialVisibilityGutter: 10
+  },
+  tablet: {
+    breakpoint: { min: 768, max: 1024 },
+    items: 4,
+    slidesToSlide: 4,
+    partialVisibilityGutter: 10
+  },
+  mobile: {
+    breakpoint: { min: 0, max: 767 },
+    items: 2,
+    slidesToSlide: 2,
+    partialVisibilityGutter: 10
   }
+}
 
-  function handleScroll ({ orientation }: IHandleScrollParams) {
-    const $movieList = refContainer?.current?.querySelector(`.${styles.list}`)
-    const scrollLeft = getMaxWidthScrollByClick() * imageWidth
+export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
+  const [responsive, setResponsive] = useState({ ...defaultResponsiveProps })
+  const sliderRef = useRef(null)
 
-    if ($movieList && orientation === 'left') {
-      $movieList.scrollLeft -= scrollLeft
-    }
-
-    if ($movieList && orientation === 'right') {
-      $movieList.scrollLeft += scrollLeft
-    }
-  }
-
-  function getScrollPosition (e) {
-    const scrollLeft = e.target.scrollLeft
-    const listWidth = e.target.scrollWidth - movieListWidth
-
-    if (scrollLeft === 0) {
-      setScrollPosition('start')
-      return
-    }
-
-    if (scrollLeft >= listWidth) {
-      setScrollPosition('end')
-      return
-    }
-
-    setScrollPosition('middle')
+  function handleResponsiveProps () {
+    setResponsive({ ...defaultResponsiveProps })
   }
 
   useEffect(() => {
-    function handleResize () {
-      const container = refContainer.current
-      const movieList = container.querySelector(`.${styles.list}`)
-      const imageWidth = container.querySelector(`.${styles.list} > div`).offsetWidth
-
-      setMovieListWidth(movieList.offsetWidth)
-      setImageWidth(imageWidth)
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-
-    return () => window.removeEventListener('resize', handleResize)
+    handleResponsiveProps()
+    window.addEventListener('resize', handleResponsiveProps)
+    return () => window.removeEventListener('resize', handleResponsiveProps)
   }, [])
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
 
-      <div
-        className={styles.listContainer}
-        ref={refContainer}
+      <Carousel
+        ref={sliderRef}
+        partialVisible={true}
+        infinite={true}
+        draggable={false}
+        ssr={true}
+        responsive={responsive}
+        customLeftArrow={<MoviesCarouselArrow direction="left" />}
+        customRightArrow={<MoviesCarouselArrow direction="right" />}
       >
-        <MoviesCarouselArrow
-          orientation="left"
-          visible={scrollPosition !== 'start'}
-          handleClick={() => handleScroll({ orientation: 'left' })}
-        />
-
-        <div
-          className={styles.list}
-          data-testid="movie-list"
-          onScroll={getScrollPosition}
-        >
-          {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
-        </div>
-
-        <MoviesCarouselArrow
-          orientation="right"
-          visible={scrollPosition !== 'end'}
-          handleClick={() => handleScroll({ orientation: 'right' })}
-        />
-      </div>
+        {movies.map((movie, index) => (
+          <div
+            key={movie.id}
+            style={{ margin: '0 2px', borderRadius: 4, overflow: 'hidden' }}
+          >
+            <img src={movie.image} alt={movie.title} />
+          </div>
+        ))}
+      </Carousel>
     </div>
   )
 }

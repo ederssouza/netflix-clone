@@ -12,29 +12,3 @@
   min-width: 6rem;
   text-decoration: none;
 }
-
-.listContainer {
-  position: relative;
-
-  button {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-  }
-
-  &:hover {
-
-    button {
-      color: #fff;
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-}
-
-.list {
-  display: flex;
-  overflow: hidden;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-}
