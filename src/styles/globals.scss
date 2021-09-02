@@ -50,3 +50,47 @@ img {
     font-size: 87.5%;
   }
 }
+
+.react-multi-carousel-list {
+  padding-left: 10px;
+  position: relative;
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding-left: 20px;
+  }
+
+  @media (min-width: 1024px) and (max-width: 3000px) {
+    padding-left: 30px;
+  }
+
+  .react-multi-carousel-arrow {
+    align-items: center;
+    background-color: rgba(#000, 0.6);
+    bottom: 0;
+    cursor: pointer;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+    }
+
+    @media (min-width: 1024px) and (max-width: 3000px) {
+      width: 28px;
+      bottom: 4px;
+    }
+  }
+
+  .react-multi-carousel-arrow-left {
+    border-radius: 0 4px 4px 0;
+    left: 0;
+  }
+
+  .react-multi-carousel-arrow-right {
+    border-radius: 4px 0 0 4px;
+    right: 0;
+  }
+}
