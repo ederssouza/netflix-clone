@@ -14,28 +14,34 @@ interface IMoviesCarouselProps {
 
 const defaultResponsiveProps = {
   superLargeDesktop: {
-    breakpoint: { min: 3001, max: 4000 },
+    breakpoint: { min: 1400, max: 5000 },
     items: 6,
     slidesToSlide: 6,
-    partialVisibilityGutter: 10
+    partialVisibilityGutter: 20
   },
   desktop: {
-    breakpoint: { min: 1025, max: 3000 },
-    items: 6,
-    slidesToSlide: 6,
-    partialVisibilityGutter: 10
+    breakpoint: { min: 1100, max: 1399 },
+    items: 5,
+    slidesToSlide: 5,
+    partialVisibilityGutter: 18
   },
   tablet: {
-    breakpoint: { min: 768, max: 1024 },
+    breakpoint: { min: 800, max: 1099 },
     items: 4,
     slidesToSlide: 4,
-    partialVisibilityGutter: 10
+    partialVisibilityGutter: 16
+  },
+  mobile2: {
+    breakpoint: { min: 500, max: 799 },
+    items: 3,
+    slidesToSlide: 3,
+    partialVisibilityGutter: 13
   },
   mobile: {
-    breakpoint: { min: 0, max: 767 },
+    breakpoint: { min: 0, max: 499 },
     items: 2,
     slidesToSlide: 2,
-    partialVisibilityGutter: 10
+    partialVisibilityGutter: 19
   }
 }
 

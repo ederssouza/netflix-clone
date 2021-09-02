@@ -10,7 +10,7 @@
 }
 
 body {
-  background: var(--bg-color);
+  background-color: var(--bg-color);
   color: var(--body-text-color);
   line-height: 1.2;
   overflow-x: hidden;
@@ -52,35 +52,56 @@ img {
 }
 
 .react-multi-carousel-list {
-  padding-left: 10px;
+  padding-left: 18px; // 2
   position: relative;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-    padding-left: 20px;
+  @media (min-width: 500px) and (max-width: 799px) {
+    padding-left: 20px; // 3
   }
 
-  @media (min-width: 1024px) and (max-width: 3000px) {
-    padding-left: 30px;
+  @media (min-width: 800px) and (max-width: 1099px) {
+    padding-left: 32px; // 4
+  }
+
+  @media (min-width: 1100px) and (max-width: 1399px) {
+    padding-left: 44px; // 5
+  }
+
+  @media (min-width: 1400px) {
+    padding-left: 60px; // 6
   }
 
   .react-multi-carousel-arrow {
     align-items: center;
     background-color: rgba(#000, 0.6);
-    bottom: 0;
+    bottom: 2px;
     cursor: pointer;
     display: flex;
-    font-size: 30px;
+    font-size: 3rem;
     justify-content: center;
     position: absolute;
     top: 0;
-    z-index: 9999;
+    width: 18px;
+    z-index: 1;
 
-    @media (min-width: 768px) and (max-width: 1024px) {
+    @media (min-width: 500px) and (max-width: 799px) {
+      bottom: 3px;
+      width: 20px;
     }
 
-    @media (min-width: 1024px) and (max-width: 3000px) {
-      width: 28px;
+    @media (min-width: 800px) and (max-width: 1099px) {
+      bottom: 3px;
+      width: 32px;
+    }
+
+    @media (min-width: 1100px) and (max-width: 1399px) {
       bottom: 4px;
+      width: 44px;
+    }
+
+    @media (min-width: 1400px) {
+      bottom: 4px;
+      width: 60px;
     }
   }
 
@@ -93,4 +114,7 @@ img {
     border-radius: 4px 0 0 4px;
     right: 0;
   }
+}
+
+.react-multi-carousel-item.react-multi-carousel-item--active {
 }
