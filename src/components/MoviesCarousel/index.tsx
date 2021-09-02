@@ -1,17 +1,11 @@
-// https://www.npmjs.com/package/react-multi-carousel
 import { useEffect, useRef, useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 import { MoviesCarouselArrow } from './MoviesCarouselArrow'
+import { IMovie, MoviesCarouselCard } from './MoviesCarouselCard'
 
 import styles from './styles.module.scss'
-
-interface IMovie {
-  id: number
-  title: string
-  image: string
-}
 
 interface IMoviesCarouselProps {
   title: string
@@ -73,14 +67,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
         customLeftArrow={<MoviesCarouselArrow direction="left" />}
         customRightArrow={<MoviesCarouselArrow direction="right" />}
       >
-        {movies.map((movie, index) => (
-          <div
-            key={movie.id}
-            style={{ margin: '0 2px', borderRadius: 4, overflow: 'hidden' }}
-          >
-            <img src={movie.image} alt={movie.title} />
-          </div>
-        ))}
+        {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
       </Carousel>
     </div>
   )
