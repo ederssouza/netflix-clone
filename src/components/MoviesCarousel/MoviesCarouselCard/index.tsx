@@ -1,3 +1,5 @@
+import styles from './styles.module.scss'
+
 export interface IMovie {
   id: number
   title: string
@@ -10,7 +12,7 @@ interface IMovieProps {
 
 export function MoviesCarouselCard ({ movie }: IMovieProps) {
   return (
-    <div style={{ margin: '0 2px', borderRadius: 4, overflow: 'hidden' }}>
+    <div className={styles.container}>
       <img src={movie.image} alt={movie.title} />
     </div>
   )
