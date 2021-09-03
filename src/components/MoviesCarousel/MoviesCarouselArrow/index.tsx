@@ -10,6 +10,7 @@ export function MoviesCarouselArrow ({ direction, onClick, ...rest }: IMoviesCar
     return (
       <div
         className="react-multi-carousel-arrow react-multi-carousel-arrow-left"
+        data-testid="movies-carousel-arrow"
         onClick={onClick}
       >
         <MdKeyboardArrowLeft />
@@ -20,6 +21,7 @@ export function MoviesCarouselArrow ({ direction, onClick, ...rest }: IMoviesCar
   return (
     <div
       className="react-multi-carousel-arrow react-multi-carousel-arrow-right"
+      data-testid="movies-carousel-arrow"
       onClick={onClick}
     >
       <MdKeyboardArrowRight />
