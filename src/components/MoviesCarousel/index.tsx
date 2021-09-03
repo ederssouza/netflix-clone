@@ -60,7 +60,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
   }, [])
 
   return (
-    <div className={styles.container} data-testid="movies-carousel">
+    <div data-testid="movies-carousel">
       <h2 className={styles.title}>{title}</h2>
 
       <Carousel
