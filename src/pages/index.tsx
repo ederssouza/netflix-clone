@@ -51,10 +51,11 @@ export default function Home () {
           style={{ marginTop: containerMarginTop }}
           data-testid="movies-container"
         >
-          <div ref={refMoviesCarousel}>
-            <MoviesCarousel title="Populares Netflix" movies={movies} />
-          </div>
-
+          <MoviesCarousel
+            ref={refMoviesCarousel}
+            title="Populares Netflix"
+            movies={movies}
+          />
           <MoviesCarousel title="Em alta" movies={movies} />
           <MoviesCarousel title="Lançamentos" movies={movies} />
           <MoviesCarousel title="Assistir novamente" movies={movies} />
