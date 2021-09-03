@@ -7,22 +7,42 @@ export function Footer () {
       <div className={styles.container}>
         <ul className={styles.socialMedia}>
           <li>
-            <a href="https://www.facebook.com/netflixbrasil" title="Facebook">
+            <a
+              href="https://www.facebook.com/netflixbrasil"
+              title="Facebook"
+              target="_blank"
+              rel="noreferrer"
+            >
               <ImFacebook2 />
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/NetflixBrasil" title="Instagram">
+            <a
+              href="https://www.instagram.com/NetflixBrasil"
+              title="Instagram"
+              target="_blank"
+              rel="noreferrer"
+            >
               <ImInstagram />
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/NetflixBrasil" title="Twitter">
+            <a
+              href="https://twitter.com/NetflixBrasil"
+              title="Twitter"
+              target="_blank"
+              rel="noreferrer"
+            >
               <ImTwitter />
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com/user/NetflixBRA" title="YouTube">
+            <a
+              href="https://www.youtube.com/user/NetflixBRA"
+              title="YouTube"
+              target="_blank"
+              rel="noreferrer"
+            >
               <ImYoutube />
             </a>
           </li>
