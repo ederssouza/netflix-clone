@@ -60,7 +60,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
   }, [])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="movies-carousel">
       <h2 className={styles.title}>{title}</h2>
 
       <Carousel
@@ -68,8 +68,10 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
         partialVisible={true}
         infinite={true}
         draggable={false}
-        ssr={true}
         responsive={responsive}
+        ssr={true}
+        // TODO: get dinamicaly (https://stackoverflow.com/questions/67627482/react-multi-carousel-doesnt-do-server-side-render)
+        deviceType={'desktop'}
         customLeftArrow={<MoviesCarouselArrow direction="left" />}
         customRightArrow={<MoviesCarouselArrow direction="right" />}
       >
