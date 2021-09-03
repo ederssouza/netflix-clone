@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, forwardRef, ForwardRefRenderFunction } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
@@ -45,7 +45,7 @@ const defaultResponsiveProps = {
   }
 }
 
-export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
+const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCarouselProps> = ({ title, movies, ...rest }: IMoviesCarouselProps, ref) => {
   const [responsive, setResponsive] = useState({ ...defaultResponsiveProps })
   const sliderRef = useRef(null)
 
@@ -60,7 +60,7 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
   }, [])
 
   return (
-    <div data-testid="movies-carousel">
+    <div className={styles.container} data-testid="movies-carousel" ref={ref}>
       <h2 className={styles.title}>{title}</h2>
 
       <Carousel
@@ -80,3 +80,5 @@ export function MoviesCarousel ({ title, movies }: IMoviesCarouselProps) {
     </div>
   )
 }
+
+export const MoviesCarousel = forwardRef(MoviesCarouselBase)
