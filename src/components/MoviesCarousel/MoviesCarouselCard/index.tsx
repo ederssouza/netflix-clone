@@ -12,7 +12,10 @@ interface IMovieProps {
 
 export function MoviesCarouselCard ({ movie }: IMovieProps) {
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      data-testid="movies-carousel-card"
+    >
       <img src={movie.image} alt={movie.title} />
     </div>
   )
