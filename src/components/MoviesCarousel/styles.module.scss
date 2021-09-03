@@ -1,5 +1,10 @@
 .container {
-  margin: 4rem 0;
+  margin-bottom: 4rem;
+  overflow: hidden;
+
+  + .container {
+    margin-top: 4rem;
+  }
 }
 
 .title {
@@ -8,7 +13,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.5rem;
-  margin: 0.5rem 0 1rem 60px;
+  padding: 0.5rem 0 1rem 60px;
   min-width: 6rem;
   text-decoration: none;
 }
