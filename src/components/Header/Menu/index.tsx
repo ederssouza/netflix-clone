@@ -1,41 +1,37 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { IoMdArrowDropdown } from 'react-icons/io'
+
+import { MenuItems, IMenuProps } from './MenuItems'
 
 import styles from './styles.module.scss'
 
-interface IMenuItemProps {
-  href: string
-  title: string
-}
-
-interface IMenuProps {
-  items: IMenuItemProps[]
-}
-
 export function Menu ({ items }: IMenuProps) {
-  const router = useRouter()
-  const asPath = router?.asPath || null
+  const [mobileMenuClassName, setMobileMenuClassName] = useState(styles.mobileNavbar)
+
+  function handleOpenMobileMenu (e) {
+    const elemClalist = e?.target?.classList
+    const isMobileNavbar = elemClalist?.contains(styles.mobileNavbar)
+    const isOpenMobileNavbar = elemClalist?.contains(styles.mobileNavbarOpen)
+    const className = isOpenMobileNavbar || !isMobileNavbar
+      ? styles.mobileNavbar
+      : `${styles.mobileNavbar} ${styles.mobileNavbarOpen}`
+
+    setMobileMenuClassName(className)
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleOpenMobileMenu)
+    return () => document.removeEventListener('click', handleOpenMobileMenu)
+  }, [])
 
   return (
     <nav className={styles.navbar} data-testid="menu">
-      <ul className={styles.navbarMenu}>
-        {items.map(link => {
-          const className = asPath === link.href
-            ? styles.navbarMenuItemActive
-            : undefined
+      <button className={mobileMenuClassName} title="Navegar">
+        Navegar <IoMdArrowDropdown />
+        <MenuItems items={items} />
+      </button>
 
-          return (
-            <li
-              key={link.title}
-              className={link.href === asPath ? className : null}
-            >
-              <Link href={link.href}>
-                <a title={link.title}>{link.title}</a>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <MenuItems items={items} />
     </nav>
   )
 }
