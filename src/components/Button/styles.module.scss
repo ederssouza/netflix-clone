@@ -5,20 +5,30 @@
   border-radius: 4px;
   cursor: pointer;
   display: flex;
-  font-size: 1.2rem;
+  height: 20px;
+  font-size: 0.75rem;
   font-weight: bold;
-  height: 50px;
   justify-content: center;
   line-height: 2.4rem;
-  padding: 0.8rem 1.8rem 0.8rem 1.5rem;
+  padding: 0.8rem 1rem 0.8rem 1rem;
   position: relative;
   user-select: none;
   word-break: break-word;
   white-space: nowrap;
 
+  @media (min-width: 885px) {
+    font-size: 1.2rem;
+    height: 50px;
+    padding: 0.8rem 1.8rem 0.8rem 1.5rem;
+  }
+
   svg {
-    font-size: 1.8rem;
+    font-size: 1rem;
     margin-right: 1rem;
+
+    @media (min-width: 885px) {
+      font-size: 1.8rem;
+    }
   }
 
   &:not(:disabled):focus::before {
