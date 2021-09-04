@@ -1,8 +1,85 @@
-.navbar {}
+.navbar {
+
+  .mobileNavbar {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: --body-text-color;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: bold;
+    height: 41px;
+    padding: 0 10px;
+    position: relative;
+
+    > svg {
+      font-size: 1.125px;
+      margin-left: 0.25rem;
+    }
+
+    @media (min-width: 885px) {
+      display: none;
+    }
+
+    .navbarMenu {
+      background-color: rgba(0,0,0,.9);
+      border-top: 2px solid var(--prymary-text-color);
+      display: none;
+      left: 50%;
+      margin-top: 5px;
+      position: absolute;
+      top: 100%;
+      transform: translateX(-50%);
+      width: 260px;
+
+      &::before,
+      &::after {
+        bottom: 100%;
+        content: '';
+        position: absolute;
+      }
+
+      &::before {
+        border-bottom: 10px solid var(--prymary-text-color);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid transparent;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      li {
+        display: block;
+        margin-left: 0;
+      }
+
+      a {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        white-space: nowrap;
+      }
+    }
+
+    &.mobileNavbarOpen {
+
+      .navbarMenu {
+        display: block;
+      }
+    }
+  }
+}
 
 .navbarMenu {
-  display: flex;
+  display: none;
   list-style-type: none;
+
+  @media (min-width: 885px) {
+    display: flex;
+  }
 
   li {
     display: flex;
@@ -10,13 +87,17 @@
   }
 
   a {
-    color: #e5e5e5;
-    font-size: 14px;
+    color: #b3b3b3;
+    font-size: 0.875rem;
+    font-weight: normal;
   }
 }
 
 .navbarMenuItemActive {
-  color: #fff;
-  cursor: default;
-  font-weight: bold;
+
+  a {
+    color: var(--body-text-color);
+    cursor: default;
+    font-weight: 700;
+  }
 }
