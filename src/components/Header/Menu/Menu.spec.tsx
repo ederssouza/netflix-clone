@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Menu } from '.'
 
 const menuItems = [
@@ -28,9 +28,8 @@ describe('Menu component', () => {
 
     const $menu = screen.getByTestId('menu')
 
-    expect(screen.getByTitle('Home')).toBeInTheDocument()
-    expect(screen.getByTitle('Movies')).toBeInTheDocument()
-    expect($menu.querySelectorAll('ul li').length).toEqual(menuItems.length)
+    expect(screen.getByTitle('Navegar')).toBeInTheDocument()
+    expect($menu.querySelectorAll('button ul li').length).toEqual(menuItems.length)
   })
 
   it('should render with valid href attribute', () => {
@@ -44,10 +43,13 @@ describe('Menu component', () => {
   })
 
   it('should have an active link when href equals asPath', () => {
-    render(<Menu items={menuItems} />)
-
+    const { container } = render(<Menu items={menuItems} />)
     const $menu = screen.getByTestId('menu')
     const getMenuItem = (index: number) => $menu.querySelectorAll('ul li')[index]
+
+    fireEvent.click(document)
+    fireEvent.click(container.querySelector('.mobileNavbar'))
+    fireEvent.click(container.querySelector('.mobileNavbarOpen'))
 
     expect(getMenuItem(0)).not.toHaveClass('navbarMenuItemActive')
     expect(getMenuItem(1)).toHaveClass('navbarMenuItemActive')
