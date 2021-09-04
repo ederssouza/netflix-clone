@@ -4,7 +4,7 @@
     align-items: center;
     background-color: transparent;
     border: none;
-    color: --body-text-color;
+    color: var(--body-text-color);
     cursor: pointer;
     display: flex;
     font-size: 0.75rem;
@@ -14,7 +14,8 @@
     position: relative;
 
     > svg {
-      font-size: 1.125px;
+      color: var(--body-text-color);
+      font-size: 1.125rem;
       margin-left: 0.25rem;
     }
 
