@@ -47,10 +47,15 @@ const defaultResponsiveProps = {
 
 const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCarouselProps> = ({ title, movies, ...rest }: IMoviesCarouselProps, ref) => {
   const [responsive, setResponsive] = useState({ ...defaultResponsiveProps })
+  const [firstLoad, setFirstLoad] = useState(true)
   const sliderRef = useRef(null)
 
   function handleResponsiveProps () {
     setResponsive({ ...defaultResponsiveProps })
+  }
+
+  function arrowCallback () {
+    setFirstLoad(false)
   }
 
   useEffect(() => {
@@ -60,7 +65,11 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
   }, [])
 
   return (
-    <div className={styles.container} data-testid="movies-carousel" ref={ref}>
+    <div
+      className={`${styles.container} ${firstLoad ? 'carousel-firstload' : ''}`}
+      data-testid="movies-carousel"
+      ref={ref}
+    >
       <h2 className={styles.title}>{title}</h2>
 
       <Carousel
@@ -72,8 +81,18 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
         ssr={true}
         // TODO: get dinamicaly (https://stackoverflow.com/questions/67627482/react-multi-carousel-doesnt-do-server-side-render)
         deviceType={'desktop'}
-        customLeftArrow={<MoviesCarouselArrow direction="left" />}
-        customRightArrow={<MoviesCarouselArrow direction="right" />}
+        customLeftArrow={
+          <MoviesCarouselArrow
+            firstLoad={firstLoad}
+            direction="left"
+          />
+        }
+        customRightArrow={
+          <MoviesCarouselArrow
+            direction="right"
+            callback={arrowCallback}
+          />
+        }
       >
         {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
       </Carousel>
