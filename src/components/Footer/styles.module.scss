@@ -1,11 +1,24 @@
 .footer {
   margin: 0 auto;
-  max-width: 980px;
-  padding: 2rem 0 1rem;
+  padding: 2rem 20px 1rem;
+
+  @media (min-width: 885px) {
+    max-width: 980px;
+    padding: 2rem 60px 1rem;
+  }
 }
 
 .container {
-  display: flex;
+
+  @media (min-width: 420px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 885px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .socialMedia {
@@ -14,12 +27,20 @@
   margin-bottom: 0.5rem;
 
   li {
-    margin-right: 1.5rem;
+    margin-right: 1.25rem;
+
+    @media (min-width: 885px) {
+      font-size: 1.5rem;
+    }
   }
 
   a {
     color: grey;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+
+    @media (min-width: 885px) {
+      font-size: 1.5rem;
+    }
   }
 }
 

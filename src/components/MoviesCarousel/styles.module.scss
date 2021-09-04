@@ -1,19 +1,32 @@
 .container {
-  margin-bottom: 4rem;
+  margin-bottom: 0.75rem;
   overflow: hidden;
 
+  @media (min-width: 885px) {
+    margin-bottom: 4rem;
+  }
+
   + .container {
-    margin-top: 4rem;
+    margin-bottom: 0.75rem;
+
+    @media (min-width: 885px) {
+      margin-top: 4rem;
+    }
   }
 }
 
 .title {
   color: var(--body-text-color);
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  line-height: 1.5rem;
-  padding: 0.5rem 0 1rem 60px;
+  line-height: 1rem;
+  padding: 0.25rem 20px 0.25rem;
   min-width: 6rem;
   text-decoration: none;
+
+  @media (min-width: 885px) {
+    font-size: 1.5rem;
+    padding: 0.5rem 0 1rem 60px;
+  }
 }
