@@ -4,14 +4,19 @@
   background-position: 0 -80px;
   background-size: 100% 150px;
   display: flex;
-  height: 68px;
+  height: 41px;
   left: 0;
-  padding: 0 60px;
+  padding: 0 20px;
   position: fixed;
   right: 0;
   top: 0;
   transition: background-position 0.5s linear;
   z-index: 10;
+
+  @media (min-width: 885px) {
+    height: 68px;
+    padding: 0 60px;
+  }
 
   &.containerFillBackground {
     background-position: 0 0;
