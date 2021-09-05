@@ -4,10 +4,12 @@ import Genre, { getServerSideProps } from '../../pages/genre/[id]'
 describe('Genre page component', () => {
   it('should render with success', () => {
     render(<Genre id={'10'} />)
-    expect(screen.getByText('Genre 10')).toBeInTheDocument()
+    expect(screen.getByText('Gênero 10')).toBeInTheDocument()
   })
 
   it('should get URL ID param', async () => {
+    render(<Genre id={'8'} />)
+
     const response = await getServerSideProps({
       params: { id: '8' }
     } as any)
