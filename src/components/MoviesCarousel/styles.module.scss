@@ -1,5 +1,6 @@
 .container {
   margin-bottom: 0.75rem;
+  overflow: initial;
 
   @media (min-width: 885px) {
     margin-bottom: 4rem;

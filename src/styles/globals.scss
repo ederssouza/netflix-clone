@@ -53,10 +53,12 @@ img {
 }
 
 .react-multi-carousel-list {
-  overflow-y: initial;
-  overflow-x: hidden;
   padding-left: 18px; // 2 items
   position: relative;
+
+  @media (min-width: 885px) {
+    overflow: initial !important;
+  }
 
   &:hover {
     z-index: 1;
