@@ -4,6 +4,8 @@ A simple Netflix clone with React JS and Next.js
 
 ## TO DO
 
+### Layout
+
 - [x] Home page
   - [x] Header
     - [x] Menu
@@ -13,5 +15,12 @@ A simple Netflix clone with React JS and Next.js
     - [x] Carousel card
   - [x] Footer
 - [x] Genres page
+- [ ] Search page
+- [ ] Detail page
+
+### API integration
+
+- [ ] Home page
+- [ ] Genres page
 - [ ] Search page
 - [ ] Detail page
