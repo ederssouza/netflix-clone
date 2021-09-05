@@ -10,11 +10,17 @@
   font-weight: bold;
   justify-content: center;
   line-height: 2.4rem;
-  padding: 0.8rem 1rem 0.8rem 1rem;
+  padding: 0.8rem 0.5rem;
   position: relative;
   user-select: none;
   word-break: break-word;
   white-space: nowrap;
+
+  @media (min-width: 420px) {
+    font-size: 1rem;
+    height: 35px;
+    padding: 0.8rem 0.8rem;
+  }
 
   @media (min-width: 885px) {
     font-size: 1.2rem;
@@ -24,7 +30,11 @@
 
   svg {
     font-size: 1rem;
-    margin-right: 1rem;
+    margin-right: 0.25rem;
+
+    @media (min-width: 420px) {
+      font-size: 1rem;
+    }
 
     @media (min-width: 885px) {
       font-size: 1.8rem;
