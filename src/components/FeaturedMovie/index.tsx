@@ -3,17 +3,30 @@ import { Button } from '../Button'
 
 import styles from './styles.module.scss'
 
-export function FeaturedMovie () {
+interface IMovie {
+  id: number
+  background: string
+  title: string
+  description: string
+}
+
+interface IFeaturedMovieProps {
+  movie: IMovie
+}
+
+export function FeaturedMovie ({ movie }: IFeaturedMovieProps) {
+  const { background, title, description } = movie
+
   return (
     <div
       className={styles.container}
-      style={{
-        backgroundImage: 'url("http://4.bp.blogspot.com/-5tiOMxe6rSs/UkofuptCcVI/AAAAAAAAHXk/TkY1r2cYM6M/s1600/breaking-bad.jpg")'
-      }}
+      style={{ backgroundImage: `url("${background}")` }}
+      data-testid="featured-movie"
     >
       <div className={styles.info}>
         <div className={styles.infoText}>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae aliquam quos deleniti fugit fuga neque quisquam accusamus dignissimos.</p>
+          <h1 className={styles.title}>{title}</h1>
+          <p className={styles.text}>{description}</p>
         </div>
 
         <div className={styles.infoActions}>
