@@ -5,25 +5,28 @@ import styles from './styles.module.scss'
 
 interface IMovie {
   id: number
-  background: string
+  image: string
   title: string
   description: string
 }
 
 interface IFeaturedMovieProps {
+  category?: string
   movie: IMovie
 }
 
-export function FeaturedMovie ({ movie }: IFeaturedMovieProps) {
-  const { background, title, description } = movie
+export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
+  const { image, title, description } = movie
 
   return (
     <div
       className={styles.container}
-      style={{ backgroundImage: `url("${background}")` }}
+      style={{ backgroundImage: `url("${image}")` }}
       data-testid="featured-movie"
     >
       <div className={styles.info}>
+        {category && <h1 className={styles.containerTitle}>{category}</h1>}
+
         <div className={styles.infoText}>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.text}>{description}</p>
