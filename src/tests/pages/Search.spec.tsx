@@ -9,7 +9,7 @@ describe('Search page component', () => {
     expect(screen.getByText(/search term/)).toBeInTheDocument()
   })
 
-  it('should render `a` prop when has URL contains query param', async () => {
+  it('should render `q` prop when has URL contains query param', async () => {
     const response = await getServerSideProps({
       query: {
         q: 'search term'
