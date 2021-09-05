@@ -1,8 +1,8 @@
 .container {
   align-items: center;
   background-image: linear-gradient(to bottom, #000, transparent);
-  background-position: 0 -80px;
-  background-size: 100% 150px;
+  background-position: 0 -48px;
+  background-size: 100% 90px;
   display: flex;
   height: 41px;
   left: 0;
@@ -14,6 +14,8 @@
   z-index: 10;
 
   @media (min-width: 885px) {
+    background-position: 0 -80px;
+    background-size: 100% 150px;
     height: 68px;
     padding: 0 60px;
   }
