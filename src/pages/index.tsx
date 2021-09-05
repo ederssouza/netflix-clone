@@ -44,7 +44,12 @@ export default function Home () {
 
       <main className={styles.container}>
         <Header />
-        <FeaturedMovie />
+        <FeaturedMovie movie={{
+          id: 1,
+          background: 'http://4.bp.blogspot.com/-5tiOMxe6rSs/UkofuptCcVI/AAAAAAAAHXk/TkY1r2cYM6M/s1600/breaking-bad.jpg',
+          title: 'Movie title',
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae aliquam quos deleniti fugit fuga neque quisquam accusamus dignissimos.'
+        }} />
 
         <div
           className={common.moviesContainer}
