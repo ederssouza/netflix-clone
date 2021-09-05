@@ -1,5 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
+import { useRouter } from 'next/router'
 import { SearchBox } from '.'
+
+jest.mock('next/router')
 
 describe('SearchBox component', () => {
   it('should render with success', () => {
@@ -57,5 +61,17 @@ describe('SearchBox component', () => {
 
     expect($input.value).toEqual('')
     expect($searchBox).toHaveClass('containerOpen')
+  })
+
+  it('should open search box when has URL contains query param', () => {
+    const useRouterMocked = mocked(useRouter)
+
+    useRouterMocked.mockReturnValueOnce({
+      query: { q: 'search term' }
+    } as any)
+
+    render(<SearchBox />)
+
+    expect(screen.getByTestId('search-box')).toBeInTheDocument()
   })
 })

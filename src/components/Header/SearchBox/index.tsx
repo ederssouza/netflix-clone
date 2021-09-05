@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from 'react'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { IoSearch, IoClose } from 'react-icons/io5'
 
 import styles from './styles.module.scss'
@@ -6,6 +7,7 @@ import styles from './styles.module.scss'
 export function SearchBox () {
   const [className, setClassName] = useState(styles.container)
   const [search, setSearch] = useState('')
+  const router = useRouter()
 
   function handleClick () {
     setClassName(`${styles.container} ${styles.containerOpen}`)
@@ -18,6 +20,14 @@ export function SearchBox () {
   function handleChange (e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
   }
+
+  useEffect(() => {
+    const q = router?.query?.q
+    if (q) {
+      handleClick()
+      setSearch(String(q))
+    }
+  }, [router])
 
   return (
     <label
