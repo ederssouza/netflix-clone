@@ -53,7 +53,8 @@ img {
 }
 
 .react-multi-carousel-list {
-  // overflow-y: initial !important;
+  overflow-y: initial;
+  overflow-x: hidden;
   padding-left: 18px; // 2 items
   position: relative;
 
