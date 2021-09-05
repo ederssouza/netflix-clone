@@ -27,30 +27,18 @@
 
 .title {
   color: var(--body-text-color);
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 1vw 0;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
-
-  @media (min-width: 420px) {
-    font-size: 1.5rem;
-  }
-
-  @media (min-width: 885px) {
-    font-size: 1.5rem;
-  }
 }
 
 .text {
   color: var(--body-text-color);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: normal;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   width: 100%;
-
-  @media (min-width: 420px) {
-    font-size: 1rem;
-  }
 
   @media (min-width: 885px) {
     font-size: 1.25rem;

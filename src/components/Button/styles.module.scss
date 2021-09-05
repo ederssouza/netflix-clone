@@ -16,13 +16,13 @@
   word-break: break-word;
   white-space: nowrap;
 
-  @media (min-width: 420px) {
+  @media (min-width: 320px) {
     font-size: 1rem;
     height: 35px;
     padding: 0.8rem 0.8rem;
   }
 
-  @media (min-width: 885px) {
+  @media (min-width: 420px) {
     font-size: 1.2rem;
     height: 50px;
     padding: 0.8rem 1.8rem 0.8rem 1.5rem;
