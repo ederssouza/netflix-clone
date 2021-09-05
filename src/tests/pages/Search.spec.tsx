@@ -1,19 +1,43 @@
-import { useRouter } from 'next/router'
 import { render, screen } from '@testing-library/react'
-import { mocked } from 'ts-jest/utils'
-import Search from '../../pages/search'
+import Search, { getServerSideProps } from '../../pages/search'
 
 jest.mock('next/router')
 
 describe('Search page component', () => {
-  it('should render with success', () => {
-    const useRouterMocked = mocked(useRouter)
+  it('should render with success', async () => {
+    render(<Search q="search term" />)
+    expect(screen.getByText(/search term/)).toBeInTheDocument()
+  })
 
-    useRouterMocked.mockReturnValueOnce({
-      query: { q: 'search term' }
+  it('should render `a` prop when has URL contains query param', async () => {
+    const response = await getServerSideProps({
+      query: {
+        q: 'search term'
+      }
     } as any)
 
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: expect.objectContaining({
+          q: 'search term'
+        })
+      })
+    )
+  })
+
+  it('should redirect whe dont receive `q` query param', async () => {
+    const response = await getServerSideProps({
+      query: {}
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        redirect: expect.objectContaining({
+          destination: '/'
+        })
+      })
+    )
+
     render(<Search />)
-    expect(screen.getByText(/search term/)).toBeInTheDocument()
   })
 })
