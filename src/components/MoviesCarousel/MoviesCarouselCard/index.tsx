@@ -23,8 +23,12 @@ export function MoviesCarouselCard ({ movie }: IMovieProps) {
 
       <div className={styles.containerDetails}>
         <ul className={styles.actions}>
-          <li className={styles.actionItemActive}><a href="#" title=""><IoMdPlay /></a></li>
-          <li className={styles.actionItem}><a href="#" title=""><TiInfoLarge /></a></li>
+          <li className={styles.actionItemActive}>
+            <a href="#" title=""><IoMdPlay /></a>
+          </li>
+          <li className={styles.actionItem}>
+            <a href="#" title=""><TiInfoLarge /></a>
+          </li>
         </ul>
 
         <span className={`${styles.relevant} ${styles.relevantGreen}`}>
