@@ -91,6 +91,10 @@
     color: #b3b3b3;
     font-size: 0.875rem;
     font-weight: normal;
+
+    @media (min-width: 885px) {
+      color: var(--body-text-color);
+    }
   }
 }
 

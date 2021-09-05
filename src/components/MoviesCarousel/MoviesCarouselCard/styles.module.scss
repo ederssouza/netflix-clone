@@ -48,8 +48,8 @@
     &.actionItemActive {
 
       a {
-        border-color: #fff;
-        background-color: #fff;
+        border-color: var(--body-text-color);
+        background-color: var(--body-text-color);
         color: #000;
       }
     }
@@ -68,7 +68,7 @@
     width: 24px;
 
     &:hover {
-      border-color: #fff;
+      border-color: var(--body-text-color);
     }
   }
 }
