@@ -17,7 +17,7 @@ describe('MoviesCarouselArrow component', () => {
     expect($moviesCarouselArrow.querySelector('svg')).not.toBeInTheDocument()
   })
 
-  it('should call `onClick` function when on click', () => {
+  it('should call `onClick` function when on click left arrow', () => {
     const onClick = jest.fn()
 
     render(
@@ -40,7 +40,7 @@ describe('MoviesCarouselArrow component', () => {
     expect($moviesCarouselArrow).toHaveClass('react-multi-carousel-arrow-right')
   })
 
-  it('should call `onClick` and `callback` functions when on click', () => {
+  it('should call `onClick` and `callback` functions when on click right arrow', () => {
     const onClick = jest.fn()
     const callback = jest.fn()
 
