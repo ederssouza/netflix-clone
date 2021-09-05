@@ -75,7 +75,7 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
       <Carousel
         ref={sliderRef}
         infinite={true}
-        customTransition="all 1s"
+        customTransition="all 1.5s"
         transitionDuration={1000}
         partialVisible={true}
         draggable={false}
