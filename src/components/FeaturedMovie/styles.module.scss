@@ -21,19 +21,24 @@
   }
 }
 
-.infoActions {
+.infoActions {}
+
+.infoText {}
+
+.title {
+  font-size: 1.6vw;
+  color: var(--body-text-color);
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+  margin: 1vw 0;
 }
 
-.infoText {
-
-  p {
-    color: var(--body-text-color);
-    font-weight: 400;
-    line-height: normal;
-    font-size: 1.4vw;
-    text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
-    width: 100%;
-  }
+.text {
+  color: var(--body-text-color);
+  font-weight: 400;
+  line-height: normal;
+  font-size: 1.4vw;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+  width: 100%;
 }
 
 .infoActions {
