@@ -1,6 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { SearchBox } from '.'
 
 jest.mock('next/router')
@@ -9,10 +9,14 @@ describe('SearchBox component', () => {
   it('should render with success', () => {
     render(<SearchBox />)
 
-    expect(screen.getByTestId('search-box')).toBeInTheDocument()
+    const $inputSearch = screen.getByTestId('input-search')
+
+    fireEvent.change($inputSearch)
+
+    expect($inputSearch).toBeInTheDocument()
   })
 
-  it('should open when on click', () => {
+  it('should open search box when on click', () => {
     render(<SearchBox />)
 
     const $searchBox = screen.getByTestId('search-box')
@@ -22,45 +26,66 @@ describe('SearchBox component', () => {
     expect($searchBox).toHaveClass('containerOpen')
   })
 
-  it('should keep input open when has value', () => {
+  it('should clear input field when on click close icon', () => {
+    render(<SearchBox />)
+
+    const $inputSearch = screen.getByTestId('input-search')
+    const $closeSearchBox = screen.getByTestId('close-search-box')
+
+    fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
+    expect($inputSearch.value).toEqual('Matrix')
+
+    fireEvent.click($closeSearchBox)
+    expect($inputSearch.value).toEqual('')
+  })
+
+  it('should keep open on blur if value is valid', () => {
     render(<SearchBox />)
 
     const $searchBox = screen.getByTestId('search-box')
-    const $input = $searchBox.querySelector('input')
+    const $inputSearch = screen.getByTestId('input-search')
 
     fireEvent.click($searchBox)
-    fireEvent.change($input, { target: { value: 'Matrix' } })
-    fireEvent.blur($input)
+    fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
+    expect($inputSearch.value).toEqual('Matrix')
+
+    fireEvent.blur($inputSearch)
 
     expect($searchBox).toHaveClass('containerOpen')
   })
 
-  it('should close input when has not value', () => {
+  it('should auto close on blur if value is empty', () => {
     render(<SearchBox />)
 
     const $searchBox = screen.getByTestId('search-box')
-    const $input = $searchBox.querySelector('input')
+    const $inputSearch = screen.getByTestId('input-search')
 
     fireEvent.click($searchBox)
-    fireEvent.change($input, { target: { value: '' } })
-    fireEvent.blur($input)
+    fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
+    expect($inputSearch.value).toEqual('Matrix')
+
+    fireEvent.change($inputSearch, { target: { value: '' } })
+    expect($inputSearch.value).toEqual('')
+
+    fireEvent.blur($inputSearch)
 
     expect($searchBox).not.toHaveClass('containerOpen')
   })
 
-  it('should reset input and keep open when on click in the close icon', () => {
+  it('should redirect to search page when is valid value', () => {
+    jest.useFakeTimers()
+
     render(<SearchBox />)
 
-    const $searchBox = screen.getByTestId('search-box')
-    const $input = $searchBox.querySelector('input')
-    const $closeIcon = $searchBox.querySelector('.closeIcon')
+    const $inputSearch = screen.getByTestId('input-search')
 
-    fireEvent.click($searchBox)
-    fireEvent.change($input, { target: { value: 'Matrix' } })
-    fireEvent.click($closeIcon)
+    expect($inputSearch.value).toEqual('')
+    fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
+    expect($inputSearch.value).toEqual('Matrix')
 
-    expect($input.value).toEqual('')
-    expect($searchBox).toHaveClass('containerOpen')
+    act(() => jest.advanceTimersByTime(2000))
+
+    expect(Router.push).toHaveBeenCalledWith('/search?q=Matrix')
   })
 
   it('should open search box when has URL contains query param', () => {
@@ -72,6 +97,8 @@ describe('SearchBox component', () => {
 
     render(<SearchBox />)
 
-    expect(screen.getByTestId('search-box')).toBeInTheDocument()
+    const $searchBox = screen.getByTestId('search-box')
+
+    expect($searchBox).toHaveClass('containerOpen')
   })
 })
