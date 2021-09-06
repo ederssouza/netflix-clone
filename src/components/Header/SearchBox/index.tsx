@@ -17,6 +17,7 @@ export function SearchBox () {
 
   function handleChange (value: string) {
     setSearch(value)
+    debounced(value)
   }
 
   function redirectToSearch (value: string) {
@@ -49,10 +50,7 @@ export function SearchBox () {
         placeholder="Titulo, gente e gêneros"
         data-testid="input-search"
         value={search}
-        onChange={(e) => {
-          handleChange(e.target.value)
-          debounced(e.target.value)
-        }}
+        onChange={(e) => handleChange(e.target.value)}
         onBlur={() => handleBlur()}
       />
 
