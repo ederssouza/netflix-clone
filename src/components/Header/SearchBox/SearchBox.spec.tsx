@@ -9,7 +9,7 @@ describe('SearchBox component', () => {
   it('should render with success', () => {
     render(<SearchBox />)
 
-    const $inputSearch = screen.getByTestId('input-search')
+    const $inputSearch = screen.getByTestId('input-search') as HTMLInputElement
 
     fireEvent.change($inputSearch)
 
@@ -29,7 +29,7 @@ describe('SearchBox component', () => {
   it('should clear input field when on click close icon', () => {
     render(<SearchBox />)
 
-    const $inputSearch = screen.getByTestId('input-search')
+    const $inputSearch = screen.getByTestId('input-search') as HTMLInputElement
     const $closeSearchBox = screen.getByTestId('close-search-box')
 
     fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
@@ -43,7 +43,7 @@ describe('SearchBox component', () => {
     render(<SearchBox />)
 
     const $searchBox = screen.getByTestId('search-box')
-    const $inputSearch = screen.getByTestId('input-search')
+    const $inputSearch = screen.getByTestId('input-search') as HTMLInputElement
 
     fireEvent.click($searchBox)
     fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
@@ -58,7 +58,7 @@ describe('SearchBox component', () => {
     render(<SearchBox />)
 
     const $searchBox = screen.getByTestId('search-box')
-    const $inputSearch = screen.getByTestId('input-search')
+    const $inputSearch = screen.getByTestId('input-search') as HTMLInputElement
 
     fireEvent.click($searchBox)
     fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
@@ -77,7 +77,7 @@ describe('SearchBox component', () => {
 
     render(<SearchBox />)
 
-    const $inputSearch = screen.getByTestId('input-search')
+    const $inputSearch = screen.getByTestId('input-search') as HTMLInputElement
 
     expect($inputSearch.value).toEqual('')
     fireEvent.change($inputSearch, { target: { value: 'Matrix' } })
