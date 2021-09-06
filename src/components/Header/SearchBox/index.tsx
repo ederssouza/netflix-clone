@@ -1,24 +1,31 @@
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { IoSearch, IoClose } from 'react-icons/io5'
+import { useDebouncedCallback } from 'use-debounce'
 
 import styles from './styles.module.scss'
 
 export function SearchBox () {
   const [className, setClassName] = useState(styles.container)
   const [search, setSearch] = useState('')
+  const debounced = useDebouncedCallback(redirectToSearch, 2000)
   const router = useRouter()
 
   function handleClick () {
     setClassName(`${styles.container} ${styles.containerOpen}`)
   }
 
-  function handleBlur () {
-    !search.trim() && setClassName(styles.container)
+  function handleChange (value: string) {
+    setSearch(value)
   }
 
-  function handleChange (e: ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value)
+  function redirectToSearch (value: string) {
+    const val = value.trim()
+    val && Router.push(`/search?q=${value}`)
+  }
+
+  function handleBlur () {
+    !search.trim() && setClassName(styles.container)
   }
 
   useEffect(() => {
@@ -40,13 +47,18 @@ export function SearchBox () {
       <input
         type="search"
         placeholder="Titulo, gente e gêneros"
+        data-testid="input-search"
         value={search}
+        onChange={(e) => {
+          handleChange(e.target.value)
+          debounced(e.target.value)
+        }}
         onBlur={() => handleBlur()}
-        onChange={(e) => handleChange(e)}
       />
 
       <IoClose
         className={styles.closeIcon}
+        data-testid="close-search-box"
         onClick={() => setSearch('')}
       />
     </label>
