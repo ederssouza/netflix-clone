@@ -48,7 +48,7 @@ export default function DetailsById ({ movie }: IDetailsProps) {
 
               <div className={styles.headerInfoRight}>
                 <div>
-                  <h1 className={styles.headerTitle}>Breaking Bad (2012)</h1>
+                  <h1 className={styles.headerTitle}>{movie.title} (2012)</h1>
                   <span>(US) Action, Thriller {movie.runtime}</span>
                 </div>
 

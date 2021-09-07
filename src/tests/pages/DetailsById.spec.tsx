@@ -16,17 +16,9 @@ describe('DetailsById page component', () => {
   it('should render with success', () => {
     render(<Details movie={movie} />)
 
-    const $title = screen.getByText(movie.title)
-    const $releaseDate = screen.getByText(movie.releaseDate)
-    const $genres = screen.getByTestId('details-genres')
-    const $genreName = screen.getByText(movie.genres[1].name)
-    const $runtime = screen.getByText(movie.runtime)
+    const $title = screen.getByText(new RegExp(movie.title))
 
     expect($title).toBeInTheDocument()
-    expect($releaseDate).toBeInTheDocument()
-    expect($genres.querySelectorAll('li').length).toEqual(movie.genres.length)
-    expect($genreName).toBeInTheDocument()
-    expect($runtime).toBeInTheDocument()
   })
 
   it('should render movie data when receive `id` URL param', async () => {
