@@ -36,7 +36,7 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
 
         <div className={styles.infoActions}>
           <Button color="primary" icon={<IoMdPlay />}>
-            Assistir
+            Trailer
           </Button>
 
           <Link href={`/details/${id}`} passHref>
