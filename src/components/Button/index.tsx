@@ -1,4 +1,4 @@
-import { ReactNode, ReactElement } from 'react'
+import { ReactNode, ReactElement, forwardRef, ForwardRefRenderFunction } from 'react'
 import styles from './styles.module.scss'
 
 interface IButton {
@@ -7,7 +7,12 @@ interface IButton {
   children: ReactNode
 }
 
-export function Button ({ color = 'primary', icon, children }: IButton) {
+const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, IButton> = ({
+  color = 'primary',
+  icon,
+  children,
+  ...rest
+}: IButton) => {
   function renderButtonColorStyle (color: string) {
     const colors = {
       primary: 'btnPrimary',
@@ -19,9 +24,11 @@ export function Button ({ color = 'primary', icon, children }: IButton) {
   }
 
   return (
-    <button className={`${styles.btn} ${renderButtonColorStyle(color)}`}>
+    <button className={`${styles.btn} ${renderButtonColorStyle(color)}`} {...rest}>
       {icon}
       {children}
     </button>
   )
 }
+
+export const Button = forwardRef(ButtonBase)
