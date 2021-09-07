@@ -1,23 +1,17 @@
-import { render, screen } from '@testing-library/react'
-import Genre, { getServerSideProps } from '../../pages/genre/[id]'
+import { render } from '@testing-library/react'
+import Genre, { getServerSideProps } from '../../pages/genre'
 
 describe('Genre page component', () => {
-  it('should render with success', () => {
-    render(<Genre id={'10'} />)
-    expect(screen.getByText('Gênero 10')).toBeInTheDocument()
-  })
+  it('should redirect to home when URL does not have `id` param', async () => {
+    const response = await getServerSideProps({} as any)
 
-  it('should get URL ID param', async () => {
-    render(<Genre id={'8'} />)
-
-    const response = await getServerSideProps({
-      params: { id: '8' }
-    } as any)
+    render(<Genre />)
 
     expect(response).toEqual(
       expect.objectContaining({
-        props: expect.objectContaining({
-          id: '8'
+        redirect: expect.objectContaining({
+          destination: '/',
+          permanent: true
         })
       })
     )
