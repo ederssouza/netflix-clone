@@ -1,6 +1,10 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
+import { Header } from '../../components/Header'
+
+import styles from './styles.module.scss'
+
 interface IGenresProps {
   id: number
   name: string
@@ -27,16 +31,40 @@ export default function DetailsById ({ movie }: IDetailsProps) {
       </Head>
 
       <div data-testid="details">
-        <header>
-          <h1>{movie.title}</h1>
-          <div>{movie.releaseDate}</div>
-          <ul data-testid="details-genres">
-            {movie.genres.map(genre => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
-          <div>{movie.runtime}</div>
-        </header>
+        <Header />
+
+        <section
+          className={styles.header}
+          style={{ backgroundImage: 'url("https://occ-0-626-1123.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQ1n7nMsHQU4eAT8s7OtRNBTkRt8KcVP9M0q5ZnZRppX0WwulOFBD6wHx0U4pOga86psNHvwzBvJah7ey3BpIgbMOeE.webp?r=252")' }}
+        >
+          <div className={styles.container}>
+            <h1 className={styles.headerTitle}>{movie.title} ({movie.releaseDate})</h1>
+            <span>{movie.releaseDate} (US) Action, Thriller {movie.runtime}</span>
+          </div>
+        </section>
+
+        <section>
+          <div className={styles.container}>
+            <div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+            </div>
+
+            <div>
+              <span>Elenco:</span> Nome 1, Nome 2, Nome 3, Nome 4, Nome 5.
+            </div>
+
+            <div>
+              <span>Gênero:</span>
+              {movie.genres.map(genre => (
+                <span key={genre.id}>{genre.name}</span>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </>
   )
