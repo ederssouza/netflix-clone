@@ -26,6 +26,10 @@
 
   a[class*=logo] {
     display: flex;
-    margin-right: 25px;
+    margin-right: 0.5rem;
+
+    @media (min-width: 885px) {
+      margin-right: 25px;
+    }
   }
 }

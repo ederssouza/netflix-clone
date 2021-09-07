@@ -47,7 +47,7 @@ export function SearchBox () {
 
       <input
         type="search"
-        placeholder="Titulo, gente e gêneros"
+        placeholder="Digite aqui"
         data-testid="input-search"
         value={search}
         onChange={(e) => handleChange(e.target.value)}
