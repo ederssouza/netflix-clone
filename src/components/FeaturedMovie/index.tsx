@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import { IoMdPlay, IoMdInformationCircleOutline } from 'react-icons/io'
+
 import { Button } from '../Button'
 
 import styles from './styles.module.scss'
@@ -37,9 +39,11 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
             Assistir
           </Button>
 
-          <Button color="secondary" icon={<IoMdInformationCircleOutline />}>
-            Mais informações
-          </Button>
+          <Link href="/details/10" passHref>
+            <Button color="secondary" icon={<IoMdInformationCircleOutline />}>
+              Mais informações
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
