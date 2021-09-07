@@ -1,7 +1,10 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import { IoMdPlay } from 'react-icons/io'
 
 import { Header } from '../../components/Header'
+import { PercentageCircle } from '../../components/PercentageCircle'
+import { Button } from '../../components/Button'
 
 import styles from './styles.module.scss'
 
@@ -37,31 +40,48 @@ export default function DetailsById ({ movie }: IDetailsProps) {
           className={styles.header}
           style={{ backgroundImage: 'url("https://occ-0-626-1123.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQ1n7nMsHQU4eAT8s7OtRNBTkRt8KcVP9M0q5ZnZRppX0WwulOFBD6wHx0U4pOga86psNHvwzBvJah7ey3BpIgbMOeE.webp?r=252")' }}
         >
-          <div className={styles.container}>
-            <h1 className={styles.headerTitle}>{movie.title} ({movie.releaseDate})</h1>
-            <span>{movie.releaseDate} (US) Action, Thriller {movie.runtime}</span>
+          <div className={styles.headerInfo}>
+            <div className={styles.container}>
+              <div className={styles.headerInfoLeft}>
+                <PercentageCircle value={80} />
+              </div>
+
+              <div className={styles.headerInfoRight}>
+                <div>
+                  <h1 className={styles.headerTitle}>Breaking Bad (2012)</h1>
+                  <span>(US) Action, Thriller {movie.runtime}</span>
+                </div>
+
+                <Button color="primary" icon={<IoMdPlay />}>
+                  Trailer
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
 
         <section>
           <div className={styles.container}>
-            <div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
-            </div>
+            <div className={styles.content}>
+              <div className={styles.description}>
+                <h2 className={styles.contentTitle}>Overview</h2>
 
-            <div>
-              <span>Elenco:</span> Nome 1, Nome 2, Nome 3, Nome 4, Nome 5.
-            </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
 
-            <div>
-              <span>Gênero:</span>
-              {movie.genres.map(genre => (
-                <span key={genre.id}>{genre.name}</span>
-              ))}
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
+              </div>
+
+              <aside className={styles.sidebar}>
+                <div className={styles.sidebarBox}>
+                  <span className={styles.sidebarTitle}>Elenco:</span> Nome 1, Nome 2, Nome 3, Nome 4, Nome 5.
+                </div>
+
+                <div className={styles.sidebarBox}>
+                  <span className={styles.sidebarTitle}>Gênero:</span> Gênero 1, Gênero 2, Gênero 3, Gênero 4, Gênero 5.
+                </div>
+              </aside>
             </div>
           </div>
         </section>
