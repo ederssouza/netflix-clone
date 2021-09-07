@@ -12,4 +12,12 @@ describe('FeaturedMovie component', () => {
     expect(screen.getByText(/Lorem ipsum/i)).toBeInTheDocument()
     expect($featuredMovie).toHaveAttribute('style', `background-image: url(${movies[0].image});`)
   })
+
+  it('should have a href valid attribute', () => {
+    render(<FeaturedMovie movie={movies[0]} />)
+
+    const $moreDetailsButton = screen.getByTestId('more-details-button')
+
+    expect($moreDetailsButton).toHaveAttribute('href', `/details/${movies[0].id}`)
+  })
 })
