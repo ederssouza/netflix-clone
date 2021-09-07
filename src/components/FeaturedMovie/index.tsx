@@ -18,7 +18,7 @@ interface IFeaturedMovieProps {
 }
 
 export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
-  const { image, title, description } = movie
+  const { id, image, title, description } = movie
 
   return (
     <div
@@ -39,8 +39,12 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
             Assistir
           </Button>
 
-          <Link href="/details/10" passHref>
-            <Button color="secondary" icon={<IoMdInformationCircleOutline />}>
+          <Link href={`/details/${id}`} passHref>
+            <Button
+              color="secondary"
+              icon={<IoMdInformationCircleOutline />}
+              data-testid="more-details-button"
+            >
               Mais informações
             </Button>
           </Link>
