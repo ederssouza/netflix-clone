@@ -64,7 +64,7 @@ export default function DetailsById ({ movie }: IDetailsProps) {
           <div className={styles.container}>
             <div className={styles.content}>
               <div className={styles.description}>
-                <h2 className={styles.contentTitle}>Overview</h2>
+                <h2 className={styles.contentTitle}>Resumo</h2>
 
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt unde magnam similique dolor? Culpa iste perferendis alias cum aspernatur harum ad, quam dolore labore est maiores. Soluta itaque inventore quia.</p>
 
