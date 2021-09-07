@@ -1,0 +1,53 @@
+.flexWrapper {
+  display: flex;
+}
+
+.singleChart {
+  width: 100%;
+  justify-content: space-around ;
+}
+
+.circularChart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+.circleBg {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 3;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circularChartRed .circle {
+  stroke: red;
+}
+
+.circularChartOrange .circle {
+  stroke: orange;
+}
+
+.circularChartGreen .circle {
+  stroke: green;
+}
+
+.percentage {
+  fill: #eee;
+  font-size: 0.5em;
+  font-weight: 600;
+  text-anchor: middle;
+}
