@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 
 interface IGenresProps {
   id: number
@@ -18,18 +19,26 @@ interface IDetailsProps {
 
 export default function DetailsById ({ movie }: IDetailsProps) {
   return (
-    <div data-testid="details">
-      <header>
-        <h1>{movie.title}</h1>
-        <div>{movie.releaseDate}</div>
-        <ul data-testid="details-genres">
-          {movie.genres.map(genre => (
-            <li key={genre.id}>{genre.name}</li>
-          ))}
-        </ul>
-        <div>{movie.runtime}</div>
-      </header>
-    </div>
+    <>
+      <Head>
+        <title>DYNAMIC_TITLE | Netflix</title>
+        <meta name="description" content="..." />
+        <link rel="icon" href="/assets/img/favicon.ico" />
+      </Head>
+
+      <div data-testid="details">
+        <header>
+          <h1>{movie.title}</h1>
+          <div>{movie.releaseDate}</div>
+          <ul data-testid="details-genres">
+            {movie.genres.map(genre => (
+              <li key={genre.id}>{genre.name}</li>
+            ))}
+          </ul>
+          <div>{movie.runtime}</div>
+        </header>
+      </div>
+    </>
   )
 }
 
