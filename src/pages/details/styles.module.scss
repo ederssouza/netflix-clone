@@ -1,0 +1,24 @@
+.header {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 490px;
+
+  .container {
+    // align-items: flex-end;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem 0;
+  }
+}
+
+.headerTitle {
+  font-size: 2rem;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 2rem 0;
+}
