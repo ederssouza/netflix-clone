@@ -15,7 +15,7 @@ interface IGenreProps {
   id: string
 }
 
-export default function Genre ({ id }: IGenreProps) {
+export default function GenreById ({ id }: IGenreProps) {
   return (
     <>
       <Head>
