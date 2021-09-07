@@ -11,7 +11,7 @@
     "test": "jest --maxWorkers=50%",
     "test:watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand",
-    "test:coverage": "jest --coverage  --maxWorkers=25%"
+    "test:coverage": "jest --coverage --maxWorkers=25%"
   },
   "dependencies": {
     "axios": "^0.21.1",
