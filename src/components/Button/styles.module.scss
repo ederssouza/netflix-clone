@@ -24,8 +24,11 @@
 
   @media (min-width: 420px) {
     font-size: 1.2rem;
-    height: 50px;
     padding: 0.8rem 1.8rem 0.8rem 1.5rem;
+  }
+
+  @media (min-width: 885px) {
+    height: 50px;
   }
 
   svg {
