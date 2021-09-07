@@ -1,18 +1,13 @@
 import { ReactNode, ReactElement, forwardRef, ForwardRefRenderFunction } from 'react'
 import styles from './styles.module.scss'
 
-interface IButton {
+interface IButtonProps {
   color?: 'primary' | 'secondary'
   icon?: ReactElement
   children: ReactNode
 }
 
-const ButtonBase: ForwardRefRenderFunction<HTMLButtonElement, IButton> = ({
-  color = 'primary',
-  icon,
-  children,
-  ...rest
-}: IButton) => {
+const ButtonBase: ForwardRefRenderFunction<HTMLInputElement, IButtonProps> = ({ color = 'primary', icon, children, ...rest }: IButtonProps, ref) => {
   function renderButtonColorStyle (color: string) {
     const colors = {
       primary: 'btnPrimary',
