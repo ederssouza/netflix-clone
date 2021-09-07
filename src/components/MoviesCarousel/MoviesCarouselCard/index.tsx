@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { IoMdPlay } from 'react-icons/io'
 import { TiInfoLarge } from 'react-icons/ti'
 
@@ -26,8 +27,14 @@ export function MoviesCarouselCard ({ movie }: IMovieProps) {
           <li className={styles.actionItemActive}>
             <a href="#" title=""><IoMdPlay /></a>
           </li>
-          <li className={styles.actionItem}>
-            <a href="#" title=""><TiInfoLarge /></a>
+
+          <li
+            className={styles.actionItem}
+            data-testid="movies-carousel-more-details"
+          >
+            <Link href={`/details/${movie.id}`} passHref>
+              <a title="Ver mais detalhes"><TiInfoLarge /></a>
+            </Link>
           </li>
         </ul>
 

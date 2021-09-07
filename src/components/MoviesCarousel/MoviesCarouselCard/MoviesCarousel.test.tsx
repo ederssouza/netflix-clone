@@ -9,8 +9,10 @@ describe('MoviesCarouselCard component', () => {
     render(<MoviesCarouselCard movie={movie} />)
 
     const $moviesCarouselCard = screen.getByTestId('movies-carousel-card')
+    const $moviesCarouselCardMoreDetails = screen.getByTestId('movies-carousel-more-details')
 
     expect($moviesCarouselCard.querySelector('img')).toHaveAttribute('alt', movie.title)
     expect($moviesCarouselCard.querySelector('img')).toHaveAttribute('src', movie.image)
+    expect($moviesCarouselCardMoreDetails.querySelector('a')).toHaveAttribute('href', `/details/${movie.id}`)
   })
 })
