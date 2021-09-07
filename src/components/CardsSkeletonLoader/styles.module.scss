@@ -1,0 +1,115 @@
+@mixin skeleton {
+  background-color: #1d1d1d;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #141414 50%, transparent 100%);
+    animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
+}
+
+.cardsSkeleton {
+  margin: 0.75rem 0;
+
+  @media (min-width: 885px) {
+    margin: 4rem 0;
+  }
+}
+
+.cardsSkeletonTitle {
+  background-color: #222;
+  display: inline-block;
+  margin: 0.25rem 0 0.5rem;
+  min-width: 8rem;
+  height: 16px;
+  @include skeleton;
+
+  @media (min-width: 885px) {
+    height: 16px;
+    margin: 0.5rem 0 1rem;
+  }
+}
+
+.cardsSkeletonGrid {
+  display: grid;
+  grid-column-gap: 4px;
+  grid-template-columns: repeat(2, 1fr);
+  list-style-type: none;
+
+  @media (min-width: 500px) and (max-width: 799px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 800px) and (max-width: 1099px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1100px) and (max-width: 1399px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  div {
+    background-color: #222;
+    border-radius: 4px;
+    display: none;
+    min-height: 120px;
+    overflow: hidden;
+    position: relative;
+    @include skeleton;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      display: flex;
+    }
+
+    @media (min-width: 500px) and (max-width: 799px) {
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 1099px) {
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1100px) and (max-width: 1399px) {
+      display: flex;
+
+      &:nth-child(1) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1400px) {
+      display: flex;
+    }
+  }
+}
+
+@keyframes load {
+  from {
+    left: -150px;
+  }
+  to   {
+    left: 100%;
+  }
+}

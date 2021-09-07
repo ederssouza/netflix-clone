@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 
 import { Header } from '../../components/Header'
+import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
 
 import styles from './styles.module.scss'
 
@@ -21,6 +22,11 @@ export default function Search ({ q }: ISearchProps) {
       <main className={styles.container}>
         <Header />
         <h1>Buscar por: {q}</h1>
+
+        <CardsSkeletonLoader />
+        <CardsSkeletonLoader />
+        <CardsSkeletonLoader />
+        <CardsSkeletonLoader />
       </main>
     </>
   )
