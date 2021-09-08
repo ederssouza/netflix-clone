@@ -4,10 +4,9 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 interface IMoviesCarouselArrowProps extends ArrowProps {
   direction: 'left' | 'right'
   firstLoad?: boolean
-  callback?: () => void
 }
 
-export function MoviesCarouselArrow ({ direction, firstLoad = false, callback, onClick, ...rest }: IMoviesCarouselArrowProps) {
+export function MoviesCarouselArrow ({ direction, firstLoad = false, onClick, ...rest }: IMoviesCarouselArrowProps) {
   if (direction === 'left') {
     return (
       <div
@@ -24,10 +23,7 @@ export function MoviesCarouselArrow ({ direction, firstLoad = false, callback, o
     <div
       className="react-multi-carousel-arrow react-multi-carousel-arrow-right"
       data-testid="movies-carousel-arrow"
-      onClick={() => {
-        onClick()
-        callback()
-      }}
+      onClick={() => onClick()}
     >
       <MdKeyboardArrowRight />
     </div>
