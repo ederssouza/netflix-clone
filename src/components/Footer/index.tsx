@@ -1,110 +1,77 @@
 import { ImFacebook2, ImInstagram, ImTwitter, ImYoutube } from 'react-icons/im'
+
+import { FooterSocialMedia } from './FooterSocialMedia'
+import { FooterMenu } from './FooterMenu'
+import { FooterCopyright } from './FooterCopyright'
+
 import styles from './styles.module.scss'
 
 export function Footer () {
-  const currentYear = new Date().getFullYear()
+  const socialMediaList = [
+    {
+      href: 'https://www.facebook.com/netflixbrasil',
+      title: 'Facebook',
+      icon: <ImFacebook2 />
+    },
+    {
+      href: 'https://www.instagram.com/NetflixBrasil',
+      title: 'Instagram',
+      icon: <ImInstagram />
+    },
+    {
+      href: 'https://twitter.com/NetflixBrasil',
+      title: 'Twitter',
+      icon: <ImTwitter />
+    },
+    {
+      href: 'https://www.youtube.com/user/NetflixBRA',
+      title: 'YouTube',
+      icon: <ImYoutube />
+    }
+  ]
 
   return (
     <footer className={styles.footer} data-testid="footer">
       <div className={styles.footerContainer}>
-        <ul className={styles.footerSocialMedia}>
-          <li>
-            <a
-              href="https://www.facebook.com/netflixbrasil"
-              title="Facebook"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ImFacebook2 />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/NetflixBrasil"
-              title="Instagram"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ImInstagram />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/NetflixBrasil"
-              title="Twitter"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ImTwitter />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.youtube.com/user/NetflixBRA"
-              title="YouTube"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ImYoutube />
-            </a>
-          </li>
-        </ul>
+        <FooterSocialMedia items={socialMediaList} />
       </div>
 
       <div className={styles.footerContainer}>
-        <ul className={styles.footerMenu}>
-          <li>
-            <a href="#" title="Idioma e legendas">Idioma e legendas</a>
-          </li>
-          <li>
-            <a href="#" title="Imprensa">Imprensa</a>
-          </li>
-          <li>
-            <a href="#" title="Privacidade">Privacidade</a>
-          </li>
-          <li>
-            <a href="#" title="Entre em contato">Entre em contato</a>
-          </li>
-        </ul>
+        <FooterMenu
+          items={[
+            'Idioma e legendas',
+            'Imprensa',
+            'Privacidade',
+            'Entre em contato'
+          ]}
+        />
 
-        <ul className={styles.footerMenu}>
-          <li>
-            <a href="#" title="Audiodescrição">Audiodescrição</a>
-          </li>
-          <li>
-            <a href="#" title="Relações com investidores">Relações com investidores</a>
-          </li>
-          <li>
-            <a href="#" title="Avisos legais">Avisos legais</a>
-          </li>
-        </ul>
+        <FooterMenu
+          items={[
+            'Audiodescrição',
+            'Relações com investidores',
+            'Avisos legais'
+          ]}
+        />
 
-        <ul className={styles.footerMenu}>
-          <li>
-            <a href="#" title="Centro de ajuda">Centro de ajuda</a>
-          </li>
-          <li>
-            <a href="#" title="Carreiras">Carreiras</a>
-          </li>
-          <li>
-            <a href="#" title="Preferências de cookies">Preferências de cookies</a>
-          </li>
-        </ul>
+        <FooterMenu
+          items={[
+            'Centro de ajuda',
+            'Carreiras',
+            'Preferências de cookies'
+          ]}
+        />
 
-        <ul className={styles.footerMenu}>
-          <li>
-            <a href="#" title="Cartão pré-pago">Cartão pré-pago</a>
-          </li>
-          <li>
-            <a href="#" title="Termos de uso">Termos de uso</a>
-          </li>
-          <li>
-            <a href="#" title="Informações corporativas">Informações corporativas</a>
-          </li>
-        </ul>
+        <FooterMenu
+          items={[
+            'Cartão pré-pago',
+            'Termos de uso',
+            'Informações corporativas'
+          ]}
+        />
       </div>
 
-      <span className={styles.footerCopyright}>&copy; 1997-{currentYear} Netflix, Inc.  ‎{'{cde6c7c5-4e42-4c65-8f35-2d9aa3d447b7}'}</span>
+      <FooterCopyright />
     </footer>
   )
 }

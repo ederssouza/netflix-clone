@@ -1,0 +1,21 @@
+.footerMenu {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  list-style-type: none;
+  margin-bottom: 0.875rem;
+
+  li {
+    margin-bottom: 0.875rem;
+  }
+
+  a {
+    color: grey;
+    font-size: 0.8125rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.footerSocialMedia {
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 0.5rem;
+
+  li {
+    margin-right: 1.25rem;
+
+    @media (min-width: 885px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  a {
+    color: grey;
+    font-size: 1.25rem;
+
+    @media (min-width: 885px) {
+      font-size: 1.5rem;
+    }
+  }
+}
