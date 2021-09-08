@@ -80,13 +80,6 @@ img {
     padding-left: 60px; // 6 items
   }
 
-  &:hover {
-
-    .react-multi-carousel-arrow {
-      opacity: 1;
-    }
-  }
-
   .react-multi-carousel-arrow {
     align-items: center;
     background-color: rgba(#000, 0.6);
@@ -98,7 +91,7 @@ img {
     opacity: 0;
     position: absolute;
     top: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.5s;
     width: 18px;
     z-index: 1;
 
@@ -123,6 +116,7 @@ img {
     }
 
     &:hover {
+      opacity: 1;
 
       svg {
         transform: scale(1.25);

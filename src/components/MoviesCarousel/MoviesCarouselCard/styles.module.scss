@@ -6,6 +6,10 @@
   position: relative;
   transition: all 0.26s;
 
+  img {
+    border-radius: 4px;
+  }
+
   &:hover {
 
     @media (min-width: 885px) {
@@ -15,6 +19,7 @@
 
       img {
         position: relative;
+        border-radius: 4px 4px 0 0;
       }
 
       .containerDetails {
