@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 
-import { Header } from '../../components/Header'
 // import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
 import { Footer } from '../../components/Footer'
-
+import { Header } from '../../components/Header'
 import styles from './styles.module.scss'
 
 // import { movies } from '../../tests/mocks/movies'

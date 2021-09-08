@@ -1,14 +1,12 @@
 import Head from 'next/head'
 
-import { Header } from '../components/Header'
 import { FeaturedMovie } from '../components/FeaturedMovie'
-import { MoviesContainer } from '../components/MoviesContainer'
-import { MoviesCarousel } from '../components/MoviesCarousel'
 import { Footer } from '../components/Footer'
-
-import styles from './home.module.scss'
-
+import { Header } from '../components/Header'
+import { MoviesCarousel } from '../components/MoviesCarousel'
+import { MoviesContainer } from '../components/MoviesContainer'
 import { movies } from '../tests/mocks/movies'
+import styles from './home.module.scss'
 
 export default function Home () {
   return (

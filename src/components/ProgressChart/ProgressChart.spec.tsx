@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react'
+
 import { ProgressChart } from '.'
 
 describe('ProgressChart component', () => {

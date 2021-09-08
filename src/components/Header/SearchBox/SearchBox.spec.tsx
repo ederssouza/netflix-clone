@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, act } from '@testing-library/react'
-import { mocked } from 'ts-jest/utils'
 import Router, { useRouter } from 'next/router'
+import { mocked } from 'ts-jest/utils'
+
 import { SearchBox } from '.'
 
 jest.mock('next/router')

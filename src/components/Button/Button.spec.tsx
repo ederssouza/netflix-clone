@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { IoMdPlay } from 'react-icons/io'
+
 import { Button } from '.'
 
 describe('Button component', () => {

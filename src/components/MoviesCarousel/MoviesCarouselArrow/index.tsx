@@ -1,5 +1,5 @@
-import { ArrowProps } from 'react-multi-carousel'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import { ArrowProps } from 'react-multi-carousel'
 
 interface IMoviesCarouselArrowProps extends ArrowProps {
   direction: 'left' | 'right'
