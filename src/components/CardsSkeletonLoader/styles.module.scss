@@ -1,5 +1,5 @@
 @mixin skeleton {
-  background-color: #1d1d1d;
+  background-color: #1f1f1f;
   overflow: hidden;
   position: relative;
 
@@ -11,7 +11,7 @@
     top: 0;
     height: 100%;
     width: 150px;
-    background: linear-gradient(to right, transparent 0%, #141414 50%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, #1a1a1a 50%, transparent 100%);
     animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
   }
 }
