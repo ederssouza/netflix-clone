@@ -34,15 +34,15 @@
 }
 
 .progressChartRed .progressChartCircle {
-  stroke: red;
+  stroke: var(--danger-text-color);
 }
 
 .progressChartOrange .progressChartCircle {
-  stroke: orange;
+  stroke: var(--warning-text-color);
 }
 
 .progressChartGreen .progressChartCircle {
-  stroke: green;
+  stroke: var(--success-text-color);
 }
 
 .progressChartPercentage {
