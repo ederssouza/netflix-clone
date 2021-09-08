@@ -12,7 +12,7 @@
   }
 
   a {
-    color: grey;
+    color: var(--gray-text-color);
     font-size: 1.25rem;
 
     @media (min-width: 885px) {

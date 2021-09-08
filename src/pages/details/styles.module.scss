@@ -98,7 +98,7 @@
 }
 
 .description {
-  color: #fff;
+  color: var(--body-text-color);
   line-height: 27px;
   font-size: 1rem;
 
@@ -130,5 +130,5 @@
 }
 
 .sidebarTitle {
-  color: #777;
+  color: var(--gray-text-color)
 }

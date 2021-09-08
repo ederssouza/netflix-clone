@@ -6,7 +6,7 @@
   cursor: pointer;
   display: flex;
   font-size: 0.75rem;
-  font-weight: bold;
+  font-weight: 700;
   height: 41px;
   padding: 0 10px;
   position: relative;
@@ -52,11 +52,19 @@
     li {
       display: block;
       margin-left: 0;
+
+      &.menuItemsActiveItem {
+
+        a {
+          font-weight: 700;
+        }
+      }
     }
 
     a {
       align-items: center;
       display: flex;
+      font-size: 0.75rem;
       height: 50px;
       justify-content: center;
       white-space: nowrap;
@@ -85,9 +93,8 @@
   }
 
   a {
-    color: #b3b3b3;
     font-size: 0.875rem;
-    font-weight: normal;
+    color: var(--gray-text-color);
 
     @media (min-width: 885px) {
       color: var(--body-text-color);
@@ -100,6 +107,9 @@
   a {
     color: var(--body-text-color);
     cursor: default;
-    font-weight: 700;
+
+    @media (min-width: 885px) {
+      font-weight: 700;
+    }
   }
 }

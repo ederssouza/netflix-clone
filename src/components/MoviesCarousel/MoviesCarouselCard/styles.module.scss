@@ -31,7 +31,7 @@
 
 .moviesCarouselCardDetails {
   border-radius: 0 0 4px 4px;
-  background-color: #181818;
+  background-color: var(--bg-color);
   display: none;
   flex-direction: column;
   left: 0;
@@ -55,15 +55,15 @@
       a {
         border-color: var(--body-text-color);
         background-color: var(--body-text-color);
-        color: #000;
+        color: var(--bg-color);
       }
     }
   }
 
   a {
     align-items: center;
-    background-color: #222222;
-    border: 1px solid #8c8c8c;
+    background-color: var(--bg-color);
+    border: 1px solid var(--gray-text-color);
     border-radius: 50%;
     display: flex;
     font-size: 0.75rem;
