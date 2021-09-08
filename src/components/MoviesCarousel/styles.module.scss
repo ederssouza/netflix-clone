@@ -1,4 +1,4 @@
-.container {
+.moviesCarousel {
   margin-bottom: 0.75rem;
   overflow: initial;
 
@@ -6,7 +6,7 @@
     margin-bottom: 4rem;
   }
 
-  + .container {
+  + .moviesCarousel {
     margin-bottom: 0.75rem;
 
     @media (min-width: 885px) {
@@ -15,7 +15,7 @@
   }
 }
 
-.title {
+.moviesCarouselTitle {
   color: var(--body-text-color);
   display: inline-block;
   font-size: 1rem;

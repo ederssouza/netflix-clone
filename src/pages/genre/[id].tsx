@@ -7,8 +7,6 @@ import { MoviesContainer } from '../../components/MoviesContainer'
 import { MoviesCarousel } from '../../components/MoviesCarousel'
 import { Footer } from '../../components/Footer'
 
-import styles from '../home.module.scss'
-
 import { movies } from '../../tests/mocks/movies'
 
 interface IGenreProps {
@@ -24,7 +22,7 @@ export default function GenreById ({ id }: IGenreProps) {
         <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
-      <main className={styles.container}>
+      <main>
         <Header />
         <FeaturedMovie category={`Gênero ${id}`} movie={movies[0]} />
 

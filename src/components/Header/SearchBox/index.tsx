@@ -6,13 +6,13 @@ import { useDebouncedCallback } from 'use-debounce'
 import styles from './styles.module.scss'
 
 export function SearchBox () {
-  const [className, setClassName] = useState(styles.container)
+  const [className, setClassName] = useState(styles.searchBox)
   const [search, setSearch] = useState('')
   const debounced = useDebouncedCallback(redirectToSearch, 2000)
   const router = useRouter()
 
   function handleClick () {
-    setClassName(`${styles.container} ${styles.containerOpen}`)
+    setClassName(`${styles.searchBox} ${styles.searchBoxOpen}`)
   }
 
   function handleChange (value: string) {
@@ -26,11 +26,12 @@ export function SearchBox () {
   }
 
   function handleBlur () {
-    !search.trim() && setClassName(styles.container)
+    !search.trim() && setClassName(styles.searchBox)
   }
 
   useEffect(() => {
     const q = router?.query?.q
+
     if (q) {
       handleClick()
       setSearch(String(q))

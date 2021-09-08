@@ -22,19 +22,19 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
 
   return (
     <div
-      className={styles.container}
+      className={styles.featuredMovie}
       style={{ backgroundImage: `url("${image}")` }}
       data-testid="featured-movie"
     >
-      <div className={styles.info}>
-        {category && <h1 className={styles.containerTitle}>{category}</h1>}
+      <div className={styles.featuredMovieInfo}>
+        {category && <h1 className={styles.featuredMovieCategory}>{category}</h1>}
 
-        <div className={styles.infoText}>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.text}>{description}</p>
+        <div className={styles.featuredMovieInfoText}>
+          <h1 className={styles.featuredMovieTitle}>{title}</h1>
+          <p className={styles.featuredMovieText}>{description}</p>
         </div>
 
-        <div className={styles.infoActions}>
+        <div className={styles.featuredMovieInfoActions}>
           <Button color="primary" icon={<IoMdPlay />}>
             Trailer
           </Button>

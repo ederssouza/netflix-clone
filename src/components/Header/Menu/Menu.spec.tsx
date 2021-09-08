@@ -48,10 +48,10 @@ describe('Menu component', () => {
     const getMenuItem = (index: number) => $menu.querySelectorAll('ul li')[index]
 
     fireEvent.click(document)
-    fireEvent.click(container.querySelector('.mobileNavbar'))
-    fireEvent.click(container.querySelector('.mobileNavbarOpen'))
+    fireEvent.click(container.querySelector('.menuMobile'))
+    fireEvent.click(container.querySelector('.menuMobileOpen'))
 
-    expect(getMenuItem(0)).not.toHaveClass('navbarMenuItemActive')
-    expect(getMenuItem(1)).toHaveClass('navbarMenuItemActive')
+    expect(getMenuItem(0)).not.toHaveClass('menuItemsActiveItem')
+    expect(getMenuItem(1)).toHaveClass('menuItemsActiveItem')
   })
 })

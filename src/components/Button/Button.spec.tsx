@@ -8,17 +8,17 @@ describe('Button component', () => {
 
     const component = screen.getByText('Primary button')
     expect(component).toBeInTheDocument()
-    expect(component).toHaveClass('btnPrimary')
+    expect(component).toHaveClass('buttonPrimary')
   })
 
-  it('should render `btnPrimary` CSS class when not receive `color` prop', () => {
+  it('should render `buttonPrimary` CSS class when not receive `color` prop', () => {
     render(<Button>Primary button</Button>)
 
     const component = screen.getByText('Primary button')
-    expect(component).toHaveClass('btnPrimary')
+    expect(component).toHaveClass('buttonPrimary')
   })
 
-  it('should render `btnSecondary` CSS class when receive `color="secondary"` prop', () => {
+  it('should render `buttonSecondary` CSS class when receive `color="secondary"` prop', () => {
     render(
       <Button color="secondary">
         Secondary button
@@ -26,7 +26,7 @@ describe('Button component', () => {
     )
 
     const component = screen.getByText('Secondary button')
-    expect(component).toHaveClass('btnSecondary')
+    expect(component).toHaveClass('buttonSecondary')
   })
 
   it('should render button with an icon when receiving `icon` prop', () => {

@@ -22,7 +22,7 @@ describe('MoviesCarousel component', () => {
     render(<MoviesCarousel title="Adventure" movies={movies} />)
 
     const $moviesCarousel = screen.getByTestId('movies-carousel')
-    const $arrowRight = $moviesCarousel.querySelector('.react-multi-carousel-arrow-right')
+    const $arrowRight = $moviesCarousel.querySelector('.carouselArrowRight')
 
     fireEvent.click($arrowRight)
 

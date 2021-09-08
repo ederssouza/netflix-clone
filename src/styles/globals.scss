@@ -80,7 +80,7 @@ img {
     padding-left: 60px; // 6 items
   }
 
-  .react-multi-carousel-arrow {
+  .carouselArrow {
     align-items: center;
     background-color: rgba(#000, 0.6);
     bottom: 0;
@@ -123,17 +123,17 @@ img {
       }
     }
 
-    &.react-multi-carousel-arrow-left {
+    &.carouselArrowLeft {
       border-radius: 0 4px 4px 0;
       left: 0;
     }
 
-    &.react-multi-carousel-arrow-right {
+    &.carouselArrowRight {
       border-radius: 4px 0 0 4px;
       right: 0;
     }
 
-    &.react-multi-carousel-arrow-hidden {
+    &.carouselArrow-hidden {
       background-color: var(--bg-color);
       cursor: default;
       opacity: 1;

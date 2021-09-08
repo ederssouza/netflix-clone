@@ -10,8 +10,8 @@ interface IButtonProps {
 const ButtonBase: ForwardRefRenderFunction<HTMLInputElement, IButtonProps> = ({ color = 'primary', icon, children, ...rest }: IButtonProps, ref) => {
   function renderButtonColorStyle (color: string) {
     const colors = {
-      primary: 'btnPrimary',
-      secondary: 'btnSecondary'
+      primary: 'buttonPrimary',
+      secondary: 'buttonSecondary'
     }
 
     const CSSClass = colors[color]
@@ -19,7 +19,7 @@ const ButtonBase: ForwardRefRenderFunction<HTMLInputElement, IButtonProps> = ({ 
   }
 
   return (
-    <button className={`${styles.btn} ${renderButtonColorStyle(color)}`} {...rest}>
+    <button className={`${styles.button} ${renderButtonColorStyle(color)}`} {...rest}>
       {icon}
       {children}
     </button>

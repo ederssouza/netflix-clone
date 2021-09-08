@@ -6,17 +6,17 @@ import { MenuItems, IMenuProps } from './MenuItems'
 import styles from './styles.module.scss'
 
 export function Menu ({ items }: IMenuProps) {
-  const [mobileMenuClassName, setMobileMenuClassName] = useState(styles.mobileNavbar)
+  const [menuMobileClassName, setMenuMobileClassName] = useState(styles.menuMobile)
 
   function handleOpenMobileMenu (e) {
-    const elemClalist = e?.target?.classList
-    const isMobileNavbar = elemClalist?.contains(styles.mobileNavbar)
-    const isOpenMobileNavbar = elemClalist?.contains(styles.mobileNavbarOpen)
-    const className = isOpenMobileNavbar || !isMobileNavbar
-      ? styles.mobileNavbar
-      : `${styles.mobileNavbar} ${styles.mobileNavbarOpen}`
+    const elemClasslist = e?.target?.classList
+    const isMenuMobile = elemClasslist?.contains(styles.menuMobile)
+    const isOpenMenuMobile = elemClasslist?.contains(styles.menuMobileOpen)
+    const className = isOpenMenuMobile || !isMenuMobile
+      ? styles.menuMobile
+      : `${styles.menuMobile} ${styles.menuMobileOpen}`
 
-    setMobileMenuClassName(className)
+    setMenuMobileClassName(className)
   }
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export function Menu ({ items }: IMenuProps) {
   }, [])
 
   return (
-    <nav className={styles.navbar} data-testid="menu">
-      <button className={mobileMenuClassName} title="Navegar">
+    <nav className={styles.menu} data-testid="menu">
+      <button className={menuMobileClassName} title="Navegar">
         Navegar <IoMdArrowDropdown />
         <MenuItems items={items} />
       </button>

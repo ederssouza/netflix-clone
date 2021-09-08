@@ -1,4 +1,4 @@
-.container {
+.searchBox {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -46,7 +46,7 @@
     }
   }
 
-  &.containerOpen {
+  &.searchBoxOpen {
     width: 130px;
 
     @media (min-width: 885px) {
@@ -63,7 +63,7 @@
     }
 
     input {
-      background: rgba(0,0,0,.75);
+      background: rgba(0,0,0,0.75);
       border-color: rgba(255,255,255,.85);
     }
   }

@@ -1,26 +1,26 @@
-.flexWrapper {
+.progressChartWrapper {
   display: flex;
 }
 
-.singleChart {
+.progressChartSingleChart {
   width: 100%;
   justify-content: space-around ;
 }
 
-.circularChart {
+.progressChart {
   display: block;
   margin: 10px auto;
   max-width: 80%;
   max-height: 250px;
 }
 
-.circleBg {
+.progressChartCircleBg {
   fill: none;
   stroke: #ccc;
   stroke-width: 3;
 }
 
-.circle {
+.progressChartCircle {
   fill: none;
   stroke-width: 3;
   stroke-linecap: round;
@@ -33,19 +33,19 @@
   }
 }
 
-.circularChartRed .circle {
+.progressChartRed .progressChartCircle {
   stroke: red;
 }
 
-.circularChartOrange .circle {
+.progressChartOrange .progressChartCircle {
   stroke: orange;
 }
 
-.circularChartGreen .circle {
+.progressChartGreen .progressChartCircle {
   stroke: green;
 }
 
-.percentage {
+.progressChartPercentage {
   fill: #eee;
   font-size: 0.5em;
   font-weight: 600;

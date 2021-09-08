@@ -23,7 +23,7 @@ describe('SearchBox component', () => {
 
     fireEvent.click($searchBox)
 
-    expect($searchBox).toHaveClass('containerOpen')
+    expect($searchBox).toHaveClass('searchBoxOpen')
   })
 
   it('should clear input field when on click close icon', () => {
@@ -51,7 +51,7 @@ describe('SearchBox component', () => {
 
     fireEvent.blur($inputSearch)
 
-    expect($searchBox).toHaveClass('containerOpen')
+    expect($searchBox).toHaveClass('searchBoxOpen')
   })
 
   it('should auto close on blur if value is empty', () => {
@@ -69,7 +69,7 @@ describe('SearchBox component', () => {
 
     fireEvent.blur($inputSearch)
 
-    expect($searchBox).not.toHaveClass('containerOpen')
+    expect($searchBox).not.toHaveClass('searchBoxOpen')
   })
 
   it('should redirect to search page when is valid value', () => {
@@ -99,6 +99,6 @@ describe('SearchBox component', () => {
 
     const $searchBox = screen.getByTestId('search-box')
 
-    expect($searchBox).toHaveClass('containerOpen')
+    expect($searchBox).toHaveClass('searchBoxOpen')
   })
 })

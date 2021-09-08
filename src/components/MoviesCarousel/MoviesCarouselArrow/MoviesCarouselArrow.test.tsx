@@ -5,15 +5,15 @@ describe('MoviesCarouselArrow component', () => {
   it('should render left arrow with success', () => {
     render(<MoviesCarouselArrow direction="left" />)
     const $moviesCarouselArrow = screen.getByTestId('movies-carousel-arrow')
-    expect($moviesCarouselArrow).toHaveClass('react-multi-carousel-arrow-left')
-    expect($moviesCarouselArrow).not.toHaveClass('react-multi-carousel-arrow-hidden')
+    expect($moviesCarouselArrow).toHaveClass('carouselArrowLeft')
+    expect($moviesCarouselArrow).not.toHaveClass('carouselArrow-hidden')
     expect($moviesCarouselArrow.querySelector('svg')).toBeInTheDocument()
   })
 
-  it('should render with `react-multi-carousel-arrow-hidden` CSS class when receive `firstLoad` prop', () => {
+  it('should render with `carouselArrow-hidden` CSS class when receive `firstLoad` prop', () => {
     render(<MoviesCarouselArrow direction="left" firstLoad />)
     const $moviesCarouselArrow = screen.getByTestId('movies-carousel-arrow')
-    expect($moviesCarouselArrow).toHaveClass('react-multi-carousel-arrow-hidden')
+    expect($moviesCarouselArrow).toHaveClass('carouselArrow-hidden')
     expect($moviesCarouselArrow.querySelector('svg')).not.toBeInTheDocument()
   })
 
@@ -37,7 +37,7 @@ describe('MoviesCarouselArrow component', () => {
   it('should render right arrow with success', () => {
     render(<MoviesCarouselArrow direction="right" />)
     const $moviesCarouselArrow = screen.getByTestId('movies-carousel-arrow')
-    expect($moviesCarouselArrow).toHaveClass('react-multi-carousel-arrow-right')
+    expect($moviesCarouselArrow).toHaveClass('carouselArrowRight')
   })
 
   it('should call `onClick` function when on click right arrow', () => {

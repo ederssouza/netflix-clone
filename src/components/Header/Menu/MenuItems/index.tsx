@@ -17,10 +17,10 @@ export function MenuItems ({ items }: IMenuProps) {
   const asPath = router?.asPath || null
 
   return (
-    <ul className={styles.navbarMenu}>
+    <ul className={styles.menuItems}>
       {items.map(link => {
         const className = asPath === link.href
-          ? styles.navbarMenuItemActive
+          ? styles.menuItemsActiveItem
           : null
 
         return (

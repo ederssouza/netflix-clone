@@ -2,10 +2,12 @@ import { ImFacebook2, ImInstagram, ImTwitter, ImYoutube } from 'react-icons/im'
 import styles from './styles.module.scss'
 
 export function Footer () {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className={styles.footer} data-testid="footer">
-      <div className={styles.container}>
-        <ul className={styles.socialMedia}>
+      <div className={styles.footerContainer}>
+        <ul className={styles.footerSocialMedia}>
           <li>
             <a
               href="https://www.facebook.com/netflixbrasil"
@@ -49,8 +51,8 @@ export function Footer () {
         </ul>
       </div>
 
-      <div className={styles.container}>
-        <ul className={styles.footerList}>
+      <div className={styles.footerContainer}>
+        <ul className={styles.footerMenu}>
           <li>
             <a href="#" title="Idioma e legendas">Idioma e legendas</a>
           </li>
@@ -65,7 +67,7 @@ export function Footer () {
           </li>
         </ul>
 
-        <ul className={styles.footerList}>
+        <ul className={styles.footerMenu}>
           <li>
             <a href="#" title="Audiodescrição">Audiodescrição</a>
           </li>
@@ -77,7 +79,7 @@ export function Footer () {
           </li>
         </ul>
 
-        <ul className={styles.footerList}>
+        <ul className={styles.footerMenu}>
           <li>
             <a href="#" title="Centro de ajuda">Centro de ajuda</a>
           </li>
@@ -89,7 +91,7 @@ export function Footer () {
           </li>
         </ul>
 
-        <ul className={styles.footerList}>
+        <ul className={styles.footerMenu}>
           <li>
             <a href="#" title="Cartão pré-pago">Cartão pré-pago</a>
           </li>
@@ -102,7 +104,7 @@ export function Footer () {
         </ul>
       </div>
 
-      <span className={styles.copyright}>&copy; 1997-2021 Netflix, Inc.  ‎{'{cde6c7c5-4e42-4c65-8f35-2d9aa3d447b7}'}</span>
+      <span className={styles.footerCopyright}>&copy; 1997-{currentYear} Netflix, Inc.  ‎{'{cde6c7c5-4e42-4c65-8f35-2d9aa3d447b7}'}</span>
     </footer>
   )
 }

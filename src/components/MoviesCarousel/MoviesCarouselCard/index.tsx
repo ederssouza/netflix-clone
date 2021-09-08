@@ -17,19 +17,19 @@ interface IMovieProps {
 export function MoviesCarouselCard ({ movie }: IMovieProps) {
   return (
     <div
-      className={styles.container}
+      className={styles.moviesCarouselCard}
       data-testid="movies-carousel-card"
     >
       <img src={movie.image} alt={movie.title} />
 
-      <div className={styles.containerDetails}>
-        <ul className={styles.actions}>
-          <li className={styles.actionItemActive}>
+      <div className={styles.moviesCarouselCardDetails}>
+        <ul className={styles.moviesCarouselCardActions}>
+          <li className={styles.moviesCarouselCardActionActiveItem}>
             <a href="#" title=""><IoMdPlay /></a>
           </li>
-
+          {/* moviesCarouselCardRelevant */}
           <li
-            className={styles.actionItem}
+            className={styles.moviesCarouselCardActionItem}
             data-testid="movies-carousel-more-details"
           >
             <Link href={`/details/${movie.id}`} passHref>
@@ -38,11 +38,11 @@ export function MoviesCarouselCard ({ movie }: IMovieProps) {
           </li>
         </ul>
 
-        <span className={`${styles.relevant} ${styles.relevantGreen}`}>
+        <span className={`${styles.moviesCarouselCardRelevant} ${styles.moviesCarouselCardRelevantGreen}`}>
           87% relevante
         </span>
 
-        <ul className={styles.genres}>
+        <ul className={styles.moviesCarouselCardGenres}>
           <li>Drama</li>
           <li>Terror</li>
           <li>Suspense</li>

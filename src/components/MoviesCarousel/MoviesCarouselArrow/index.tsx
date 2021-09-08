@@ -10,7 +10,7 @@ export function MoviesCarouselArrow ({ direction, firstLoad = false, onClick, ..
   if (direction === 'left') {
     return (
       <div
-        className={`react-multi-carousel-arrow react-multi-carousel-arrow-left ${firstLoad ? 'react-multi-carousel-arrow-hidden' : ''}`}
+        className={`carouselArrow carouselArrowLeft ${firstLoad ? 'carouselArrow-hidden' : ''}`}
         data-testid="movies-carousel-arrow"
         onClick={() => !firstLoad && onClick()}
       >
@@ -21,7 +21,7 @@ export function MoviesCarouselArrow ({ direction, firstLoad = false, onClick, ..
 
   return (
     <div
-      className="react-multi-carousel-arrow react-multi-carousel-arrow-right"
+      className="carouselArrow carouselArrowRight"
       data-testid="movies-carousel-arrow"
       onClick={() => onClick()}
     >

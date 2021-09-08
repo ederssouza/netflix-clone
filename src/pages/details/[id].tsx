@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { IoMdPlay } from 'react-icons/io'
 
 import { Header } from '../../components/Header'
-import { PercentageCircle } from '../../components/PercentageCircle'
+import { ProgressChart } from '../../components/ProgressChart'
 import { Button } from '../../components/Button'
 
 import styles from './styles.module.scss'
@@ -43,7 +43,7 @@ export default function DetailsById ({ movie }: IDetailsProps) {
           <div className={styles.headerInfo}>
             <div className={styles.container}>
               <div className={styles.headerInfoLeft}>
-                <PercentageCircle value={80} />
+                <ProgressChart value={80} />
               </div>
 
               <div className={styles.headerInfoRight}>

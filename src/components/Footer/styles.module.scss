@@ -8,7 +8,7 @@
   }
 }
 
-.container {
+.footerContainer {
 
   @media (min-width: 420px) {
     display: grid;
@@ -21,7 +21,7 @@
   }
 }
 
-.socialMedia {
+.footerSocialMedia {
   display: flex;
   list-style-type: none;
   margin-bottom: 0.5rem;
@@ -44,7 +44,7 @@
   }
 }
 
-.footerList {
+.footerMenu {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -66,7 +66,7 @@
   }
 }
 
-.copyright {
+.footerCopyright {
   color: grey;
   font-size: 0.6875rem;
 }

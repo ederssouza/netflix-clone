@@ -31,13 +31,13 @@ const defaultResponsiveProps = {
     slidesToSlide: 4,
     partialVisibilityGutter: 16
   },
-  mobile2: {
+  mobile: {
     breakpoint: { min: 500, max: 799 },
     items: 3,
     slidesToSlide: 3,
     partialVisibilityGutter: 13
   },
-  mobile: {
+  smallMobile: {
     breakpoint: { min: 0, max: 499 },
     items: 2,
     slidesToSlide: 2,
@@ -66,11 +66,11 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
 
   return (
     <div
-      className={`${styles.container} ${firstLoad ? 'carousel-firstload' : ''}`}
+      className={`${styles.moviesCarousel} ${firstLoad ? 'carousel-firstload' : ''}`}
       data-testid="movies-carousel"
       ref={ref}
     >
-      <h2 className={styles.title}>{title}</h2>
+      <h2 className={styles.moviesCarouselTitle}>{title}</h2>
 
       <Carousel
         ref={sliderRef}

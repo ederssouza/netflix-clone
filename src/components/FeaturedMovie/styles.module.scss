@@ -1,4 +1,4 @@
-.container {
+.featuredMovie {
   align-items: center;
   background-position: center;
   background-repeat: no-repeat;
@@ -7,11 +7,11 @@
   height: 100vh;
 }
 
-.containerTitle {
+.featuredMovieCategory {
   margin-bottom: 1rem;
 }
 
-.info {
+.featuredMovieInfo {
   justify-content: center;
   background-image: linear-gradient(to right, rgba(#000, 0.9), transparent);
   display: flex;
@@ -25,18 +25,14 @@
   }
 }
 
-.infoActions {}
-
-.infoText {}
-
-.title {
+.featuredMovieTitle {
   color: var(--body-text-color);
   font-size: 1.5rem;
   margin: 1vw 0;
   text-shadow: 2px 2px 4px rgba(#000, 0.45);
 }
 
-.text {
+.featuredMovieText {
   color: var(--body-text-color);
   font-size: 1rem;
   font-weight: 400;
@@ -49,7 +45,7 @@
   }
 }
 
-.infoActions {
+.featuredMovieInfoActions {
   display: flex;
   margin-top: 1.5rem;
 
