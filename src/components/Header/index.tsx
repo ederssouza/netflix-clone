@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import { Logo } from './Logo'
 import { Menu } from './Menu'
 import { SearchBox } from './SearchBox'
@@ -7,7 +8,7 @@ import { Profile } from './Profile'
 import styles from './styles.module.scss'
 
 export function Header () {
-  const [className, setClassName] = useState(styles.container)
+  const [className, setClassName] = useState(styles.header)
   const menuItems = [
     {
       href: '/',
@@ -36,18 +37,18 @@ export function Header () {
   ]
 
   useEffect(() => {
-    function handleScroll () {
+    function handleHeaderBackground () {
       const pageYOffset = window.pageYOffset
       const classNameValue = pageYOffset > 0
-        ? `${styles.container} ${styles.containerFillBackground}`
-        : styles.container
+        ? `${styles.header} ${styles.headerFillBackground}`
+        : styles.header
 
       setClassName(classNameValue)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleHeaderBackground)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleHeaderBackground)
   }, [])
 
   return (

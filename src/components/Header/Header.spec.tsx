@@ -11,17 +11,17 @@ describe('Header component', () => {
     expect(screen.getByAltText('Netflix logo')).toBeInTheDocument()
   })
 
-  it('should add `containerFillBackground` CSS class when pageYOffset is greater than zero', () => {
+  it('should add `headerFillBackground` CSS class when pageYOffset is greater than zero', () => {
     render(<Header />)
 
     const $header = screen.getByTestId('main-header')
     Object.defineProperty(window, 'pageYOffset', { value: 100 })
     fireEvent.scroll(window)
 
-    expect($header).toHaveClass('containerFillBackground')
+    expect($header).toHaveClass('headerFillBackground')
   })
 
-  it('should remove `containerFillBackground` CSS class when pageYOffset equals zero', () => {
+  it('should remove `headerFillBackground` CSS class when pageYOffset equals zero', () => {
     render(<Header />)
 
     const $header = screen.getByTestId('main-header')
@@ -32,6 +32,6 @@ describe('Header component', () => {
     Object.defineProperty(window, 'pageYOffset', { value: 0 })
     fireEvent.scroll(window)
 
-    expect($header).not.toHaveClass('containerFillBackground')
+    expect($header).not.toHaveClass('headerFillBackground')
   })
 })

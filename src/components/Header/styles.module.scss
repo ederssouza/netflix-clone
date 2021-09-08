@@ -1,4 +1,4 @@
-.container {
+.header {
   align-items: center;
   background-image: linear-gradient(to bottom, #000, transparent);
   background-position: 0 -48px;
@@ -20,7 +20,7 @@
     padding: 0 60px;
   }
 
-  &.containerFillBackground {
+  &.headerFillBackground {
     background-position: 0 0;
   }
 
