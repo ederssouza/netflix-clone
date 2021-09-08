@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next'
 import { Header } from '../../components/Header'
 // import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
+import { Footer } from '../../components/Footer'
 
 import styles from './styles.module.scss'
 
@@ -39,6 +40,8 @@ export default function Search ({ q }: ISearchProps) {
           {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
         </div> */}
       </main>
+
+      <Footer />
     </>
   )
 }

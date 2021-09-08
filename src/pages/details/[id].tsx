@@ -5,6 +5,7 @@ import { IoMdPlay } from 'react-icons/io'
 import { Header } from '../../components/Header'
 import { ProgressChart } from '../../components/ProgressChart'
 import { Button } from '../../components/Button'
+import { Footer } from '../../components/Footer'
 
 import styles from './styles.module.scss'
 
@@ -85,6 +86,8 @@ export default function DetailsById ({ movie }: IDetailsProps) {
             </div>
           </div>
         </section>
+
+        <Footer />
       </div>
     </>
   )
