@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+
 import { FeaturedMovie } from '.'
 import { movies } from '../../tests/mocks/movies'
 

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+
 import { MoviesCarousel } from '.'
 import { movies } from '../../tests/mocks/movies'
 

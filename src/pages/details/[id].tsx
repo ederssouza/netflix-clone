@@ -2,11 +2,10 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IoMdPlay } from 'react-icons/io'
 
-import { Header } from '../../components/Header'
-import { ProgressChart } from '../../components/ProgressChart'
 import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer'
-
+import { Header } from '../../components/Header'
+import { ProgressChart } from '../../components/ProgressChart'
 import styles from './styles.module.scss'
 
 interface IGenresProps {

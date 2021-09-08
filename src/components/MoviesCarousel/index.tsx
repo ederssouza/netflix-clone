@@ -4,7 +4,6 @@ import 'react-multi-carousel/lib/styles.css'
 
 import { MoviesCarouselArrow } from './MoviesCarouselArrow'
 import { IMovie, MoviesCarouselCard } from './MoviesCarouselCard'
-
 import styles from './styles.module.scss'
 
 interface IMoviesCarouselProps {

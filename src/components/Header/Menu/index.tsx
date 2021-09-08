@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { IoMdArrowDropdown } from 'react-icons/io'
 
 import { MenuItems, IMenuProps } from './MenuItems'
-
 import styles from './styles.module.scss'
 
 export function Menu ({ items }: IMenuProps) {

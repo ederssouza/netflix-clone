@@ -19,7 +19,8 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "eslint-plugin-import-helpers"
   ],
   "globals": {
     "jest": true,
@@ -33,6 +34,20 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          ["/^react/", "/^next/", "module"],
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
   }
 }

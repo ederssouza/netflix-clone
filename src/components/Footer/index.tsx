@@ -1,9 +1,8 @@
 import { ImFacebook2, ImInstagram, ImTwitter, ImYoutube } from 'react-icons/im'
 
-import { FooterSocialMedia } from './FooterSocialMedia'
-import { FooterMenu } from './FooterMenu'
 import { FooterCopyright } from './FooterCopyright'
-
+import { FooterMenu } from './FooterMenu'
+import { FooterSocialMedia } from './FooterSocialMedia'
 import styles from './styles.module.scss'
 
 export function Footer () {

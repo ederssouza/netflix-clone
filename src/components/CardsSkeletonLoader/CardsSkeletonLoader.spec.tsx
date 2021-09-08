@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+
 import { CardsSkeletonLoader } from '.'
 
 describe('CardsSkeletonLoader component', () => {
