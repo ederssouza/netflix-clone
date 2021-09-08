@@ -54,7 +54,7 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
     setResponsive({ ...defaultResponsiveProps })
   }
 
-  function arrowCallback () {
+  function scrollCallback () {
     setFirstLoad(false)
   }
 
@@ -90,11 +90,9 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
           />
         }
         customRightArrow={
-          <MoviesCarouselArrow
-            direction="right"
-            callback={arrowCallback}
-          />
+          <MoviesCarouselArrow direction="right" />
         }
+        beforeChange={() => scrollCallback()}
       >
         {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
       </Carousel>
