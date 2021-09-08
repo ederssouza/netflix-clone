@@ -7,12 +7,13 @@ interface ICardsSkeletonLoaderProps {
 
 export function CardsSkeletonLoader ({ title = false, items = 6 }: ICardsSkeletonLoaderProps) {
   return (
-    <div>
-      <div className={styles.cardsSkeleton}>
-        {title && <div className={styles.cardsSkeletonTitle} />}
-        <div className={styles.cardsSkeletonGrid}>
-          {Array.from({ length: items }).map((_, index) => <div key={index + 1} />)}
-        </div>
+    <div
+      className={styles.cardsSkeleton}
+      data-testid="cards-skeleton-loader"
+    >
+      {title && <div className={styles.cardsSkeletonTitle} />}
+      <div className={styles.cardsSkeletonGrid}>
+        {Array.from({ length: items }).map((_, index) => <div key={index + 1} />)}
       </div>
     </div>
   )
