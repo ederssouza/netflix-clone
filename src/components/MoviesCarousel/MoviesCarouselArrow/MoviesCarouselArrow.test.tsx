@@ -40,15 +40,13 @@ describe('MoviesCarouselArrow component', () => {
     expect($moviesCarouselArrow).toHaveClass('react-multi-carousel-arrow-right')
   })
 
-  it('should call `onClick` and `callback` functions when on click right arrow', () => {
+  it('should call `onClick` function when on click right arrow', () => {
     const onClick = jest.fn()
-    const callback = jest.fn()
 
     render(
       <MoviesCarouselArrow
         direction="right"
         onClick={onClick}
-        callback={callback}
       />
     )
 
@@ -57,6 +55,5 @@ describe('MoviesCarouselArrow component', () => {
     fireEvent.click($moviesCarouselArrow)
 
     expect(onClick).toBeCalledTimes(1)
-    expect(callback).toBeCalledTimes(1)
   })
 })
