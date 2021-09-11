@@ -1,9 +1,28 @@
 import axios from 'axios'
 
-export const tmdbService = axios.create({
+interface IGetById {
+  type: string
+  id: string
+}
+
+const axiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   params: {
     api_key: process.env.TMDB_API_KEY,
     language: 'pt-BR'
   }
 })
+
+export const tmdbService = {
+  getDetailsById ({ type, id }: IGetById) {
+    return axiosInstance.get(`/${type}/${id}`)
+  },
+
+  getCreditsById ({ type, id }: IGetById) {
+    return axiosInstance.get(`/${type}/${id}/credits`)
+  },
+
+  getWatchProvidersById ({ type, id }: IGetById) {
+    return axiosInstance.get(`/${type}/${id}/watch/providers`)
+  }
+}
