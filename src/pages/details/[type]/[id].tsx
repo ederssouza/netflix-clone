@@ -43,7 +43,7 @@ interface IDetailsProps {
   cast?: ICast[]
 }
 
-export default function DetailsById ({ movie, cast = [], providers = [] }: IDetailsProps) {
+export default function DetailsById ({ movie, cast, providers }: IDetailsProps) {
   return (
     <>
       <Head>
@@ -89,32 +89,42 @@ export default function DetailsById ({ movie, cast = [], providers = [] }: IDeta
                 <p>{movie.overview}</p>
 
                 <h2 className={styles.contentTitle}>Disponível nas plataformas</h2>
-                <ul className={styles.providers}>
-                  {providers.map(provider => (
-                    <li key={provider.provider_id}>
-                      <img src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
-                    </li>
-                  ))}
-                </ul>
+                {providers?.length
+                  ? (
+                  <ul className={styles.providers}>
+                    {providers.map(provider => (
+                      <li key={provider.provider_id}>
+                        <img src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                      </li>
+                    ))}
+                  </ul>
+                    )
+                  : (<p>Não está disponível em nenhuma plataforma</p>)}
               </div>
 
               <aside className={styles.sidebar}>
-                <div className={styles.sidebarBox}>
-                  <span className={styles.sidebarTitle}>Elenco:</span>
-                  {cast.map((actor, index, arr) => {
-                    return index + 1 < arr.length
-                      ? <span key={actor.id}> {actor.name}, </span>
-                      : <span key={actor.id}>{actor.name}</span>
-                  })}
-                </div>
+                {cast?.length && (
+                  <div className={styles.sidebarBox}>
+                    <h4 className={styles.sidebarTitle}>Elenco:</h4>
+                    <ul className={styles.sidebarCast}>
+                      {cast.map((actor, index, arr) => {
+                        return index + 1 < arr.length
+                          ? <li key={actor.id}> {actor.name}, </li>
+                          : <li key={actor.id}>{actor.name}</li>
+                      })}
+                    </ul>
+                  </div>
+                )}
 
                 <div className={styles.sidebarBox}>
-                  <span className={styles.sidebarTitle}>Gênero:</span>
-                  {movie?.genres?.map((genre, index, arr) => {
-                    return index + 1 < arr.length
-                      ? <span key={genre.id}> {genre.name}, </span>
-                      : <span key={genre.id}>{genre.name}</span>
-                  })}
+                  <h4 className={styles.sidebarTitle}>Gênero:</h4>
+                  <ul className={styles.sidebarGenres}>
+                    {movie?.genres?.map((genre, index, arr) => {
+                      return index + 1 < arr.length
+                        ? <li key={genre.id}> {genre.name}, </li>
+                        : <li key={genre.id}>{genre.name}</li>
+                    })}
+                  </ul>
                 </div>
               </aside>
             </div>
@@ -147,7 +157,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      movie: detailsResponse?.data || {},
+      movie: detailsResponse?.data,
       providers: watchProvidersResponse?.data?.results?.BR?.flatrate || [],
       cast: creditsResponse?.data?.cast || []
     }
