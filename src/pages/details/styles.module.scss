@@ -111,6 +111,20 @@
   }
 }
 
+.providers {
+  display: inline-flex;
+  list-style-type: none;
+
+  li {
+    display: flex;
+    max-width: 80px;
+
+    & + li {
+      margin-left: 1rem;
+    }
+  }
+}
+
 .sidebar {
 
   @media (min-width: 885px) {
