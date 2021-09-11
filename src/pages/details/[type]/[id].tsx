@@ -67,7 +67,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
                   <h1 className={styles.headerTitle}>
                     {movie.title} ({movie.year})
                   </h1>
-                  <span>({movie.country}) {movie.genres.join(', ')} {movie.runtime}</span>
+                  <span>({movie.country}) {movie?.genres?.join(', ')} {movie.runtime}</span>
                 </div>
 
                 <Button color="primary" icon={<IoMdPlay />}>
@@ -86,7 +86,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
                 <p>{movie.overview}</p>
 
                 <h2 className={styles.contentTitle}>Disponível nas plataformas</h2>
-                <ul>
+                <ul className={styles.providers}>
                   {providers.map(provider => (
                     <li key={provider.providerId}>
                       <img src={provider.logoPath} alt="" />
@@ -107,7 +107,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
 
                 <div className={styles.sidebarBox}>
                   <span className={styles.sidebarTitle}>Gênero:</span>
-                  {movie.genres.map((genre, index, arr) => {
+                  {movie?.genres?.map((genre, index, arr) => {
                     return index + 1 < arr.length
                       ? <span key={genre}> {genre}, </span>
                       : <span key={genre}>{genre}</span>
@@ -125,24 +125,33 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { type, id } = params
-  const { data: movieData } = await tmdbService.get(`/${type}/${id}`)
-  const { data: credits } = await tmdbService.get(`/${type}/${id}/credits`)
-  const { data: watchProviders } = await tmdbService.get(`/${type}/${id}/watch/providers`)
+  try {
+    const { type, id } = params
+    const { data: movieData } = await tmdbService.get(`/${type}/${id}`)
+    const { data: credits } = await tmdbService.get(`/${type}/${id}/credits`)
+    const { data: watchProviders } = await tmdbService.get(`/${type}/${id}/watch/providers`)
 
-  const movie = formatMoviePayload(movieData)
-  const providersList = watchProviders?.results?.BR?.flatrate || []
-  const providers = providersList.map(provider => ({
-    logoPath: `https://image.tmdb.org/t/p/original${provider.logo_path}`,
-    providerId: provider.provider_id,
-    providerName: provider.provider_name
-  }))
+    const movie = formatMoviePayload(movieData)
+    const providersList = watchProviders?.results?.BR?.flatrate || []
+    const providers = providersList.map(provider => ({
+      logoPath: `https://image.tmdb.org/t/p/original${provider.logo_path}`,
+      providerId: provider.provider_id,
+      providerName: provider.provider_name
+    }))
 
-  return {
-    props: {
-      movie: { ...movie, type },
-      cast: credits?.cast,
-      providers
+    return {
+      props: {
+        movie: { ...movie, type },
+        cast: credits?.cast,
+        providers
+      }
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false
+      }
     }
   }
 }
