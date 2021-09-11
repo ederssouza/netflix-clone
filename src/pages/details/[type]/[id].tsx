@@ -35,12 +35,13 @@ interface IProvider {
 }
 
 interface IDetailsProps {
+  status: 'success' | 'error'
   movie: IMovie
   cast: ICast[]
   providers: IProvider[]
 }
 
-export default function DetailsById ({ movie, cast, providers }: IDetailsProps) {
+export default function DetailsById ({ status, movie, cast, providers }: IDetailsProps) {
   return (
     <>
       <Head>
@@ -141,16 +142,29 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     return {
       props: {
+        status: 'success',
         movie: { ...movie, type },
         cast: credits?.cast,
         providers
       }
     }
   } catch (error) {
+    if (error?.response?.status === 404) {
+      return {
+        redirect: {
+          status: 'error',
+          destination: '/404',
+          permanent: false
+        }
+      }
+    }
+
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false
+      props: {
+        status: 'error',
+        movie: null,
+        cast: [],
+        providers: []
       }
     }
   }
