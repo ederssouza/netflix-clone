@@ -23,7 +23,7 @@
 
   .menuItems {
     background-color: rgba(0,0,0,.9);
-    border-top: 2px solid var(--prymary-text-color);
+    border-top: 2px solid var(--primary-text-color);
     display: none;
     left: 50%;
     margin-top: 5px;
@@ -40,7 +40,7 @@
     }
 
     &::before {
-      border-bottom: 10px solid var(--prymary-text-color);
+      border-bottom: 10px solid var(--primary-text-color);
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-top: 10px solid transparent;
