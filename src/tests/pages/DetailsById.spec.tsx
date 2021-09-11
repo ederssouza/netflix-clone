@@ -160,4 +160,8 @@ describe('DetailsById page component', () => {
     expect(getCreditsByIdMocked).toHaveReturnedWith({})
     expect(container.querySelector('.sidebarCast')).not.toBeInTheDocument()
   })
+
+  it.todo('check if movie exists and redirect')
+
+  it.todo('invalid resquest')
 })
