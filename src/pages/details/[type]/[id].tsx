@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IoMdPlay } from 'react-icons/io'
@@ -7,20 +8,28 @@ import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { ProgressChart } from '../../../components/ProgressChart'
 import { tmdbService } from '../../../services/tmdb'
-import { formatMoviePayload } from '../../../utils/functions'
 import styles from '../styles.module.scss'
 
+interface IGenres {
+  id: number
+  name: string
+}
+
 interface IMovie {
-  background: string
-  score: number
-  title: string,
-  originalName: string
-  year: string
-  country: string
-  genres: string[]
-  runtime: string
+  title: string
   overview: string
-  type: string
+  backdrop_path: string
+  vote_average: number
+  release_date: string
+  original_language: string
+  runtime: number
+  genres: IGenres[]
+}
+
+interface IProvider {
+  provider_id?: number,
+  provider_name?: string
+  logo_path?: string
 }
 
 interface ICast {
@@ -28,20 +37,13 @@ interface ICast {
   name: string
 }
 
-interface IProvider {
-  logoPath: string
-  providerId: string
-  providerName: string
-}
-
 interface IDetailsProps {
-  status: 'success' | 'error'
   movie: IMovie
-  cast: ICast[]
-  providers: IProvider[]
+  providers?: IProvider[]
+  cast?: ICast[]
 }
 
-export default function DetailsById ({ status, movie, cast, providers }: IDetailsProps) {
+export default function DetailsById ({ movie, cast = [], providers = [] }: IDetailsProps) {
   return (
     <>
       <Head>
@@ -55,20 +57,20 @@ export default function DetailsById ({ status, movie, cast, providers }: IDetail
 
         <section
           className={styles.header}
-          style={{ backgroundImage: `url("${movie.background}")` }}
+          style={{ backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.backdrop_path}")` }}
         >
           <div className={styles.headerInfo}>
             <div className={styles.container}>
               <div className={styles.headerInfoLeft}>
-                <ProgressChart value={movie.score} />
+                <ProgressChart value={movie.vote_average * 10} />
               </div>
 
               <div className={styles.headerInfoRight}>
                 <div>
                   <h1 className={styles.headerTitle}>
-                    {movie.title} ({movie.year})
+                    {movie.title} ({movie.release_date})
                   </h1>
-                  <span>({movie.country}) {movie?.genres?.join(', ')} {movie.runtime}</span>
+                  <span>({movie.original_language}) {movie?.genres?.map(genre => genre.name).join(', ')} {movie.runtime}</span>
                 </div>
 
                 <Button color="primary" icon={<IoMdPlay />}>
@@ -89,8 +91,8 @@ export default function DetailsById ({ status, movie, cast, providers }: IDetail
                 <h2 className={styles.contentTitle}>Disponível nas plataformas</h2>
                 <ul className={styles.providers}>
                   {providers.map(provider => (
-                    <li key={provider.providerId}>
-                      <img src={provider.logoPath} alt="" />
+                    <li key={provider.provider_id}>
+                      <img src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                     </li>
                   ))}
                 </ul>
@@ -110,8 +112,8 @@ export default function DetailsById ({ status, movie, cast, providers }: IDetail
                   <span className={styles.sidebarTitle}>Gênero:</span>
                   {movie?.genres?.map((genre, index, arr) => {
                     return index + 1 < arr.length
-                      ? <span key={genre}> {genre}, </span>
-                      : <span key={genre}>{genre}</span>
+                      ? <span key={genre.id}> {genre.name}, </span>
+                      : <span key={genre.id}>{genre.name}</span>
                   })}
                 </div>
               </aside>
@@ -126,46 +128,28 @@ export default function DetailsById ({ status, movie, cast, providers }: IDetail
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  try {
-    const { type, id } = params
-    const { data: movieData } = await tmdbService.get(`/${type}/${id}`)
-    const { data: credits } = await tmdbService.get(`/${type}/${id}/credits`)
-    const { data: watchProviders } = await tmdbService.get(`/${type}/${id}/watch/providers`)
+  const { type, id } = params
 
-    const movie = formatMoviePayload(movieData)
-    const providersList = watchProviders?.results?.BR?.flatrate || []
-    const providers = providersList.map(provider => ({
-      logoPath: `https://image.tmdb.org/t/p/original${provider.logo_path}`,
-      providerId: provider.provider_id,
-      providerName: provider.provider_name
-    }))
+  const detailsResponse = await tmdbService.getDetailsById({
+    type: String(type),
+    id: String(id)
+  })
 
-    return {
-      props: {
-        status: 'success',
-        movie: { ...movie, type },
-        cast: credits?.cast,
-        providers
-      }
-    }
-  } catch (error) {
-    if (error?.response?.status === 404) {
-      return {
-        redirect: {
-          status: 'error',
-          destination: '/404',
-          permanent: false
-        }
-      }
-    }
+  const watchProvidersResponse = await tmdbService.getWatchProvidersById({
+    type: String(type),
+    id: String(id)
+  })
 
-    return {
-      props: {
-        status: 'error',
-        movie: null,
-        cast: [],
-        providers: []
-      }
+  const creditsResponse = await tmdbService.getCreditsById({
+    type: String(type),
+    id: String(id)
+  })
+
+  return {
+    props: {
+      movie: detailsResponse?.data || {},
+      providers: watchProvidersResponse?.data?.results?.BR?.flatrate || [],
+      cast: creditsResponse?.data?.cast || []
     }
   }
 }
