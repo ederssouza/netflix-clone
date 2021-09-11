@@ -13,7 +13,7 @@ export function ProgressChart ({ value }: IProgressChartProps) {
     let color = 'progressChartGreen'
 
     if (value < 60) color = 'progressChartRed'
-    if (value >= 60 && value < 80) color = 'progressChartOrange'
+    if (value >= 60 && value < 70) color = 'progressChartOrange'
 
     setColor(color)
   }, [value])
