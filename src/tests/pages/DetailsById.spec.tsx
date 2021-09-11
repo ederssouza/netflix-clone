@@ -1,46 +1,86 @@
 import { render, screen } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
 
 import Details, { getServerSideProps } from '../../pages/details/[type]/[id]'
+import { tmdbService } from '../../services/tmdb'
 
-jest.mock('../../services/tmdb.ts')
+jest.mock('../../services/tmdb')
 
-const movie = {
-  background: 'https://image.tmdb.org/t/p/original/8s4h9friP6Ci3adRGahHARVd76E.jpg',
-  score: 10,
-  title: 'Space Jam: Um Novo Legado',
-  originalName: 'Space Jam: Um Novo Legado',
-  year: '2021',
-  country: 'US',
-  genres: ['Adventure'],
-  runtime: '1h 20m',
-  overview: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non doloremque tempora obcaecati animi asperiores suscipit a! Adipisci sit a, facilis reiciendis illo magnam, officia doloremque debitis delectus hic amet porro.',
-  type: 'movie'
+const movieMock = {
+  title: 'Matrix',
+  overview: 'Lorem ipsum dolor.',
+  backdrop_path: '/8s4h9friP6Ci3adRGahHARVd76E.jpg',
+  vote_average: 7.4,
+  release_date: '2021-07-08',
+  original_language: 'en',
+  runtime: 115,
+  genres: [
+    { id: 1, name: 'thriller' },
+    { id: 2, name: 'Adventure' }
+  ]
 }
+
+const providersMock = [
+  {
+    provider_id: 4,
+    provider_name: 'NOW',
+    logo_path: '/dNAz0MMIPiqCD2axGIktXSFWmkz.jpg'
+  }
+]
+
+const providersResponseMock = {
+  results: {
+    BR: {
+      flatrate: [...providersMock]
+    }
+  }
+}
+
+const castMock = [
+  { id: 1, name: 'Keanu Reeves' },
+  { id: 2, name: 'Carrie-Anne Moss' }
+]
 
 describe('DetailsById page component', () => {
   it('should render with success', () => {
-    render(<Details movie={movie} cast={[]} providers={[]} />)
-
-    const $title = screen.getByText(new RegExp(movie.title))
-
-    expect($title).toBeInTheDocument()
+    render(<Details movie={movieMock} providers={providersMock} cast={castMock} />)
+    expect(screen.getByText(/Matrix/)).toBeInTheDocument()
   })
 
   it('should render movie data when receive `id` URL param', async () => {
-    const response = await getServerSideProps({
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: { ...movieMock }
+    } as any)
+
+    getWatchProvidersByIdMocked.mockReturnValueOnce({
+      data: { ...providersResponseMock }
+    } as any)
+
+    getCreditsByIdMocked.mockReturnValueOnce({
+      data: { cast: [...castMock] }
+    } as any)
+
+    await getServerSideProps({
       params: { type: 'movie', id: 10 }
     } as any)
 
-    render(<Details movie={movie} cast={[]} providers={[]} />)
+    expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getDetailsByIdMocked).toHaveReturnedWith({
+      data: { ...movieMock }
+    })
 
-    expect(response).toEqual(
-      expect.objectContaining({
-        props: expect.objectContaining({
-          movie: expect.objectContaining({
-            ...movie
-          })
-        })
-      })
-    )
+    expect(getWatchProvidersByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getWatchProvidersByIdMocked).toHaveReturnedWith({
+      data: { ...providersResponseMock }
+    })
+
+    expect(getCreditsByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getCreditsByIdMocked).toHaveReturnedWith({
+      data: { cast: [...castMock] }
+    })
   })
 })
