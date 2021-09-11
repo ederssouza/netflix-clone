@@ -41,6 +41,10 @@ const castMock = [
   { id: 2, name: 'Carrie-Anne Moss' }
 ]
 
+afterEach(() => {
+  jest.clearAllMocks()
+})
+
 describe('DetailsById page component', () => {
   it('should render with success', () => {
     render(<Details movie={movieMock} providers={providersMock} cast={castMock} />)
@@ -82,5 +86,78 @@ describe('DetailsById page component', () => {
     expect(getCreditsByIdMocked).toHaveReturnedWith({
       data: { cast: [...castMock] }
     })
+  })
+
+  it('should not render providers when not receiving data ', async () => {
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: { ...movieMock }
+    } as any)
+
+    getWatchProvidersByIdMocked.mockReturnValueOnce({} as any)
+
+    getCreditsByIdMocked.mockReturnValueOnce({
+      data: { cast: [...castMock] }
+    } as any)
+
+    await getServerSideProps({
+      params: { type: 'movie', id: 10 }
+    } as any)
+
+    const { container } = render(<Details movie={movieMock} providers={[]} cast={castMock} />)
+
+    expect(getDetailsByIdMocked).toBeCalled()
+    expect(getDetailsByIdMocked).toHaveReturnedWith({
+      data: { ...movieMock }
+    })
+
+    expect(getWatchProvidersByIdMocked).toBeCalledTimes(1)
+    expect(getWatchProvidersByIdMocked).toHaveReturnedWith({})
+    expect(container.querySelector('.providers')).not.toBeInTheDocument()
+    expect(screen.getByText('Não está disponível em nenhuma plataforma')).toBeInTheDocument()
+
+    expect(getCreditsByIdMocked).toBeCalledTimes(1)
+    expect(getCreditsByIdMocked).toHaveReturnedWith({
+      data: { cast: [...castMock] }
+    })
+  })
+
+  it('should not render cast when not receiving data', async () => {
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: { ...movieMock }
+    } as any)
+
+    getWatchProvidersByIdMocked.mockReturnValueOnce({
+      data: { ...providersResponseMock }
+    } as any)
+
+    getCreditsByIdMocked.mockReturnValueOnce({} as any)
+
+    await getServerSideProps({
+      params: { type: 'movie', id: 10 }
+    } as any)
+
+    const { container } = render(<Details movie={movieMock} providers={providersMock} cast={[]} />)
+
+    expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getDetailsByIdMocked).toHaveReturnedWith({
+      data: { ...movieMock }
+    })
+
+    expect(getWatchProvidersByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getWatchProvidersByIdMocked).toHaveReturnedWith({
+      data: { ...providersResponseMock }
+    })
+
+    expect(getCreditsByIdMocked).toHaveBeenCalledTimes(1)
+    expect(getCreditsByIdMocked).toHaveReturnedWith({})
+    expect(container.querySelector('.sidebarCast')).not.toBeInTheDocument()
   })
 })
