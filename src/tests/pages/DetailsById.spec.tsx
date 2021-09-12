@@ -161,7 +161,45 @@ describe('DetailsById page component', () => {
     expect(container.querySelector('.sidebarCast')).not.toBeInTheDocument()
   })
 
-  it.todo('check if movie exists and redirect')
+  it('should redirect to NotFound page when movie not exists', async () => {
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
 
-  it.todo('invalid resquest')
+    getDetailsByIdMocked.mockRejectedValueOnce({
+      response: { status: 404 }
+    })
+
+    const response = await getServerSideProps({
+      params: { type: 'movie', id: 0 }
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        redirect: expect.objectContaining({
+          permanent: false,
+          destination: '/NotFound'
+        })
+      })
+    )
+  })
+
+  it('should render generic error page when status code error is different of 404', async () => {
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+
+    getDetailsByIdMocked.mockRejectedValueOnce({
+      response: { status: 500 }
+    })
+
+    const response = await getServerSideProps({
+      params: { type: 'movie', id: 0 }
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        redirect: expect.objectContaining({
+          permanent: false,
+          destination: '/internal-error'
+        })
+      })
+    )
+  })
 })
