@@ -2,7 +2,7 @@ export const movies = Array.from({ length: 20 }).map((_, index) => {
   return {
     id: 1402 + index,
     media_type: index % 2 ? 'movie' : 'tv',
-    title: 'The Walking Dead',
+    title: `Movie ${index + 1}`,
     overview: 'Nos Estados Unidos pós-apocalíptico, um pequeno grupo de sobreviventes segue viajando à procura de uma nova casa longe dos mortos-vivos. O desespero por segurança e suprimentos os coloca constantemente à beira da sanidade.',
     backdrop_path: {
       w300: 'https://image.tmdb.org/t/p/w300/wvdWb5kTQipdMDqCclC6Y3zr4j3.jpg',
