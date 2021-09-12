@@ -1,24 +1,12 @@
 import { IoMdPlay } from 'react-icons/io'
 
+import { IMovie } from '../../@types'
 import { Button } from '../Button'
 import { ProgressChart } from '../ProgressChart'
 import styles from './styles.module.scss'
 
-interface IGenres {
-  id: number
-  name: string
-}
-
 interface IBannerProps {
-  movie: {
-    title: string
-    backdrop_path: string
-    vote_average: number
-    release_date: string
-    original_language: string
-    runtime: number
-    genres: IGenres[]
-  }
+  movie: Omit<IMovie, 'overview'>
 }
 
 export function Banner ({ movie }: IBannerProps) {
