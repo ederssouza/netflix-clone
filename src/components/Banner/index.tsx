@@ -13,7 +13,7 @@ export function Banner ({ movie }: IBannerProps) {
   return (
     <section
       className={styles.banner}
-      style={{ backgroundImage: `url("${movie.backdrop_path}")` }}
+      style={{ backgroundImage: `url("${movie.backdrop_path.original}")` }}
     >
       <div className={styles.bannerInfo}>
         <div className={styles.bannerContainer}>

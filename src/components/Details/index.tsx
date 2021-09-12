@@ -20,7 +20,7 @@ export function Details ({ overview, providers }: IContentProps) {
             {providers.map(provider => (
               <li key={provider.provider_id}>
                 <img
-                  src={`${TMDB_BASE_URL_IMAGE}${provider.logo_path}`}
+                  src={`${TMDB_BASE_URL_IMAGE}/original${provider.logo_path}`}
                   alt={provider.provider_name}
                 />
               </li>
