@@ -17,6 +17,7 @@ A simple Netflix clone with React JS and Next.js
 - [x] Genres page
 - [x] Search page
 - [x] Detail page
+- [ ] 404 page
 
 ### API integration
 
