@@ -1,15 +1,9 @@
 import Link from 'next/link'
 import { IoMdPlay, IoMdInformationCircleOutline } from 'react-icons/io'
 
+import { IMovie } from '../../@types'
 import { Button } from '../Button'
 import styles from './styles.module.scss'
-
-interface IMovie {
-  id: number
-  image: string
-  title: string
-  description: string
-}
 
 interface IFeaturedMovieProps {
   category?: string
@@ -17,12 +11,12 @@ interface IFeaturedMovieProps {
 }
 
 export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
-  const { id, image, title, description } = movie
+  const { id, media_type, backdrop_path, title, overview } = movie
 
   return (
     <div
       className={styles.featuredMovie}
-      style={{ backgroundImage: `url("${image}")` }}
+      style={{ backgroundImage: `url("${backdrop_path.original}")` }}
       data-testid="featured-movie"
     >
       <div className={styles.featuredMovieInfo}>
@@ -30,7 +24,7 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
 
         <div className={styles.featuredMovieInfoText}>
           <h1 className={styles.featuredMovieTitle}>{title}</h1>
-          <p className={styles.featuredMovieText}>{description}</p>
+          <p className={styles.featuredMovieText}>{overview}</p>
         </div>
 
         <div className={styles.featuredMovieInfoActions}>
@@ -38,7 +32,7 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
             Trailer
           </Button>
 
-          <Link href={`/details/${id}`} passHref>
+          <Link href={`/details/${media_type}/${id}`} passHref>
             <Button
               color="secondary"
               icon={<IoMdInformationCircleOutline />}
