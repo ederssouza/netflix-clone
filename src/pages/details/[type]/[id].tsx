@@ -70,7 +70,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
                   <h1 className={styles.headerTitle}>
                     {movie.title} ({movie.release_date})
                   </h1>
-                  <span>({movie.original_language}) {movie?.genres?.map(genre => genre.name).join(', ')} {movie.runtime}</span>
+                  <span>({movie.original_language}) &#8226; {movie?.genres?.map(genre => genre.name).join(', ')} &#8226; {movie.runtime}</span>
                 </div>
 
                 <Button color="primary" icon={<IoMdPlay />}>
