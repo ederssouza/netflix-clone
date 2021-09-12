@@ -49,21 +49,12 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const { type, id } = params
-
-    const detailsResponse = await tmdbService.getDetailsById({
-      type: String(type),
-      id: String(id)
-    })
-
-    const watchProvidersResponse = await tmdbService.getWatchProvidersById({
-      type: String(type),
-      id: String(id)
-    })
-
-    const creditsResponse = await tmdbService.getCreditsById({
-      type: String(type),
-      id: String(id)
-    })
+    const objRequestParams = { type: String(type), id: String(id) }
+    const [detailsResponse, watchProvidersResponse, creditsResponse] = await Promise.all([
+      tmdbService.getDetailsById(objRequestParams),
+      tmdbService.getWatchProvidersById(objRequestParams),
+      tmdbService.getCreditsById(objRequestParams)
+    ])
 
     const BRProviders = watchProvidersResponse?.data?.results?.BR
 
