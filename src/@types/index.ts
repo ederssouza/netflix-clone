@@ -4,9 +4,16 @@ export interface IGenres {
 }
 
 export interface IMovie {
+  id: number
+  media_type: string
   title: string
   overview: string
-  backdrop_path: string
+  backdrop_path: {
+    w300: string
+    w780: string
+    w1280: string
+    original: string
+  }
   vote_average: number
   release_date: string
   original_language: string
