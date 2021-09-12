@@ -1,0 +1,23 @@
+.sidebarBox {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+
+  @media (min-width: 885px) {
+    padding-top: 0;
+  }
+}
+
+.sidebarBoxTitle {
+  color: var(--gray-text-color)
+}
+
+.sidebarBoxList {
+list-style-type: none;
+
+  li {
+    display: inline-block;
+    margin-right: 0.25rem;
+  }
+}
