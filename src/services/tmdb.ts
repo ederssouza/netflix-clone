@@ -5,7 +5,12 @@ interface IGetById {
   id: string
 }
 
-const axiosInstance = axios.create({
+interface ISearch {
+  query: string
+  page?: number
+}
+
+export const axiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   params: {
     api_key: process.env.TMDB_API_KEY,
@@ -13,7 +18,7 @@ const axiosInstance = axios.create({
   }
 })
 
-export const TMDB_BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/original'
+export const TMDB_BASE_URL_IMAGE = 'https://image.tmdb.org/t/p'
 
 export const tmdbService = {
   getDetailsById ({ type, id }: IGetById) {
@@ -26,5 +31,17 @@ export const tmdbService = {
 
   getWatchProvidersById ({ type, id }: IGetById) {
     return axiosInstance.get(`/${type}/${id}/watch/providers`)
+  },
+
+  search ({ query, page = 1 }: ISearch) {
+    return axiosInstance.get('/search/multi', {
+      params: {
+        api_key: process.env.TMDB_API_KEY,
+        language: 'pt-BR',
+        query,
+        include_adult: false,
+        page: Number(page)
+      }
+    })
   }
 }
