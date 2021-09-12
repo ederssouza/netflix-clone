@@ -103,7 +103,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
               </div>
 
               <aside className={styles.sidebar}>
-                {cast?.length && (
+                {cast?.length > 0 && (
                   <div className={styles.sidebarBox}>
                     <h4 className={styles.sidebarTitle}>Elenco:</h4>
                     <ul className={styles.sidebarCast}>
