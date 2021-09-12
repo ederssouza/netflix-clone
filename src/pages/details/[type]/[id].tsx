@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IoMdPlay } from 'react-icons/io'
@@ -8,6 +7,7 @@ import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { ProgressChart } from '../../../components/ProgressChart'
 import { tmdbService } from '../../../services/tmdb'
+import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from '../styles.module.scss'
 
 interface IGenres {
@@ -155,10 +155,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     id: String(id)
   })
 
+  const BRProviders = watchProvidersResponse?.data?.results?.BR
+
   return {
     props: {
-      movie: detailsResponse?.data,
-      providers: watchProvidersResponse?.data?.results?.BR?.flatrate || [],
+      movie: normalizeMoviePayload(detailsResponse?.data),
+      providers: BRProviders?.[Object.keys(BRProviders)[1]] || [],
       cast: creditsResponse?.data?.cast || []
     }
   }
