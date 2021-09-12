@@ -13,6 +13,8 @@ const axiosInstance = axios.create({
   }
 })
 
+export const TMDB_BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/original'
+
 export const tmdbService = {
   getDetailsById ({ type, id }: IGetById) {
     return axiosInstance.get(`/${type}/${id}`)
