@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react'
+
 import Genre, { getServerSideProps } from '../../pages/genre'
 
 describe('Genre page component', () => {

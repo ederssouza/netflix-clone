@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react'
+
 import Details, { getServerSideProps } from '../../pages/details'
 
 describe('Details page component', () => {
