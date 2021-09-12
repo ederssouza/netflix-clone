@@ -1,0 +1,32 @@
+.content {
+  color: var(--body-text-color);
+  line-height: 27px;
+  font-size: 1rem;
+
+  @media (min-width: 885px) {
+    padding-right: 24px;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+.contentTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.providers {
+  display: inline-flex;
+  list-style-type: none;
+
+  li {
+    display: flex;
+    max-width: 60px;
+
+    & + li {
+      margin-left: 1rem;
+    }
+  }
+}
