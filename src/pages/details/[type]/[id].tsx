@@ -138,30 +138,48 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { type, id } = params
+  try {
+    const { type, id } = params
 
-  const detailsResponse = await tmdbService.getDetailsById({
-    type: String(type),
-    id: String(id)
-  })
+    const detailsResponse = await tmdbService.getDetailsById({
+      type: String(type),
+      id: String(id)
+    })
 
-  const watchProvidersResponse = await tmdbService.getWatchProvidersById({
-    type: String(type),
-    id: String(id)
-  })
+    const watchProvidersResponse = await tmdbService.getWatchProvidersById({
+      type: String(type),
+      id: String(id)
+    })
 
-  const creditsResponse = await tmdbService.getCreditsById({
-    type: String(type),
-    id: String(id)
-  })
+    const creditsResponse = await tmdbService.getCreditsById({
+      type: String(type),
+      id: String(id)
+    })
 
-  const BRProviders = watchProvidersResponse?.data?.results?.BR
+    const BRProviders = watchProvidersResponse?.data?.results?.BR
 
-  return {
-    props: {
-      movie: normalizeMoviePayload(detailsResponse?.data),
-      providers: BRProviders?.[Object.keys(BRProviders)[1]] || [],
-      cast: creditsResponse?.data?.cast || []
+    return {
+      props: {
+        movie: normalizeMoviePayload(detailsResponse?.data),
+        providers: BRProviders?.[Object.keys(BRProviders)[1]] || [],
+        cast: creditsResponse?.data?.cast || []
+      }
+    }
+  } catch (error) {
+    if (error?.response?.status === 404) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/NotFound'
+        }
+      }
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/internal-error'
+      }
     }
   }
 }
