@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import { MoviesCarousel } from '.'
-import { movies } from '../../tests/mocks/movies'
+import { movies } from '../../tests/mocks/tmdb'
 
 describe('MoviesCarousel component', () => {
   it('should render with success', () => {
