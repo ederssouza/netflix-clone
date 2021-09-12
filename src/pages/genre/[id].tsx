@@ -6,7 +6,7 @@ import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { MoviesCarousel } from '../../components/MoviesCarousel'
 import { MoviesContainer } from '../../components/MoviesContainer'
-import { movies } from '../../tests/mocks/movies'
+import { movies } from '../../tests/mocks/tmdb'
 
 interface IGenreProps {
   id: string
