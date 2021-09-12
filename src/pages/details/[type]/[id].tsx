@@ -6,7 +6,7 @@ import { Button } from '../../../components/Button'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { ProgressChart } from '../../../components/ProgressChart'
-import { tmdbService } from '../../../services/tmdb'
+import { tmdbService, TMDB_BASE_URL_IMAGE } from '../../../services/tmdb'
 import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from '../styles.module.scss'
 
@@ -48,7 +48,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
     <>
       <Head>
         <title>{movie.title} | Netflix</title>
-        <meta name="description" content={movie.overview} />
+        {movie?.overview && <meta name="description" content={movie.overview} />}
         <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
@@ -57,7 +57,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
 
         <section
           className={styles.header}
-          style={{ backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.backdrop_path}")` }}
+          style={{ backgroundImage: `url("${movie.backdrop_path}")` }}
         >
           <div className={styles.headerInfo}>
             <div className={styles.container}>
@@ -94,7 +94,7 @@ export default function DetailsById ({ movie, cast, providers }: IDetailsProps) 
                   <ul className={styles.providers}>
                     {providers.map(provider => (
                       <li key={provider.provider_id}>
-                        <img src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                        <img src={`${TMDB_BASE_URL_IMAGE}${provider.logo_path}`} alt={provider.provider_name} />
                       </li>
                     ))}
                   </ul>
