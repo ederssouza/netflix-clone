@@ -141,6 +141,15 @@
   @media (min-width: 885px) {
     padding-top: 0;
   }
+
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 0.25rem;
+  }
 }
 
 .sidebarTitle {
