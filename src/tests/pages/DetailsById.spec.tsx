@@ -158,7 +158,7 @@ describe('DetailsById page component', () => {
 
     expect(getCreditsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getCreditsByIdMocked).toHaveReturnedWith({})
-    expect(container.querySelector('.sidebarCast')).not.toBeInTheDocument()
+    expect(container.querySelector('[data-testid="sidebar-cast"]')).not.toBeInTheDocument()
   })
 
   it('should redirect to NotFound page when movie not exists', async () => {
