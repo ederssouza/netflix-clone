@@ -35,6 +35,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "@next/next/no-img-element": "off",
+    "camelcase": "off",
     "import-helpers/order-imports": [
       "warn",
       {
