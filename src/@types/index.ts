@@ -17,7 +17,7 @@ export interface IMovie {
   vote_average: number
   release_date: string
   original_language: string
-  runtime: number
+  runtime?: number | null
   genres: IGenres[]
 }
 
