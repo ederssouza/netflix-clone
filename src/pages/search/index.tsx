@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { IMovie } from '../../@types'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
@@ -16,26 +16,57 @@ interface ISearchProps {
 }
 
 export default function Search ({ q }: ISearchProps) {
+  const [currentPage, setCurrentPage] = useState(1)
   const [movies, setMovies] = useState([])
+  const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
+
+  const footerRef = useRef<HTMLDivElement | null>(null)
+  const prevQueryRef = useRef(null)
+  const oldCart = prevQueryRef.current ?? q
+
+  useEffect(() => {
+    prevQueryRef.current = q
+  })
+
+  useEffect(() => {
+    if (oldCart !== q) {
+      setCurrentPage(1)
+      setMovies([])
+    }
+  }, [oldCart, q])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setStatusRequest('loading')
+        currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
 
-        const res = await api.search({ query: String(q), page: 1 })
+        const res = await api.search({ query: String(q), page: currentPage })
         const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
-        setMovies(movies)
+        setMovies((oldMovies) => [...oldMovies, ...movies])
+        setHasMore(currentPage <= res.data.total_pages)
         setTimeout(() => setStatusRequest('success'), 500)
+
+        console.log('total', res.data.total_pages)
       } catch (error) {
         setStatusRequest('error')
       }
     }
 
     fetchData()
-  }, [q])
+  }, [q, currentPage])
+
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some(entry => entry.isIntersecting) && hasMore) {
+        setCurrentPage(oldCurrentPage => oldCurrentPage + 1)
+      }
+    })
+
+    footerRef?.current && intersectionObserver.observe(footerRef.current)
+    return () => intersectionObserver.disconnect()
+  }, [hasMore])
 
   return (
     <>
@@ -47,14 +78,11 @@ export default function Search ({ q }: ISearchProps) {
 
       <main className={styles.container}>
         <Header />
-        <h1>Buscar por: {q}</h1>
+        <h1>Buscar por: {q} {currentPage}</h1>
 
-        {statusRequest === 'loading' && (
-          <div>
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
+        {(statusRequest === 'success' || statusRequest === 'loadmore') && (
+          <div className={styles.grid}>
+            {movies.map((movie, index) => <MoviesCarouselCard key={`${movie.id}${index}`} movie={movie} />)}
           </div>
         )}
 
@@ -64,14 +92,19 @@ export default function Search ({ q }: ISearchProps) {
           </div>
         )}
 
-        {statusRequest === 'success' && (
-          <div className={styles.grid}>
-            {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
+        {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
+          <div>
+            <CardsSkeletonLoader />
+            <CardsSkeletonLoader />
+            <CardsSkeletonLoader />
+            <CardsSkeletonLoader />
           </div>
         )}
       </main>
 
-      <Footer />
+      <div ref={footerRef}>
+        <Footer />
+      </div>
     </>
   )
 }
