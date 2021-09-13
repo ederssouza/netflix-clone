@@ -11,7 +11,7 @@ interface ISearch {
 }
 
 export const axiosInstance = axios.create({
-  baseURL: `${process.env.API_BASE_URL}/api/tmdb`
+  baseURL: '/api/tmdb'
 })
 
 export const api = {
