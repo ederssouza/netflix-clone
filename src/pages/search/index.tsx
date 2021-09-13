@@ -43,11 +43,9 @@ export default function Search ({ q }: ISearchProps) {
         const res = await api.search({ query: String(q), page: currentPage })
         const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
-        setMovies((oldMovies) => [...oldMovies, ...movies])
+        setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
         setHasMore(currentPage <= res.data.total_pages)
         setTimeout(() => setStatusRequest('success'), 500)
-
-        console.log('total', res.data.total_pages)
       } catch (error) {
         setStatusRequest('error')
       }
@@ -86,7 +84,7 @@ export default function Search ({ q }: ISearchProps) {
           </div>
         )}
 
-        {statusRequest === 'loading' && (
+        {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
           <div>
             <CardsSkeletonLoader />
             <CardsSkeletonLoader />
@@ -94,8 +92,6 @@ export default function Search ({ q }: ISearchProps) {
             <CardsSkeletonLoader />
           </div>
         )}
-
-        {statusRequest === 'loadmore' && <CardsSkeletonLoader />}
       </main>
 
       <div ref={footerRef}>
