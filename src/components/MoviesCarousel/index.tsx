@@ -2,8 +2,9 @@ import { useEffect, useRef, useState, forwardRef, ForwardRefRenderFunction } fro
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
+import { IMovie } from '../../@types'
 import { MoviesCarouselArrow } from './MoviesCarouselArrow'
-import { IMovie, MoviesCarouselCard } from './MoviesCarouselCard'
+import { MoviesCarouselCard } from './MoviesCarouselCard'
 import styles from './styles.module.scss'
 
 interface IMoviesCarouselProps {
