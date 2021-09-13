@@ -7,6 +7,8 @@ import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
+import { useOnScreen } from '../../hooks/useOnScreen'
+import { usePrevious } from '../../hooks/usePrevious'
 import { api } from '../../services/api'
 import { normalizeMoviePayload } from '../../utils/functions'
 import styles from './styles.module.scss'
@@ -20,21 +22,18 @@ export default function Search ({ q }: ISearchProps) {
   const [movies, setMovies] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
-
+  const prevQuery = usePrevious(q)
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const prevQueryRef = useRef(null)
-  const oldCart = prevQueryRef.current ?? q
+  const { isIntersecting } = useOnScreen(footerRef)
+
+  function resetList () {
+    setCurrentPage(1)
+    setMovies([])
+  }
 
   useEffect(() => {
-    prevQueryRef.current = q
-  })
-
-  useEffect(() => {
-    if (oldCart !== q) {
-      setCurrentPage(1)
-      setMovies([])
-    }
-  }, [oldCart, q])
+    prevQuery !== q && resetList()
+  }, [prevQuery, q])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,15 +57,10 @@ export default function Search ({ q }: ISearchProps) {
   }, [q, currentPage])
 
   useEffect(() => {
-    const intersectionObserver = new IntersectionObserver((entries) => {
-      if (entries.some(entry => entry.isIntersecting) && hasMore) {
-        setCurrentPage(oldCurrentPage => oldCurrentPage + 1)
-      }
-    })
-
-    footerRef?.current && intersectionObserver.observe(footerRef.current)
-    return () => intersectionObserver.disconnect()
-  }, [hasMore])
+    if (isIntersecting && hasMore) {
+      setCurrentPage(oldCurrentPage => oldCurrentPage + 1)
+    }
+  }, [isIntersecting, hasMore])
 
   return (
     <>
@@ -92,7 +86,7 @@ export default function Search ({ q }: ISearchProps) {
           </div>
         )}
 
-        {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
+        {statusRequest === 'loading' && (
           <div>
             <CardsSkeletonLoader />
             <CardsSkeletonLoader />
@@ -100,6 +94,8 @@ export default function Search ({ q }: ISearchProps) {
             <CardsSkeletonLoader />
           </div>
         )}
+
+        {statusRequest === 'loadmore' && <CardsSkeletonLoader />}
       </main>
 
       <div ref={footerRef}>
