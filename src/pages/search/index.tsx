@@ -29,6 +29,7 @@ export default function Search ({ q }: ISearchProps) {
   function resetList () {
     setCurrentPage(1)
     setMovies([])
+    setHasMore(false)
   }
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function Search ({ q }: ISearchProps) {
         setTimeout(() => setStatusRequest('success'), 500)
       } catch (error) {
         setStatusRequest('error')
+        resetList()
       }
     }
 
