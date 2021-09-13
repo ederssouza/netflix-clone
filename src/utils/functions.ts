@@ -1,7 +1,7 @@
 import { TMDB_BASE_URL_IMAGE } from '../services/tmdb'
 
 export function timeConvert (num: number) {
-  if (!num) return
+  if (!num) return null
 
   const hours = Math.floor(num / 60)
   const minutes = num % 60
