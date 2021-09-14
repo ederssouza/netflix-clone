@@ -87,7 +87,7 @@ img {
   .carouselArrow {
     align-items: center;
     background-color: rgba(#000, 0.6);
-    bottom: 0;
+    bottom: -1px;
     cursor: pointer;
     display: flex;
     font-size: 3rem;
