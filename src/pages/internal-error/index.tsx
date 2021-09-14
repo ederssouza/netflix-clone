@@ -8,7 +8,7 @@ import { Header } from '../../components/Header'
 import styles from './styles.module.scss'
 
 interface IInternalErrorProps {
-  statusCode: string
+  statusCode?: string
 }
 
 export default function PageInternalError ({ statusCode }: IInternalErrorProps) {
@@ -43,7 +43,7 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { code } = query
 
   return {
