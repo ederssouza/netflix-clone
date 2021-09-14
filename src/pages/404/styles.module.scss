@@ -20,14 +20,14 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 56px);
   justify-content: center;
   position: relative;
   text-align: center;
   z-index: 2;
 
   @media (max-width: 420px) {
-    min-height: -webkit-fill-available;
+    min-height: 100vh;
   }
 
   @media (min-width: 885px) {
