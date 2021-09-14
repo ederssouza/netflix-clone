@@ -66,7 +66,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       }
     }
   } catch (error) {
-    if (error?.response?.status === 404) {
+    const statusCode = error?.response?.status
+
+    if (statusCode === 404) {
       return {
         redirect: {
           permanent: false,
@@ -78,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/internal-error'
+        destination: `/internal-error?code=${statusCode}`
       }
     }
   }

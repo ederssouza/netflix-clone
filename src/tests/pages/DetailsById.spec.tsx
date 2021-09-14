@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
-import Details, { getServerSideProps } from '../../pages/details/[type]/[id]'
+import DetailsById, { getServerSideProps } from '../../pages/details/[type]/[id]'
 import { api } from '../../services/api'
 import { castMock, movies, providersMock, providersResponseMock } from '../mocks/tmdb'
 
@@ -15,7 +15,7 @@ afterEach(() => {
 
 describe('DetailsById page component', () => {
   it('should render with success', () => {
-    render(<Details movie={movieMock} providers={providersMock} cast={castMock} />)
+    render(<DetailsById movie={movieMock} providers={providersMock} cast={castMock} />)
     expect(screen.getByText(new RegExp(movieMock.title))).toBeInTheDocument()
   })
 
@@ -75,7 +75,7 @@ describe('DetailsById page component', () => {
       params: { type: 'movie', id: 10 }
     } as any)
 
-    const { container } = render(<Details movie={movieMock} providers={[]} cast={castMock} />)
+    const { container } = render(<DetailsById movie={movieMock} providers={[]} cast={castMock} />)
 
     expect(getDetailsByIdMocked).toBeCalled()
     expect(getDetailsByIdMocked).toHaveReturnedWith({
@@ -112,7 +112,7 @@ describe('DetailsById page component', () => {
       params: { type: 'movie', id: 10 }
     } as any)
 
-    const { container } = render(<Details movie={movieMock} providers={providersMock} cast={[]} />)
+    const { container } = render(<DetailsById movie={movieMock} providers={providersMock} cast={[]} />)
 
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
@@ -165,7 +165,7 @@ describe('DetailsById page component', () => {
       expect.objectContaining({
         redirect: expect.objectContaining({
           permanent: false,
-          destination: '/internal-error'
+          destination: '/internal-error?code=500'
         })
       })
     )
