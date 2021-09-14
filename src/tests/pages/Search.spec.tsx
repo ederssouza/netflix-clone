@@ -7,6 +7,18 @@ import { movies } from '../mocks/tmdb'
 
 jest.mock('../../services/api')
 
+beforeEach(() => {
+  const intersectionObserverMock = jest.fn()
+
+  intersectionObserverMock.mockReturnValue({
+    observe: () => null,
+    unobserve: () => null,
+    disconnect: () => null
+  })
+
+  window.IntersectionObserver = intersectionObserverMock
+})
+
 afterEach(() => {
   jest.clearAllMocks()
 })
@@ -80,4 +92,6 @@ describe('Search page component', () => {
       })
     )
   })
+
+  it.todo('should load next page when the footer element is showing')
 })
