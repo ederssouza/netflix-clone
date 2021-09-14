@@ -4,23 +4,12 @@ import { mocked } from 'ts-jest/utils'
 import Search, { getServerSideProps } from '../../pages/search'
 import { api } from '../../services/api'
 import { movies } from '../mocks/tmdb'
+import { intersectionObserverMock } from '../utils/IntersectionObserverMock'
 
 jest.mock('../../services/api')
 
-beforeEach(() => {
-  const intersectionObserverMock = jest.fn()
-
-  intersectionObserverMock.mockReturnValue({
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null
-  })
-
-  window.IntersectionObserver = intersectionObserverMock
-})
-
-afterEach(() => {
-  jest.clearAllMocks()
+beforeAll(() => {
+  intersectionObserverMock([{ isIntersecting: false }])
 })
 
 describe('Search page component', () => {
@@ -34,7 +23,8 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)]
+        results: [...movies.slice(0, 2)],
+        total_pages: 10
       }
     } as any)
 
@@ -50,12 +40,13 @@ describe('Search page component', () => {
 
     await waitFor(() => {
       expect(screen.getByText(searchTerm)).toBeInTheDocument()
-    }, { timeout: 2000 })
+    }, { timeout: 1000 })
 
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
-        results: [...movies.slice(0, 2)]
+        results: [...movies.slice(0, 2)],
+        total_pages: 10
       }
     })
   })
@@ -76,7 +67,7 @@ describe('Search page component', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Ocorreu um erro')).toBeInTheDocument()
-    }, { timeout: 2000 })
+    }, { timeout: 1000 })
   })
 
   it('should redirect whe dont receive `q` query param', async () => {
@@ -93,5 +84,40 @@ describe('Search page component', () => {
     )
   })
 
-  it.todo('should load next page when the footer element is showing')
+  it('should load next page when the footer element is showing', async () => {
+    intersectionObserverMock([{ isIntersecting: true }])
+
+    const searchTerm = 'Movie 1'
+    const response = await getServerSideProps({
+      query: { q: searchTerm }
+    } as any)
+
+    const getDetailsByIdMocked = mocked(api.search)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: {
+        results: [...movies.slice(0, 2)],
+        total_pages: 10
+      }
+    } as any)
+
+    render(<Search q={searchTerm} />)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: expect.objectContaining({
+          q: searchTerm
+        })
+      })
+    )
+
+    await waitFor(() => {
+      expect(getDetailsByIdMocked).toHaveReturnedWith({
+        data: {
+          results: [...movies.slice(0, 2)],
+          total_pages: 10
+        }
+      })
+    }, { timeout: 1000 })
+  })
 })
