@@ -165,7 +165,7 @@ describe('DetailsById page component', () => {
       expect.objectContaining({
         redirect: expect.objectContaining({
           permanent: false,
-          destination: '/internal-error'
+          destination: '/internal-error?code=500'
         })
       })
     )
