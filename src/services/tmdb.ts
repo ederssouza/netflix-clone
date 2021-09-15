@@ -29,11 +29,15 @@ interface INetflixList {
   page?: number
 }
 
+const defaultParams = {
+  api_key: process.env.TMDB_API_KEY,
+  language: 'pt-BR'
+}
+
 export const axiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   params: {
-    api_key: process.env.TMDB_API_KEY,
-    language: 'pt-BR'
+    ...defaultParams
   }
 })
 
@@ -55,8 +59,7 @@ export const tmdbService = {
   search ({ query, page = 1 }: ISearch) {
     return axiosInstance.get('/search/multi', {
       params: {
-        api_key: process.env.TMDB_API_KEY,
-        language: 'pt-BR',
+        ...defaultParams,
         query,
         include_adult: false,
         page: Number(page)
@@ -71,8 +74,7 @@ export const tmdbService = {
   getTopRated ({ type, page = 1 }: ITopRated) {
     return axiosInstance.get(`/${type}/top_rated`, {
       params: {
-        api_key: process.env.TMDB_API_KEY,
-        language: 'pt-BR',
+        ...defaultParams,
         page: Number(page)
       }
     })
@@ -85,9 +87,8 @@ export const tmdbService = {
   getGenreById ({ type, id, page = 1 }: IGenreById) {
     return axiosInstance.get(`/discover/${type}`, {
       params: {
-        api_key: process.env.TMDB_API_KEY,
+        ...defaultParams,
         with_genres: id,
-        language: 'pt-BR',
         page: Number(page)
       }
     })
@@ -96,9 +97,8 @@ export const tmdbService = {
   getNetflixList ({ page = 1 }: INetflixList) {
     return axiosInstance.get('/discover/tv', {
       params: {
-        api_key: process.env.TMDB_API_KEY,
+        ...defaultParams,
         with_network: 213,
-        language: 'pt-BR',
         page: Number(page)
       }
     })
