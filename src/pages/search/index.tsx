@@ -82,6 +82,7 @@ export default function Search ({ q }: ISearchProps) {
 
         {statusRequest === 'error' && (
           <div>
+            {/* TODO: create component */}
             <h1>Ocorreu um erro</h1>
           </div>
         )}
