@@ -24,5 +24,5 @@ A simple Netflix clone with React JS and Next.js
 
 - [ ] Home page
 - [ ] Genres page
-- [ ] Search page
-- [ ] Detail page
+- [x] Search page
+- [x] Detail page
