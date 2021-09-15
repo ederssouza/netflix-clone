@@ -68,7 +68,7 @@ export const tmdbService = {
   },
 
   getGenres ({ type }: IGenres) {
-    return axiosInstance.get(`/${type}/top_rated`)
+    return axiosInstance.get(`/genre/${type}/list`)
   },
 
   getTopRated ({ type, page = 1 }: ITopRated) {
