@@ -6,13 +6,13 @@ import { movies } from '../../tests/mocks/tmdb'
 const movieMock = movies[0]
 
 describe('FeaturedMovie component', () => {
-  it('should render with success', () => {
-    render(<FeaturedMovie movie={movieMock} />)
+  it('should render with success', async () => {
+    render(<FeaturedMovie genre="Drama" movie={movieMock} />)
 
     const $featuredMovie = screen.getByTestId('featured-movie')
 
     expect(screen.getByText(movieMock.title)).toBeInTheDocument()
-    expect(screen.getByText(movieMock.title)).toBeInTheDocument()
+    expect(screen.getByText('Drama')).toBeInTheDocument()
     expect($featuredMovie).toHaveAttribute('style', `background-image: url(${movieMock.backdrop_path.original});`)
   })
 

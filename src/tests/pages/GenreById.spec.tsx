@@ -204,4 +204,25 @@ describe('Search page component', () => {
       })
     )
   })
+
+  it('should render generic text error when not receive status code', async () => {
+    const getGenresMocked = mocked(api.getGenres)
+
+    getGenresMocked.mockRejectedValueOnce({
+      response: {}
+    })
+
+    const response = await getServerSideProps({
+      params: { type: 'movie', id: '18' }
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        redirect: expect.objectContaining({
+          permanent: false,
+          destination: '/internal-error'
+        })
+      })
+    )
+  })
 })
