@@ -21,7 +21,7 @@ interface ITopRated {
 
 interface IGenreById {
   type: string
-  id: number
+  id: string
   page?: number
 }
 
