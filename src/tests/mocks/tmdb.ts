@@ -43,3 +43,9 @@ export const castMock = [
   { id: 1, name: 'Keanu Reeves' },
   { id: 2, name: 'Carrie-Anne Moss' }
 ]
+
+export const genresMock = [
+  { id: 10759, name: 'Action & Adventure' },
+  { id: 18, name: 'Drama' },
+  { id: 10765, name: 'Sci-Fi & Fantasy' }
+]
