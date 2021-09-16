@@ -34,6 +34,10 @@
   font-size: 1.5rem;
   margin: 1vw 0;
   text-shadow: 2px 2px 4px rgba(#000, 0.45);
+
+  @media (min-width: 885px) {
+    font-size: 2.5rem;
+  }
 }
 
 .featuredMovieText {
