@@ -8,7 +8,7 @@ export default async function getGenreById (req: NextApiRequest, res: NextApiRes
 
     const response = await tmdbService.getGenreById({
       type: String(type),
-      id: Number(id),
+      id: String(id),
       page: Number(page)
     })
 
