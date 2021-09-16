@@ -21,7 +21,7 @@ interface ITopRated {
 
 interface IGenreById {
   type: string
-  id: number
+  id: string
   page?: number
 }
 
@@ -52,7 +52,9 @@ export const api = {
     })
   },
 
-  getGenres ({ type }: IGenres) {},
+  getGenres ({ type }: IGenres) {
+    return axiosInstance.get(`/genres/${type}`)
+  },
 
   getTopRated ({ type, page = 1 }: ITopRated) {},
 
