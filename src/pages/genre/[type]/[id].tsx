@@ -2,14 +2,14 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
-import { IMovie } from '../../@types'
-import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
-import { Footer } from '../../components/Footer'
-import { Header } from '../../components/Header'
-import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
-import { useOnScreen } from '../../hooks/useOnScreen'
-import { api } from '../../services/api'
-import { normalizeMoviePayload } from '../../utils/functions'
+import { IMovie } from '../../../@types'
+import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
+import { Footer } from '../../../components/Footer'
+import { Header } from '../../../components/Header'
+import { MoviesCarouselCard } from '../../../components/MoviesCarousel/MoviesCarouselCard'
+import { useOnScreen } from '../../../hooks/useOnScreen'
+import { api } from '../../../services/api'
+import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from './styles.module.scss'
 
 interface IGenreProps {
@@ -92,11 +92,13 @@ export default function GenreById ({ id }: IGenreProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id } = params
+  const { type, id } = params
+  console.log({ type, id })
 
   return {
     props: {
-      id
+      id,
+      type
     }
   }
 }
