@@ -12,10 +12,10 @@ export function MoviesContainer ({ children }: IMoviesContainerProps) {
 
   function handleContainerMarginTop () {
     setTimeout(() => {
-      const $firstCarousel = refMoviesCarousel.current.querySelector('[data-testid="movies-carousel"]')
-      const containerheight = $firstCarousel.clientHeight
+      const $elem = refMoviesCarousel.current.querySelector('[data-testid="movies-carousel"]') || refMoviesCarousel.current.querySelector('[data-testid="movies-carousel-card"]')
+      const containerheight = $elem?.clientHeight
       setContainerMarginTop(`-${containerheight}px`)
-    }, 10)
+    }, 500)
   }
 
   useEffect(() => {
