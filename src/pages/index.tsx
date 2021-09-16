@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { MoviesContainer } from '../components/MoviesContainer'
-import { getHomeLists } from '../services/api/getHomeLists'
+import { api } from '../services/api'
 import styles from './home.module.scss'
 
 interface ISectionsProps {
@@ -51,7 +51,7 @@ export default function Home ({ featured, sections }: IHomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const { netflix, trendings, action, adventure, comedy, documentaries } = await getHomeLists()
+    const { netflix, trendings, action, adventure, comedy, documentaries } = await api.getHomeLists()
 
     const sections = [
       { title: 'Populares Netflix', movies: [...netflix] },
