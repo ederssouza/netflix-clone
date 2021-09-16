@@ -24,14 +24,6 @@ export function Header () {
     {
       href: '/genre/3',
       title: 'Bombando'
-    },
-    {
-      href: '/genre/4',
-      title: 'Minha lista'
-    },
-    {
-      href: '/genre/5',
-      title: 'Assista de novo'
     }
   ]
 
