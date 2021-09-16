@@ -4,7 +4,7 @@ import { mocked } from 'ts-jest/utils'
 import Search, { getServerSideProps } from '../../pages/search'
 import { api } from '../../services/api'
 import { movies } from '../mocks/tmdb'
-import { intersectionObserverMock } from '../utils/IntersectionObserverMock'
+import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
 jest.mock('../../services/api')
 
