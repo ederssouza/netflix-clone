@@ -4,7 +4,7 @@ import { tmdbService } from '../../../../services/tmdb'
 
 export default async function getTrendings (req: NextApiRequest, res: NextApiResponse) {
   try {
-    const response = await tmdbService.getTrendings()
+    const response = await tmdbService.getTrendings({})
 
     return res.status(200).json({ ...response.data })
   } catch (error) {
