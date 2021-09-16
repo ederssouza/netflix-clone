@@ -77,10 +77,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       }
     }
 
+    const destination = statusCode ? `/internal-error?code=${statusCode}` : '/internal-error'
+
     return {
       redirect: {
         permanent: false,
-        destination: `/internal-error?code=${statusCode}`
+        destination
       }
     }
   }
