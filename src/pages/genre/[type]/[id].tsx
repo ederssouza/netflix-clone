@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 
 import { IGenres, IMovie } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
+import { FeaturedMovie } from '../../../components/FeaturedMovie'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { MoviesCarouselCard } from '../../../components/MoviesCarousel/MoviesCarouselCard'
+import { MoviesContainer } from '../../../components/MoviesContainer'
 import { useOnScreen } from '../../../hooks/useOnScreen'
 import { api } from '../../../services/api'
 import { normalizeMoviePayload } from '../../../utils/functions'
@@ -58,29 +60,47 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
-      <main className={styles.container}>
+      <main>
         <Header />
 
-        <h1>Gênero: {genre}</h1>
+        <div>
+          {(statusRequest === 'success' || statusRequest === 'loadmore') && (
+            <>
+              {movies.length && (
+                <FeaturedMovie
+                  genre={genre}
+                  movie={{ ...movies[4], media_type: type }}
+                />
+              )}
 
-        {(statusRequest === 'success' || statusRequest === 'loadmore') && (
-          <div className={styles.grid}>
-            {movies.map((movie, index) => <MoviesCarouselCard key={`${movie.id}${index}`} movie={movie} />)}
-          </div>
-        )}
+              <MoviesContainer>
+                <div className={styles.container}>
+                  <div className={styles.grid}>
+                    {movies.map((movie, index) => (
+                      <MoviesCarouselCard
+                        key={`${movie.id}${index}`}
+                        movie={{ ...movie, media_type: type }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </MoviesContainer>
+            </>
+          )}
+
+          {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
+            <div className={styles.container}>
+              <CardsSkeletonLoader />
+              <CardsSkeletonLoader />
+              <CardsSkeletonLoader />
+              <CardsSkeletonLoader />
+            </div>
+          )}
+        </div>
 
         {statusRequest === 'error' && (
-          <div>
+          <div className={styles.container}>
             <h1>Ocorreu um erro</h1>
-          </div>
-        )}
-
-        {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
-          <div>
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
-            <CardsSkeletonLoader />
           </div>
         )}
       </main>
@@ -130,10 +150,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       }
     }
 
+    const destination = statusCode ? `/internal-error?code=${statusCode}` : '/internal-error'
+
     return {
       redirect: {
         permanent: false,
-        destination: `/internal-error?code=${statusCode}`
+        destination
       }
     }
   }
