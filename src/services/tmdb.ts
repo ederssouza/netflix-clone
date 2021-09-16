@@ -80,8 +80,13 @@ export const tmdbService = {
     })
   },
 
-  getTrendings () {
-    return axiosInstance.get('/trending/all/week')
+  getTrendings ({ page = 1 }) {
+    return axiosInstance.get('/trending/all/week', {
+      params: {
+        ...defaultParams,
+        page: Number(page)
+      }
+    })
   },
 
   getGenreById ({ type, id, page = 1 }: IGenreById) {
