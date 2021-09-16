@@ -6,25 +6,23 @@ import { Button } from '../Button'
 import styles from './styles.module.scss'
 
 interface IFeaturedMovieProps {
-  category?: string
+  genre?: string
   movie: IMovie
 }
 
-export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
-  const { id, media_type, backdrop_path, title, overview } = movie
-
+export function FeaturedMovie ({ genre, movie }: IFeaturedMovieProps) {
   return (
     <div
       className={styles.featuredMovie}
-      style={{ backgroundImage: `url("${backdrop_path.original}")` }}
+      style={{ backgroundImage: `url("${movie?.backdrop_path?.original}")` }}
       data-testid="featured-movie"
     >
       <div className={styles.featuredMovieInfo}>
-        {category && <h1 className={styles.featuredMovieCategory}>{category}</h1>}
+        {genre && <h1 className={styles.featuredMovieGenre}>{genre}</h1>}
 
         <div className={styles.featuredMovieInfoText}>
-          <h1 className={styles.featuredMovieTitle}>{title}</h1>
-          <p className={styles.featuredMovieText}>{overview}</p>
+          <h1 className={styles.featuredMovieTitle}>{movie.title}</h1>
+          <p className={styles.featuredMovieText}>{movie.overview}</p>
         </div>
 
         <div className={styles.featuredMovieInfoActions}>
@@ -32,7 +30,7 @@ export function FeaturedMovie ({ category, movie }: IFeaturedMovieProps) {
             Trailer
           </Button>
 
-          <Link href={`/details/${media_type}/${id}`} passHref>
+          <Link href={`/details/${movie.media_type}/${movie.id}`} passHref>
             <Button
               color="secondary"
               icon={<IoMdInformationCircleOutline />}
