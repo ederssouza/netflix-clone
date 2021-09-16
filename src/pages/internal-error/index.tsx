@@ -25,7 +25,9 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
 
         <div className={styles.banner}>
           <div className={styles.bannerContent}>
-            <h1 className={styles.bannerTitle}>Erro {statusCode}</h1>
+            <h1 className={styles.bannerTitle}>
+              {statusCode ? `Erro ${statusCode}` : 'Ocorreu um erro'}
+            </h1>
             <p className={styles.bannerText}>
               Ops... Parece que algo deu errado.<br />
               Tente novamente mais tarde.
@@ -44,11 +46,9 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { code } = query
-
   return {
     props: {
-      statusCode: code
+      statusCode: query?.code || null
     }
   }
 }
