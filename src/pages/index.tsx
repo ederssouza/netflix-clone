@@ -1,14 +1,26 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
+import { IMovie } from '../@types'
 import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { MoviesContainer } from '../components/MoviesContainer'
-import { movies } from '../tests/mocks/tmdb'
+import { getHomeLists } from '../services/api/getHomeLists'
 import styles from './home.module.scss'
 
-export default function Home () {
+interface ISectionsProps {
+  title: string
+  movies: IMovie[]
+}
+
+interface IHomeProps {
+  featured: IMovie
+  sections: ISectionsProps[]
+}
+
+export default function Home ({ featured, sections }: IHomeProps) {
   return (
     <>
       <Head>
@@ -19,18 +31,66 @@ export default function Home () {
 
       <main className={styles.container}>
         <Header />
-        <FeaturedMovie movie={movies[0]} />
+        <FeaturedMovie movie={featured} />
 
         <MoviesContainer>
-          <MoviesCarousel title="Populares Netflix" movies={movies} />
-          <MoviesCarousel title="Em alta" movies={movies} />
-          <MoviesCarousel title="Lançamentos" movies={movies} />
-          <MoviesCarousel title="Assistir novamente" movies={movies} />
-          <MoviesCarousel title="Documentários" movies={movies} />
+          {sections.map(section => (
+            <MoviesCarousel
+              key={section.title}
+              title={section.title}
+              movies={section.movies}
+            />
+          ))}
         </MoviesContainer>
 
         <Footer />
       </main>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const { netflix, trendings, action, adventure, comedy, documentaries } = await getHomeLists()
+
+    const sections = [
+      { title: 'Populares Netflix', movies: [...netflix] },
+      { title: 'Em alta', movies: [...trendings] },
+      { title: 'Ação', movies: [...action] },
+      { title: 'Aventura', movies: [...adventure] },
+      { title: 'Comédia', movies: [...comedy] },
+      { title: 'Documentário', movies: [...documentaries] }
+    ]
+
+    const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
+    const movieIndexAleatory = Math.floor(Math.random() * 20)
+    const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
+
+    return {
+      props: {
+        featured,
+        sections
+      }
+    }
+  } catch (error) {
+    const statusCode = error?.response?.status
+
+    if (statusCode === 404) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/NotFound'
+        }
+      }
+    }
+
+    const destination = statusCode ? `/internal-error?code=${statusCode}` : '/internal-error'
+
+    return {
+      redirect: {
+        permanent: false,
+        destination
+      }
+    }
+  }
 }
