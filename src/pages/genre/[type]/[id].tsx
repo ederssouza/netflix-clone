@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
-import { IMovie } from '../../../@types'
+import { IGenres, IMovie } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
@@ -12,11 +12,13 @@ import { api } from '../../../services/api'
 import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from './styles.module.scss'
 
-interface IGenreProps {
+interface IGenreByIdProps {
+  genre: string
+  type: string
   id: string
 }
 
-export default function GenreById ({ id }: IGenreProps) {
+export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const [movies, setMovies] = useState([])
   const [hasMore, setHasMore] = useState(true)
@@ -28,8 +30,7 @@ export default function GenreById ({ id }: IGenreProps) {
     const fetchData = async () => {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
-
-        const res = await api.getGenreById({ type: 'tv', id: 99, page: currentPage })
+        const res = await api.getGenreById({ type, id, page: currentPage })
         const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
         setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
@@ -41,7 +42,7 @@ export default function GenreById ({ id }: IGenreProps) {
     }
 
     fetchData()
-  }, [currentPage])
+  }, [type, id, currentPage])
 
   useEffect(() => {
     if (isIntersecting && hasMore) {
@@ -59,7 +60,8 @@ export default function GenreById ({ id }: IGenreProps) {
 
       <main className={styles.container}>
         <Header />
-        <h1>[GENRE_NAME] {currentPage}</h1>
+
+        <h1>Gênero: {genre}</h1>
 
         {(statusRequest === 'success' || statusRequest === 'loadmore') && (
           <div className={styles.grid}>
@@ -69,7 +71,6 @@ export default function GenreById ({ id }: IGenreProps) {
 
         {statusRequest === 'error' && (
           <div>
-            {/* TODO: create component */}
             <h1>Ocorreu um erro</h1>
           </div>
         )}
@@ -92,13 +93,48 @@ export default function GenreById ({ id }: IGenreProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { type, id } = params
-  console.log({ type, id })
+  try {
+    const { type, id } = params
+    const res = await api.getGenres({ type: String(type) })
+    const genres = res?.data?.genres
 
-  return {
-    props: {
-      id,
-      type
+    if (Array.isArray(genres) && !genres.length) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: true
+        }
+      }
+    }
+
+    const genre = genres.find((genre: IGenres) => {
+      return genre.id === Number(id)
+    }) as IGenres
+
+    return {
+      props: {
+        genre: genre.name,
+        type,
+        id
+      }
+    }
+  } catch (error) {
+    const statusCode = error?.response?.status
+
+    if (statusCode === 404) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/NotFound'
+        }
+      }
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/internal-error?code=${statusCode}`
+      }
     }
   }
 }
