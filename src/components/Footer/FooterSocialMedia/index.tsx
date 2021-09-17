@@ -2,10 +2,6 @@ import { ReactElement } from 'react'
 
 import styles from './styles.module.scss'
 
-// interface ISocialMedia {
-//   media: 'facebook' | 'instagram' | 'twitter' | 'youtube'
-// }
-
 interface ISocialMedia {
   title: string
   href: string
