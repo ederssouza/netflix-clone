@@ -13,7 +13,7 @@ export function Banner ({ media }: IBannerProps) {
   return (
     <section
       className={styles.banner}
-      style={{ backgroundImage: `url("${media.backdrop_path.original}")` }}
+      style={{ backgroundImage: `url(${media.backdrop_path.original})` }}
     >
       <div className={styles.bannerInfo}>
         <div className={styles.bannerContainer}>
@@ -26,7 +26,12 @@ export function Banner ({ media }: IBannerProps) {
               <h1 className={styles.bannerTitle}>
                 {media.title} ({media.release_date})
               </h1>
-              <span>({media.original_language}) &#8226; {media?.genres?.map(genre => genre.name).join(', ')} &#8226; {media.runtime}</span>
+
+              <span>
+                {media?.original_language && `(${media.original_language}) • `}
+                {media?.genres?.length > 0 && `${media?.genres?.map(genre => genre.name).join(', ')} • `}
+                {media?.runtime && media.runtime}
+              </span>
             </div>
 
             <Button color="primary" icon={<IoMdPlay />}>
