@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 
 import { IGenres, IMovie } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
-import { FeaturedMovie } from '../../../components/FeaturedMovie'
+import { FeaturedMedia } from '../../../components/FeaturedMedia'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
-import { MoviesCarouselCard } from '../../../components/MoviesCarousel/MoviesCarouselCard'
-import { MoviesContainer } from '../../../components/MoviesContainer'
+import { MediaCarouselCard } from '../../../components/MediaCarousel/MediaCarouselCard'
+import { MediaContainer } from '../../../components/MediaContainer'
 import { useOnScreen } from '../../../hooks/useOnScreen'
 import { tmdbService } from '../../../services/tmdb'
 import { normalizeMoviePayload } from '../../../utils/functions'
@@ -67,24 +67,24 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
           {(statusRequest === 'success' || statusRequest === 'loadmore') && (
             <>
               {movies.length > 0 && (
-                <FeaturedMovie
+                <FeaturedMedia
                   genre={genre}
                   movie={{ ...movies[4], media_type: type }}
                 />
               )}
 
-              <MoviesContainer>
+              <MediaContainer>
                 <div className={styles.container}>
                   <div className={styles.grid}>
                     {movies.map((movie, index) => (
-                      <MoviesCarouselCard
+                      <MediaCarouselCard
                         key={`${movie.id}${index}`}
                         movie={{ ...movie, media_type: type }}
                       />
                     ))}
                   </div>
                 </div>
-              </MoviesContainer>
+              </MediaContainer>
             </>
           )}
 

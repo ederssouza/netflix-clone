@@ -2,11 +2,11 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { IFeaturedMedia, IMovie } from '../@types'
-import { FeaturedMovie } from '../components/FeaturedMovie'
+import { FeaturedMedia } from '../components/FeaturedMedia'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
-import { MoviesCarousel } from '../components/MoviesCarousel'
-import { MoviesContainer } from '../components/MoviesContainer'
+import { MediaCarousel } from '../components/MediaCarousel'
+import { MediaContainer } from '../components/MediaContainer'
 import { tmdbService } from '../services/tmdb'
 import { normalizeMediaSectionList } from '../utils/functions'
 import styles from './home.module.scss'
@@ -32,17 +32,17 @@ export default function Home ({ featured, sections }: IHomeProps) {
 
       <main className={styles.container}>
         <Header />
-        <FeaturedMovie movie={featured} />
+        <FeaturedMedia movie={featured} />
 
-        <MoviesContainer>
+        <MediaContainer>
           {sections.map(section => (
-            <MoviesCarousel
+            <MediaCarousel
               key={section.title}
               title={section.title}
               movies={section.movies}
             />
           ))}
-        </MoviesContainer>
+        </MediaContainer>
 
         <Footer />
       </main>

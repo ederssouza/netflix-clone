@@ -6,7 +6,7 @@ import { IMovie } from '../../@types'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
-import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
+import { MediaCarouselCard } from '../../components/MediaCarousel/MediaCarouselCard'
 import { useOnScreen } from '../../hooks/useOnScreen'
 import { usePrevious } from '../../hooks/usePrevious'
 import { tmdbService } from '../../services/tmdb'
@@ -76,7 +76,7 @@ export default function Search ({ q }: ISearchProps) {
 
         {(statusRequest === 'success' || statusRequest === 'loadmore') && (
           <div className={styles.grid}>
-            {movies.map((movie, index) => <MoviesCarouselCard key={`${movie.id}${index}`} movie={movie} />)}
+            {movies.map((movie, index) => <MediaCarouselCard key={`${movie.id}${index}`} movie={movie} />)}
           </div>
         )}
 
