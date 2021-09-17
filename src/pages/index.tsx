@@ -1,23 +1,18 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-import { IMovie } from '../@types'
 import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { MoviesContainer } from '../components/MoviesContainer'
 import { api } from '../services/api'
+import { normalizeMediaPayload } from '../utils/functions'
 import styles from './home.module.scss'
 
-interface ISectionsProps {
-  title: string
-  movies: IMovie[]
-}
-
 interface IHomeProps {
-  featured: IMovie
-  sections: ISectionsProps[]
+  featured: any
+  sections: any[]
 }
 
 export default function Home ({ featured, sections }: IHomeProps) {
@@ -51,11 +46,27 @@ export default function Home ({ featured, sections }: IHomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const { netflix, trendings, action, adventure, comedy, documentaries } = await api.getHomeLists()
+    const [netflixResponse, trendingsResponse, actionResponse, adventureResponse, comedyResponse, documentariesResponse] = await Promise.all([
+      api.getNetflixList({ page: 1 }),
+      api.getTrendings({ page: 1 }),
+      api.getGenreById({ type: 'movie', id: '28', page: 2 }),
+      api.getGenreById({ type: 'movie', id: '12', page: 2 }),
+      api.getGenreById({ type: 'movie', id: '35', page: 2 }),
+      api.getGenreById({ type: 'tv', id: '99', page: 2 })
+    ])
+
+    const netflix = netflixResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+    const topRated = trendingsResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+    const action = actionResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
+    const adventure = adventureResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
+    const comedy = comedyResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
+    const documentaries = documentariesResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+
+    const totalMediaPerPage = netflixResponse?.data?.results?.length
 
     const sections = [
       { title: 'Populares Netflix', movies: [...netflix] },
-      { title: 'Em alta', movies: [...trendings] },
+      { title: 'Em alta', movies: [...topRated] },
       { title: 'Ação', movies: [...action] },
       { title: 'Aventura', movies: [...adventure] },
       { title: 'Comédia', movies: [...comedy] },
@@ -63,7 +74,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     ]
 
     const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
-    const movieIndexAleatory = Math.floor(Math.random() * 20)
+    const movieIndexAleatory = Math.floor(Math.random() * totalMediaPerPage)
     const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
 
     return {
