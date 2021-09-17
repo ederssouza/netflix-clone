@@ -66,7 +66,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         <div>
           {(statusRequest === 'success' || statusRequest === 'loadmore') && (
             <>
-              {movies.length && (
+              {movies.length > 0 && (
                 <FeaturedMovie
                   genre={genre}
                   movie={{ ...movies[4], media_type: type }}
