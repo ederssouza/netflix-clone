@@ -15,7 +15,7 @@ export function MoviesContainer ({ children }: IMoviesContainerProps) {
       const $elem = refMoviesCarousel.current.querySelector('[data-testid="movies-carousel"]') || refMoviesCarousel.current.querySelector('[data-testid="movies-carousel-card"]')
       const containerheight = $elem?.clientHeight
       setContainerMarginTop(`-${containerheight}px`)
-    }, 500)
+    }, 700)
   }
 
   useEffect(() => {

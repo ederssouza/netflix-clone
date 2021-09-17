@@ -12,6 +12,6 @@ describe('MoviesContainer component', () => {
       </MoviesContainer>
     )
 
-    act(() => jest.advanceTimersByTime(500))
+    act(() => jest.advanceTimersByTime(1000))
   })
 })
