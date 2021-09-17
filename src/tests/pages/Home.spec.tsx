@@ -46,8 +46,8 @@ describe('Home page component', () => {
     const trendingsResponseMocked = mocked(api.getTrendings)
     const actionResponseMocked = mocked(api.getGenreById)
     const adventureResponseMocked = mocked(api.getGenreById)
-    const comedyResponse = mocked(api.getGenreById)
-    const documentariesResponse = mocked(api.getGenreById)
+    const comedyResponseMocked = mocked(api.getGenreById)
+    const documentariesResponseMocked = mocked(api.getGenreById)
     const defaultResponse = {
       data: {
         page: 1,
@@ -61,8 +61,8 @@ describe('Home page component', () => {
     trendingsResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
     actionResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
     adventureResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    comedyResponse.mockReturnValueOnce({ ...defaultResponse } as any)
-    documentariesResponse.mockReturnValueOnce({ ...defaultResponse } as any)
+    comedyResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    documentariesResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
 
     const response = await getServerSideProps({} as any)
     const sections = [
