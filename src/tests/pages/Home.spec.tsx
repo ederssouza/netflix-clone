@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
-import Home, { getServerSideProps } from '../../pages/index'
-import { api } from '../../services/api'
+import Home, { getStaticProps } from '../../pages/index'
+import { tmdbService } from '../../services/tmdb'
 import { normalizeMediaPayload } from '../../utils/functions'
 
-jest.mock('../../services/api')
+jest.mock('../../services/tmdb')
 
 const mediaListMock = [
   {
@@ -42,12 +42,12 @@ beforeEach(() => {
 
 describe('Home page component', () => {
   it('should render with success', async () => {
-    const netflixResponseMocked = mocked(api.getNetflixList)
-    const trendingsResponseMocked = mocked(api.getTrendings)
-    const actionResponseMocked = mocked(api.getGenreById)
-    const adventureResponseMocked = mocked(api.getGenreById)
-    const comedyResponseMocked = mocked(api.getGenreById)
-    const documentariesResponseMocked = mocked(api.getGenreById)
+    const netflixResponseMocked = mocked(tmdbService.getNetflixList)
+    const trendingsResponseMocked = mocked(tmdbService.getTrendings)
+    const actionResponseMocked = mocked(tmdbService.getGenreById)
+    const adventureResponseMocked = mocked(tmdbService.getGenreById)
+    const comedyResponseMocked = mocked(tmdbService.getGenreById)
+    const documentariesResponseMocked = mocked(tmdbService.getGenreById)
     const defaultResponse = {
       data: {
         page: 1,
@@ -64,7 +64,7 @@ describe('Home page component', () => {
     comedyResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
     documentariesResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
 
-    const response = await getServerSideProps({} as any)
+    const response = await getStaticProps({} as any)
     const sections = [
       { title: 'Populares Netflix', movies: [...tvListNormalizedMock] },
       { title: 'Em alta', movies: [...tvListNormalizedMock] },
@@ -91,13 +91,13 @@ describe('Home page component', () => {
   })
 
   it('should redirect to NotFound page when movie not exists', async () => {
-    const getNetflixListMocked = mocked(api.getNetflixList)
+    const getNetflixListMocked = mocked(tmdbService.getNetflixList)
 
     getNetflixListMocked.mockRejectedValueOnce({
       response: { status: 404 }
     })
 
-    const response = await getServerSideProps({} as any)
+    const response = await getStaticProps({} as any)
 
     expect(response).toEqual(
       expect.objectContaining({
@@ -110,13 +110,13 @@ describe('Home page component', () => {
   })
 
   it('should render generic error page when status code error is different of 404', async () => {
-    const getNetflixListMocked = mocked(api.getNetflixList)
+    const getNetflixListMocked = mocked(tmdbService.getNetflixList)
 
     getNetflixListMocked.mockRejectedValueOnce({
       response: { status: 500 }
     })
 
-    const response = await getServerSideProps({} as any)
+    const response = await getStaticProps({} as any)
 
     expect(response).toEqual(
       expect.objectContaining({
@@ -129,13 +129,13 @@ describe('Home page component', () => {
   })
 
   it('should render generic text error when not receive status code', async () => {
-    const getNetflixListMocked = mocked(api.getNetflixList)
+    const getNetflixListMocked = mocked(tmdbService.getNetflixList)
 
     getNetflixListMocked.mockRejectedValueOnce({
       response: {}
     })
 
-    const response = await getServerSideProps({} as any)
+    const response = await getStaticProps({} as any)
 
     expect(response).toEqual(
       expect.objectContaining({

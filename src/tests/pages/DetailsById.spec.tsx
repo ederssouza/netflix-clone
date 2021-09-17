@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
 import DetailsById, { getServerSideProps } from '../../pages/details/[type]/[id]'
-import { api } from '../../services/api'
+import { tmdbService } from '../../services/tmdb'
 import { castMock, movies, providersMock, providersResponseMock } from '../mocks/tmdb'
 
-jest.mock('../../services/api')
+jest.mock('../../services/tmdb')
 
 const movieMock = movies[0]
 
@@ -20,9 +20,9 @@ describe('DetailsById page component', () => {
   })
 
   it('should render movie data when receive `id` URL param', async () => {
-    const getDetailsByIdMocked = mocked(api.getDetailsById)
-    const getWatchProvidersByIdMocked = mocked(api.getWatchProvidersById)
-    const getCreditsByIdMocked = mocked(api.getCreditsById)
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: { ...movieMock }
@@ -57,9 +57,9 @@ describe('DetailsById page component', () => {
   })
 
   it('should not render providers when not receiving data ', async () => {
-    const getDetailsByIdMocked = mocked(api.getDetailsById)
-    const getWatchProvidersByIdMocked = mocked(api.getWatchProvidersById)
-    const getCreditsByIdMocked = mocked(api.getCreditsById)
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: { ...movieMock }
@@ -94,9 +94,9 @@ describe('DetailsById page component', () => {
   })
 
   it('should not render cast when not receiving data', async () => {
-    const getDetailsByIdMocked = mocked(api.getDetailsById)
-    const getWatchProvidersByIdMocked = mocked(api.getWatchProvidersById)
-    const getCreditsByIdMocked = mocked(api.getCreditsById)
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
+    const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
+    const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: { ...movieMock }
@@ -130,7 +130,7 @@ describe('DetailsById page component', () => {
   })
 
   it('should redirect to NotFound page when movie not exists', async () => {
-    const getDetailsByIdMocked = mocked(api.getDetailsById)
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
 
     getDetailsByIdMocked.mockRejectedValueOnce({
       response: { status: 404 }
@@ -151,7 +151,7 @@ describe('DetailsById page component', () => {
   })
 
   it('should render generic error page when status code error is different of 404', async () => {
-    const getDetailsByIdMocked = mocked(api.getDetailsById)
+    const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
 
     getDetailsByIdMocked.mockRejectedValueOnce({
       response: { status: 500 }
@@ -172,7 +172,7 @@ describe('DetailsById page component', () => {
   })
 
   it('should render generic text error when not receive status code', async () => {
-    const getGenresMocked = mocked(api.getDetailsById)
+    const getGenresMocked = mocked(tmdbService.getDetailsById)
 
     getGenresMocked.mockRejectedValueOnce({
       response: {}

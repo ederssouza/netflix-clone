@@ -9,7 +9,7 @@ import { Header } from '../../components/Header'
 import { MoviesCarouselCard } from '../../components/MoviesCarousel/MoviesCarouselCard'
 import { useOnScreen } from '../../hooks/useOnScreen'
 import { usePrevious } from '../../hooks/usePrevious'
-import { api } from '../../services/api'
+import { tmdbService } from '../../services/tmdb'
 import { normalizeMoviePayload } from '../../utils/functions'
 import styles from './styles.module.scss'
 
@@ -41,7 +41,7 @@ export default function Search ({ q }: ISearchProps) {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
 
-        const res = await api.search({ query: String(q), page: currentPage })
+        const res = await tmdbService.search({ query: String(q), page: currentPage })
         const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
         setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])

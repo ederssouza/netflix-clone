@@ -2,11 +2,11 @@ import { act, render, screen, waitFor } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
 import Genre, { getServerSideProps } from '../../pages/genre/[type]/[id]'
-import { api } from '../../services/api'
+import { tmdbService } from '../../services/tmdb'
 import { movies, genresMock } from '../mocks/tmdb'
 import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
-jest.mock('../../services/api')
+jest.mock('../../services/tmdb')
 
 beforeAll(() => {
   intersectionObserverMock([{ isIntersecting: false }])
@@ -20,7 +20,7 @@ describe('Search page component', () => {
   it('should render with success', async () => {
     jest.useFakeTimers()
 
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
       data: {
@@ -32,7 +32,7 @@ describe('Search page component', () => {
       params: { type: 'movie', id: '18' }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.getGenreById)
+    const getDetailsByIdMocked = mocked(tmdbService.getGenreById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
@@ -69,7 +69,7 @@ describe('Search page component', () => {
   })
 
   it('should render error message when occured an error on request', async () => {
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
       data: {
@@ -81,7 +81,7 @@ describe('Search page component', () => {
       params: { type: 'movie', id: '18' }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.getGenreById)
+    const getDetailsByIdMocked = mocked(tmdbService.getGenreById)
 
     getDetailsByIdMocked.mockRejectedValueOnce({
       response: { status: 404 }
@@ -97,7 +97,7 @@ describe('Search page component', () => {
   it('should load next page when the footer element is showing', async () => {
     intersectionObserverMock([{ isIntersecting: true }])
 
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
       data: {
@@ -109,7 +109,7 @@ describe('Search page component', () => {
       params: { type: 'movie', id: '18' }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.getGenreById)
+    const getDetailsByIdMocked = mocked(tmdbService.getGenreById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
@@ -141,7 +141,7 @@ describe('Search page component', () => {
   })
 
   it('should redirect home whe dont receive genres list', async () => {
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
       data: {
@@ -164,7 +164,7 @@ describe('Search page component', () => {
   })
 
   it('should redirect to NotFound page when movie not exists', async () => {
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({
       response: { status: 404 }
@@ -185,7 +185,7 @@ describe('Search page component', () => {
   })
 
   it('should render generic error page when status code error is different of 404', async () => {
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({
       response: { status: 500 }
@@ -206,7 +206,7 @@ describe('Search page component', () => {
   })
 
   it('should render generic text error when not receive status code', async () => {
-    const getGenresMocked = mocked(api.getGenres)
+    const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({
       response: {}

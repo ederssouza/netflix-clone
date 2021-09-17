@@ -2,11 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
 import Search, { getServerSideProps } from '../../pages/search'
-import { api } from '../../services/api'
+import { tmdbService } from '../../services/tmdb'
 import { movies } from '../mocks/tmdb'
 import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
-jest.mock('../../services/api')
+jest.mock('../../services/tmdb')
 
 beforeAll(() => {
   intersectionObserverMock([{ isIntersecting: false }])
@@ -19,7 +19,7 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
@@ -57,7 +57,7 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockRejectedValueOnce({
       response: { status: 404 }
@@ -92,7 +92,7 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
