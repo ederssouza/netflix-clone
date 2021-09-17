@@ -95,10 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
     if (statusCode === 404) {
       return {
-        redirect: {
-          permanent: false,
-          destination: '/NotFound'
-        }
+        notFound: true
       }
     }
 

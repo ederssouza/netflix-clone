@@ -176,10 +176,7 @@ describe('Search page component', () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        redirect: expect.objectContaining({
-          permanent: false,
-          destination: '/NotFound'
-        })
+        notFound: true
       })
     )
   })
