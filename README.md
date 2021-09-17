@@ -22,7 +22,7 @@ A simple Netflix clone with React JS and Next.js
 
 ### API integration
 
-- [ ] Home page
+- [x] Home page
 - [ ] Genres page
 - [x] Search page
 - [x] Detail page
