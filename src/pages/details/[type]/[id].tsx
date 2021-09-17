@@ -7,7 +7,7 @@ import { Details } from '../../../components/Details'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { Sidebar } from '../../../components/Sidebar'
-import { api } from '../../../services/api'
+import { tmdbService } from '../../../services/tmdb'
 import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from '../styles.module.scss'
 
@@ -51,9 +51,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const { type, id } = params
     const objRequestParams = { type: String(type), id: String(id) }
     const [detailsResponse, watchProvidersResponse, creditsResponse] = await Promise.all([
-      api.getDetailsById(objRequestParams),
-      api.getWatchProvidersById(objRequestParams),
-      api.getCreditsById(objRequestParams)
+      tmdbService.getDetailsById(objRequestParams),
+      tmdbService.getWatchProvidersById(objRequestParams),
+      tmdbService.getCreditsById(objRequestParams)
     ])
 
     const BRProviders = watchProvidersResponse?.data?.results?.BR
