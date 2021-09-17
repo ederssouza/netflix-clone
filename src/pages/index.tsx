@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { IMovie } from '../@types'
+import { IMediaFeatured, IMovie } from '../@types'
 import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
@@ -17,7 +17,7 @@ interface ISectionsProps {
 }
 
 interface IHomeProps {
-  featured: IMovie
+  featured: IMediaFeatured
   sections: ISectionsProps[]
 }
 
@@ -94,7 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
         featured,
         sections
       },
-      revalidate: 60 * 60 * 0.5 // seconds * minutes * hours = 30 minutes
+      revalidate: 60 * 30 // 30 minutes
     }
   } catch (error) {
     const statusCode = error?.response?.status
