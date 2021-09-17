@@ -1,3 +1,16 @@
+export interface IMediaFeatured {
+  id: number
+  media_type: 'tv' | 'movie'
+  title: string
+  overview?: string
+  backdrop_path: {
+    w300: string
+    w780: string
+    w1280: string
+    original: string
+  }
+}
+
 export interface IGenres {
   id: number
   name: string
