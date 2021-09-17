@@ -14,15 +14,15 @@ export function Header () {
       title: 'Início'
     },
     {
-      href: '/genre/1',
+      href: '/tv',
       title: 'Séries'
     },
     {
-      href: '/genre/2',
+      href: '/movies',
       title: 'Filmes'
     },
     {
-      href: '/genre/3',
+      href: '/latest',
       title: 'Bombando'
     }
   ]
