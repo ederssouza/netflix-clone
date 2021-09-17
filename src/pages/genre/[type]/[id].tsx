@@ -57,7 +57,6 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
       <Head>
         <title>Busca | Netflix</title>
         <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <main>

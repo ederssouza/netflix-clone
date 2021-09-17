@@ -17,7 +17,6 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
       <Head>
         <title>Início | Netflix</title>
         <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <main>

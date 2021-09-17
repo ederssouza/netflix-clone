@@ -23,7 +23,6 @@ export default function DetailsById ({ media, cast, providers }: IDetailsProps) 
       <Head>
         {media?.title && <title>{media.title} | Netflix</title>}
         {media?.overview && <meta name="description" content={media.overview} />}
-        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <div data-testid="details">

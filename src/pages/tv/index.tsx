@@ -27,7 +27,6 @@ export default function Tv ({ featured, sections }: IHomeProps) {
       <Head>
         <title>Series | Netflix</title>
         <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <main className={styles.container}>
