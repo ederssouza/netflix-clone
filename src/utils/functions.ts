@@ -40,6 +40,28 @@ export function normalizeMoviePayload (data: any) {
     release_date: release_date ? new Date(release_date).getFullYear() : null,
     original_language: original_language?.toUpperCase(),
     runtime: timeConvert(runtime),
-    genres: data?.genres
+    genres: data?.genres || []
+  }
+}
+
+export function normalizeMediaPayload (data: any) {
+  if (!data) return {}
+
+  const renderURIImage = (size = 'original') => data?.backdrop_path
+    ? `${TMDB_BASE_URL_IMAGE}/${size}${data.backdrop_path}`
+    : '/assets/img/banner.jpeg'
+
+  return {
+    id: data?.id,
+    title: data?.title || data?.name,
+    overview: data?.overview || 'Nenhum resumo disponível',
+    backdrop_path: {
+      w300: renderURIImage('w300'),
+      w780: renderURIImage('w780'),
+      w1280: renderURIImage('w1280'),
+      original: renderURIImage('original')
+    },
+    media_type: data?.media_type,
+    vote_average: data?.vote_average
   }
 }
