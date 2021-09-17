@@ -13,7 +13,7 @@ export function MediaContainer ({ children }: IMediaContainerProps) {
       const $elem = refMediaCarousel.current.querySelector('[data-testid="carousel"]') || refMediaCarousel.current.querySelector('[data-testid="carousel-card"]')
       const containerheight = $elem?.clientHeight
       setContainerMarginTop(`-${containerheight}px`)
-    }, 700)
+    }, 800)
   }
 
   useEffect(() => {
