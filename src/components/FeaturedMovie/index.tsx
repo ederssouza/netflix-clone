@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { IoMdPlay, IoMdInformationCircleOutline } from 'react-icons/io'
 
-import { IMediaFeatured } from '../../@types'
+import { IFeaturedMedia } from '../../@types'
 import { Button } from '../Button'
 import styles from './styles.module.scss'
 
 interface IFeaturedMovieProps {
   genre?: string
-  movie: IMediaFeatured
+  movie: IFeaturedMedia
 }
 
 export function FeaturedMovie ({ genre, movie }: IFeaturedMovieProps) {

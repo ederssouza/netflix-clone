@@ -1,4 +1,4 @@
-export interface IMediaFeatured {
+export interface IFeaturedMedia {
   id: number
   media_type: 'tv' | 'movie'
   title: string

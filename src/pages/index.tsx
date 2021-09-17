@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { IMediaFeatured, IMovie } from '../@types'
+import { IFeaturedMedia, IMovie } from '../@types'
 import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
@@ -17,7 +17,7 @@ interface ISectionsProps {
 }
 
 interface IHomeProps {
-  featured: IMediaFeatured
+  featured: IFeaturedMedia
   sections: ISectionsProps[]
 }
 
