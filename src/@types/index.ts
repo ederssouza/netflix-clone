@@ -1,6 +1,6 @@
 export interface IFeaturedMedia {
   id: number
-  media_type: 'tv' | 'movie'
+  media_type: string
   title: string
   overview?: string
   backdrop_path: {
