@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
+import { IMovie } from '../@types'
 import { FeaturedMovie } from '../components/FeaturedMovie'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
@@ -10,9 +11,14 @@ import { api } from '../services/api'
 import { normalizeMediaSectionList } from '../utils/functions'
 import styles from './home.module.scss'
 
+interface ISectionsProps {
+  title: string
+  movies: IMovie[]
+}
+
 interface IHomeProps {
-  featured: any
-  sections: any[]
+  featured: IMovie
+  sections: ISectionsProps[]
 }
 
 export default function Home ({ featured, sections }: IHomeProps) {
