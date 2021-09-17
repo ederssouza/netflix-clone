@@ -2,14 +2,14 @@ import { useEffect, useRef, useState, forwardRef, ForwardRefRenderFunction } fro
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-import { IMovie } from '../../@types'
+import { IMedia } from '../../@types'
 import { MediaCarouselArrow } from './MediaCarouselArrow'
 import { MediaCarouselCard } from './MediaCarouselCard'
 import styles from './styles.module.scss'
 
 interface IMediaCarouselProps {
   title: string
-  movies: IMovie[]
+  mediaList: IMedia[]
 }
 
 const defaultResponsiveProps = {
@@ -45,7 +45,7 @@ const defaultResponsiveProps = {
   }
 }
 
-const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarouselProps> = ({ title, movies, ...rest }: IMediaCarouselProps, ref) => {
+const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarouselProps> = ({ title, mediaList, ...rest }: IMediaCarouselProps, ref) => {
   const [responsive, setResponsive] = useState({ ...defaultResponsiveProps })
   const [firstLoad, setFirstLoad] = useState(true)
   const sliderRef = useRef(null)
@@ -94,7 +94,7 @@ const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarous
         }
         beforeChange={() => scrollCallback()}
       >
-        {movies.map(movie => <MediaCarouselCard key={movie.id} movie={movie} />)}
+        {mediaList.map(media => <MediaCarouselCard key={media.id} media={media} />)}
       </Carousel>
     </div>
   )

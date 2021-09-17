@@ -1,4 +1,4 @@
-export const movies = Array.from({ length: 20 }).map((_, index) => {
+export const mediaList = Array.from({ length: 20 }).map((_, index) => {
   return {
     id: 1402 + index,
     media_type: index % 2 ? 'movie' : 'tv',

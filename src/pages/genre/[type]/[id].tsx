@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
-import { IGenres, IMovie } from '../../../@types'
+import { IGenres, IMedia } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
 import { FeaturedMedia } from '../../../components/FeaturedMedia'
 import { Footer } from '../../../components/Footer'
@@ -11,7 +11,7 @@ import { MediaCarouselCard } from '../../../components/MediaCarousel/MediaCarous
 import { MediaContainer } from '../../../components/MediaContainer'
 import { useOnScreen } from '../../../hooks/useOnScreen'
 import { tmdbService } from '../../../services/tmdb'
-import { normalizeMoviePayload } from '../../../utils/functions'
+import { normalizeMediaPayload } from '../../../utils/functions'
 import styles from './styles.module.scss'
 
 interface IGenreByIdProps {
@@ -22,7 +22,7 @@ interface IGenreByIdProps {
 
 export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   const [currentPage, setCurrentPage] = useState(1)
-  const [movies, setMovies] = useState([])
+  const [mediaList, setMediaList] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
@@ -33,9 +33,9 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
         const res = await tmdbService.getGenreById({ type, id, page: currentPage })
-        const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
+        const results = res.data.results.map((media: IMedia) => normalizeMediaPayload(media))
 
-        setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
+        setMediaList((oldMediaList) => [...oldMediaList, ...results.slice(0, 18)])
         setHasMore(currentPage <= res.data.total_pages)
         setTimeout(() => setStatusRequest('success'), 500)
       } catch (error) {
@@ -66,20 +66,20 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         <div>
           {(statusRequest === 'success' || statusRequest === 'loadmore') && (
             <>
-              {movies.length > 0 && (
+              {mediaList.length > 0 && (
                 <FeaturedMedia
                   genre={genre}
-                  movie={{ ...movies[4], media_type: type }}
+                  media={{ ...mediaList[4], media_type: type }}
                 />
               )}
 
               <MediaContainer>
                 <div className={styles.container}>
                   <div className={styles.grid}>
-                    {movies.map((movie, index) => (
+                    {mediaList.map((media, index) => (
                       <MediaCarouselCard
-                        key={`${movie.id}${index}`}
-                        movie={{ ...movie, media_type: type }}
+                        key={`${media.id}${index}`}
+                        media={{ ...media, media_type: type }}
                       />
                     ))}
                   </div>

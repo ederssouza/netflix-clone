@@ -66,17 +66,17 @@ describe('Home page component', () => {
 
     const response = await getStaticProps({} as any)
     const sections = [
-      { title: 'Populares Netflix', movies: [...tvListNormalizedMock] },
-      { title: 'Em alta', movies: [...tvListNormalizedMock] },
-      { title: 'Ação', movies: [...movieListNormalizedMock] },
-      { title: 'Aventura', movies: [...movieListNormalizedMock] },
-      { title: 'Comédia', movies: [...movieListNormalizedMock] },
-      { title: 'Documentário', movies: [...tvListNormalizedMock] }
+      { title: 'Populares Netflix', mediaList: [...tvListNormalizedMock] },
+      { title: 'Em alta', mediaList: [...tvListNormalizedMock] },
+      { title: 'Ação', mediaList: [...movieListNormalizedMock] },
+      { title: 'Aventura', mediaList: [...movieListNormalizedMock] },
+      { title: 'Comédia', mediaList: [...movieListNormalizedMock] },
+      { title: 'Documentário', mediaList: [...tvListNormalizedMock] }
     ]
 
     const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
-    const movieIndexAleatory = Math.floor(Math.random() * sections[0].movies.length)
-    const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
+    const mediaIndexAleatory = Math.floor(Math.random() * sections[0].mediaList.length)
+    const featured = sections[sectionIndexAleatory].mediaList[mediaIndexAleatory]
 
     render(<Home featured={featured} sections={sections} />)
 

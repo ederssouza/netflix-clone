@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
-import { IMovie } from '../../@types'
+import { IMedia } from '../../@types'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
@@ -10,7 +10,7 @@ import { MediaCarouselCard } from '../../components/MediaCarousel/MediaCarouselC
 import { useOnScreen } from '../../hooks/useOnScreen'
 import { usePrevious } from '../../hooks/usePrevious'
 import { tmdbService } from '../../services/tmdb'
-import { normalizeMoviePayload } from '../../utils/functions'
+import { normalizeMediaPayload } from '../../utils/functions'
 import styles from './styles.module.scss'
 
 interface ISearchProps {
@@ -19,7 +19,7 @@ interface ISearchProps {
 
 export default function Search ({ q }: ISearchProps) {
   const [currentPage, setCurrentPage] = useState(1)
-  const [movies, setMovies] = useState([])
+  const [mediaList, setMediaList] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const prevQuery = usePrevious(q)
@@ -28,7 +28,7 @@ export default function Search ({ q }: ISearchProps) {
 
   function resetList () {
     setCurrentPage(1)
-    setMovies([])
+    setMediaList([])
     setHasMore(false)
   }
 
@@ -42,9 +42,9 @@ export default function Search ({ q }: ISearchProps) {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
 
         const res = await tmdbService.search({ query: String(q), page: currentPage })
-        const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
+        const results = res.data.results.map((media: IMedia) => normalizeMediaPayload(media))
 
-        setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
+        setMediaList((oldMediaList) => [...oldMediaList, ...results.slice(0, 18)])
         setHasMore(currentPage <= res.data.total_pages)
         setTimeout(() => setStatusRequest('success'), 500)
       } catch (error) {
@@ -76,7 +76,7 @@ export default function Search ({ q }: ISearchProps) {
 
         {(statusRequest === 'success' || statusRequest === 'loadmore') && (
           <div className={styles.grid}>
-            {movies.map((movie, index) => <MediaCarouselCard key={`${movie.id}${index}`} movie={movie} />)}
+            {mediaList.map((media, index) => <MediaCarouselCard key={`${media.id}${index}`} media={media} />)}
           </div>
         )}
 

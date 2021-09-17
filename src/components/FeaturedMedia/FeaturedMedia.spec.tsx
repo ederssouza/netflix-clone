@@ -1,26 +1,26 @@
 import { render, screen } from '@testing-library/react'
 
 import { FeaturedMedia } from '.'
-import { movies } from '../../tests/mocks/tmdb'
+import { mediaList } from '../../tests/mocks/tmdb'
 
-const movieMock = movies[0]
+const mediaMock = mediaList[0]
 
 describe('FeaturedMedia component', () => {
   it('should render with success', async () => {
-    render(<FeaturedMedia genre="Drama" movie={movieMock} />)
+    render(<FeaturedMedia genre="Drama" media={mediaMock} />)
 
-    const $featuredMedia = screen.getByTestId('featured-movie')
+    const $featuredMedia = screen.getByTestId('featured-media')
 
-    expect(screen.getByText(movieMock.title)).toBeInTheDocument()
+    expect(screen.getByText(mediaMock.title)).toBeInTheDocument()
     expect(screen.getByText('Drama')).toBeInTheDocument()
-    expect($featuredMedia).toHaveAttribute('style', `background-image: url(${movieMock.backdrop_path.original});`)
+    expect($featuredMedia).toHaveAttribute('style', `background-image: url(${mediaMock.backdrop_path.original});`)
   })
 
   it('should have a href valid attribute', () => {
-    render(<FeaturedMedia movie={movieMock} />)
+    render(<FeaturedMedia media={mediaMock} />)
 
     const $moreDetailsButton = screen.getByTestId('more-details-button')
 
-    expect($moreDetailsButton).toHaveAttribute('href', `/details/${movieMock.media_type}/${movieMock.id}`)
+    expect($moreDetailsButton).toHaveAttribute('href', `/details/${mediaMock.media_type}/${mediaMock.id}`)
   })
 })

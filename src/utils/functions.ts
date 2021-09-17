@@ -14,7 +14,7 @@ export function isValidArray (value: any) {
   return Array.isArray(value) && value.length
 }
 
-export function normalizeMoviePayload (data: any) {
+export function normalizeMediaDetailsPayload (data: any) {
   if (!data) return {}
 
   const renderURIImage = (size = 'original') => data?.backdrop_path

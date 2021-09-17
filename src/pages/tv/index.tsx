@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { IMovie } from '../../@types'
+import { IMedia } from '../../@types'
 import { FeaturedMedia } from '../../components/FeaturedMedia'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
@@ -13,11 +13,11 @@ import styles from '../home.module.scss'
 
 interface ISectionsProps {
   title: string
-  movies: IMovie[]
+  mediaList: IMedia[]
 }
 
 interface IHomeProps {
-  featured: IMovie
+  featured: IMedia
   sections: ISectionsProps[]
 }
 
@@ -32,14 +32,14 @@ export default function Tv ({ featured, sections }: IHomeProps) {
 
       <main className={styles.container}>
         <Header />
-        <FeaturedMedia movie={featured} />
+        <FeaturedMedia media={featured} />
 
         <MediaContainer>
           {sections.map(section => (
             <MediaCarousel
               key={section.title}
               title={section.title}
-              movies={section.movies}
+              mediaList={section.mediaList}
             />
           ))}
         </MediaContainer>
@@ -71,17 +71,17 @@ export const getStaticProps: GetStaticProps = async () => {
     const totalMediaPerPage = actionResponse?.data?.results?.length
 
     const sections = [
-      { title: 'Action & Adventure', movies: [...action] },
-      { title: 'Crime', movies: [...crime] },
-      { title: 'Drama', movies: [...drama] },
-      { title: 'Família', movies: [...family] },
-      { title: 'Mistério', movies: [...mistery] },
-      { title: 'Faroeste', movies: [...western] }
+      { title: 'Action & Adventure', mediaList: [...action] },
+      { title: 'Crime', mediaList: [...crime] },
+      { title: 'Drama', mediaList: [...drama] },
+      { title: 'Família', mediaList: [...family] },
+      { title: 'Mistério', mediaList: [...mistery] },
+      { title: 'Faroeste', mediaList: [...western] }
     ]
 
-    const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
-    const movieIndexAleatory = Math.floor(Math.random() * totalMediaPerPage)
-    const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
+    const sectionAleatoryIndex = Math.floor(Math.random() * sections.length)
+    const mediaAleatoryIndex = Math.floor(Math.random() * totalMediaPerPage)
+    const featured = sections[sectionAleatoryIndex].mediaList[mediaAleatoryIndex]
 
     return {
       props: {

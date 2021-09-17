@@ -7,22 +7,22 @@ import styles from './styles.module.scss'
 
 interface IFeaturedMediaProps {
   genre?: string
-  movie: IFeaturedMedia
+  media: IFeaturedMedia
 }
 
-export function FeaturedMedia ({ genre, movie }: IFeaturedMediaProps) {
+export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
   return (
     <div
       className={styles.featuredMedia}
-      style={{ backgroundImage: `url("${movie?.backdrop_path?.original}")` }}
-      data-testid="featured-movie"
+      style={{ backgroundImage: `url("${media?.backdrop_path?.original}")` }}
+      data-testid="featured-media"
     >
       <div className={styles.featuredMediaInfo}>
         {genre && <h1 className={styles.featuredMediaGenre}>{genre}</h1>}
 
         <div className={styles.featuredMediaInfoText}>
-          <h1 className={styles.featuredMediaTitle}>{movie.title}</h1>
-          <p className={styles.featuredMediaText}>{movie.overview}</p>
+          <h1 className={styles.featuredMediaTitle}>{media.title}</h1>
+          <p className={styles.featuredMediaText}>{media.overview}</p>
         </div>
 
         <div className={styles.featuredMediaInfoActions}>
@@ -30,7 +30,7 @@ export function FeaturedMedia ({ genre, movie }: IFeaturedMediaProps) {
             Trailer
           </Button>
 
-          <Link href={`/details/${movie.media_type}/${movie.id}`} passHref>
+          <Link href={`/details/${media.media_type}/${media.id}`} passHref>
             <Button
               color="secondary"
               icon={<IoMdInformationCircleOutline />}

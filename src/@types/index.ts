@@ -16,7 +16,7 @@ export interface IGenres {
   name: string
 }
 
-export interface IMovie {
+export interface IMedia {
   id: number
   media_type: string
   title: string

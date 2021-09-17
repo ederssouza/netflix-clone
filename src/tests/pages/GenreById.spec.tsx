@@ -3,7 +3,7 @@ import { mocked } from 'ts-jest/utils'
 
 import Genre, { getServerSideProps } from '../../pages/genre/[type]/[id]'
 import { tmdbService } from '../../services/tmdb'
-import { movies, genresMock } from '../mocks/tmdb'
+import { mediaList, genresMock } from '../mocks/tmdb'
 import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
 jest.mock('../../services/tmdb')
@@ -36,7 +36,7 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
@@ -62,7 +62,7 @@ describe('Search page component', () => {
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     })
@@ -113,7 +113,7 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
@@ -133,7 +133,7 @@ describe('Search page component', () => {
     await waitFor(() => {
       expect(getDetailsByIdMocked).toHaveReturnedWith({
         data: {
-          results: [...movies.slice(0, 2)],
+          results: [...mediaList.slice(0, 2)],
           total_pages: 10
         }
       })
