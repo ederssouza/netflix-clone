@@ -32,7 +32,8 @@ const mediaListMock = [
   }
 ]
 
-const mediaListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+const tvListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+const movieListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
 
 beforeEach(() => {
   const randomMock = jest.spyOn(global.Math, 'random')
@@ -41,23 +42,36 @@ beforeEach(() => {
 
 describe('Home page component', () => {
   it('should render with success', async () => {
-    const getNetflixListMocked = mocked(api.getNetflixList)
-
-    getNetflixListMocked.mockReturnValueOnce({
+    const netflixResponseMocked = mocked(api.getNetflixList)
+    const trendingsResponseMocked = mocked(api.getTrendings)
+    const actionResponseMocked = mocked(api.getGenreById)
+    const adventureResponseMocked = mocked(api.getGenreById)
+    const comedyResponse = mocked(api.getGenreById)
+    const documentariesResponse = mocked(api.getGenreById)
+    const defaultResponse = {
       data: {
         page: 1,
         results: [...mediaListMock],
         total_pages: 1,
         total_results: 2
       }
-    } as any)
+    }
+
+    netflixResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    trendingsResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    actionResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    adventureResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    comedyResponse.mockReturnValueOnce({ ...defaultResponse } as any)
+    documentariesResponse.mockReturnValueOnce({ ...defaultResponse } as any)
 
     const response = await getServerSideProps({} as any)
     const sections = [
-      {
-        title: 'Populares Netflix',
-        movies: [...mediaListNormalizedMock]
-      }
+      { title: 'Populares Netflix', movies: [...tvListNormalizedMock] },
+      { title: 'Em alta', movies: [...tvListNormalizedMock] },
+      { title: 'Ação', movies: [...movieListNormalizedMock] },
+      { title: 'Aventura', movies: [...movieListNormalizedMock] },
+      { title: 'Comédia', movies: [...movieListNormalizedMock] },
+      { title: 'Documentário', movies: [...tvListNormalizedMock] }
     ]
 
     const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
