@@ -65,3 +65,9 @@ export function normalizeMediaPayload (data: any) {
     vote_average: data?.vote_average
   }
 }
+
+export function normalizeMediaSectionList (arr = [], media_type: 'movie' | 'tv') {
+  return isValidArray(arr)
+    ? arr.map(item => normalizeMediaPayload({ ...item, media_type }))
+    : []
+}
