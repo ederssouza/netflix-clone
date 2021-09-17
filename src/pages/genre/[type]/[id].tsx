@@ -10,7 +10,7 @@ import { Header } from '../../../components/Header'
 import { MoviesCarouselCard } from '../../../components/MoviesCarousel/MoviesCarouselCard'
 import { MoviesContainer } from '../../../components/MoviesContainer'
 import { useOnScreen } from '../../../hooks/useOnScreen'
-import { api } from '../../../services/api'
+import { tmdbService } from '../../../services/tmdb'
 import { normalizeMoviePayload } from '../../../utils/functions'
 import styles from './styles.module.scss'
 
@@ -32,7 +32,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
     const fetchData = async () => {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
-        const res = await api.getGenreById({ type, id, page: currentPage })
+        const res = await tmdbService.getGenreById({ type, id, page: currentPage })
         const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
         setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
@@ -115,7 +115,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const { type, id } = params
-    const res = await api.getGenres({ type: String(type) })
+    const res = await tmdbService.getGenres({ type: String(type) })
     const genres = res?.data?.genres
 
     if (Array.isArray(genres) && !genres.length) {
