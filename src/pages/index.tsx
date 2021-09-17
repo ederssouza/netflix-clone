@@ -7,7 +7,7 @@ import { Header } from '../components/Header'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { MoviesContainer } from '../components/MoviesContainer'
 import { api } from '../services/api'
-import { normalizeMediaPayload } from '../utils/functions'
+import { normalizeMediaSectionList } from '../utils/functions'
 import styles from './home.module.scss'
 
 interface IHomeProps {
@@ -46,7 +46,14 @@ export default function Home ({ featured, sections }: IHomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const [netflixResponse, trendingsResponse, actionResponse, adventureResponse, comedyResponse, documentariesResponse] = await Promise.all([
+    const [
+      netflixResponse,
+      trendingsResponse,
+      actionResponse,
+      adventureResponse,
+      comedyResponse,
+      documentariesResponse
+    ] = await Promise.all([
       api.getNetflixList({ page: 1 }),
       api.getTrendings({ page: 1 }),
       api.getGenreById({ type: 'movie', id: '28', page: 2 }),
@@ -55,13 +62,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
       api.getGenreById({ type: 'tv', id: '99', page: 2 })
     ])
 
-    const netflix = netflixResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
-    const topRated = trendingsResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
-    const action = actionResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
-    const adventure = adventureResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
-    const comedy = comedyResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
-    const documentaries = documentariesResponse?.data?.results.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
-
+    const netflix = normalizeMediaSectionList(netflixResponse?.data?.results, 'tv')
+    const topRated = normalizeMediaSectionList(trendingsResponse?.data?.results, 'tv')
+    const action = normalizeMediaSectionList(actionResponse?.data?.results, 'movie')
+    const adventure = normalizeMediaSectionList(adventureResponse?.data?.results, 'movie')
+    const comedy = normalizeMediaSectionList(comedyResponse?.data?.results, 'movie')
+    const documentaries = normalizeMediaSectionList(documentariesResponse?.data?.results, 'tv')
     const totalMediaPerPage = netflixResponse?.data?.results?.length
 
     const sections = [
