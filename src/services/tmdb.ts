@@ -30,7 +30,7 @@ interface INetflixList {
 }
 
 const defaultParams = {
-  api_key: process.env.TMDB_API_KEY,
+  api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
   language: 'pt-BR'
 }
 
