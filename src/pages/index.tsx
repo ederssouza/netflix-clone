@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { IMovie } from '../@types'
@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { MoviesCarousel } from '../components/MoviesCarousel'
 import { MoviesContainer } from '../components/MoviesContainer'
-import { api } from '../services/api'
+import { tmdbService } from '../services/tmdb'
 import { normalizeMediaSectionList } from '../utils/functions'
 import styles from './home.module.scss'
 
@@ -50,7 +50,7 @@ export default function Home ({ featured, sections }: IHomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const [
       netflixResponse,
@@ -60,12 +60,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
       comedyResponse,
       documentariesResponse
     ] = await Promise.all([
-      api.getNetflixList({ page: 1 }),
-      api.getTrendings({ page: 1 }),
-      api.getGenreById({ type: 'movie', id: '28', page: 2 }),
-      api.getGenreById({ type: 'movie', id: '12', page: 2 }),
-      api.getGenreById({ type: 'movie', id: '35', page: 2 }),
-      api.getGenreById({ type: 'tv', id: '99', page: 2 })
+      tmdbService.getNetflixList({ page: 1 }),
+      tmdbService.getTrendings({ page: 1 }),
+      tmdbService.getGenreById({ type: 'movie', id: '28', page: 2 }),
+      tmdbService.getGenreById({ type: 'movie', id: '12', page: 2 }),
+      tmdbService.getGenreById({ type: 'movie', id: '35', page: 2 }),
+      tmdbService.getGenreById({ type: 'tv', id: '99', page: 2 })
     ])
 
     const netflix = normalizeMediaSectionList(netflixResponse?.data?.results, 'tv')
