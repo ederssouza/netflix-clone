@@ -14,7 +14,7 @@ export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
   return (
     <div
       className={styles.featuredMedia}
-      style={{ backgroundImage: `url("${media?.backdrop_path?.original}")` }}
+      style={{ backgroundImage: `url(${media?.backdrop_path?.original})` }}
       data-testid="featured-media"
     >
       <div className={styles.featuredMediaInfo}>
@@ -22,7 +22,7 @@ export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
 
         <div className={styles.featuredMediaInfoText}>
           <h1 className={styles.featuredMediaTitle}>{media.title}</h1>
-          <p className={styles.featuredMediaText}>{media.overview}</p>
+          {media?.overview && <p className={styles.featuredMediaText}>{media.overview}</p>}
         </div>
 
         <div className={styles.featuredMediaInfoActions}>
@@ -30,7 +30,10 @@ export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
             Trailer
           </Button>
 
-          <Link href={`/details/${media.media_type}/${media.id}`} passHref>
+          <Link
+            href={`/details/${media.media_type}/${media.id}`}
+            passHref
+          >
             <Button
               color="secondary"
               icon={<IoMdInformationCircleOutline />}
