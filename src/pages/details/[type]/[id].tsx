@@ -8,7 +8,7 @@ import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
 import { Sidebar } from '../../../components/Sidebar'
 import { tmdbService } from '../../../services/tmdb'
-import { normalizeMediaPayload } from '../../../utils/functions'
+import { normalizeMediaDetailsPayload } from '../../../utils/functions'
 import styles from '../styles.module.scss'
 
 interface IDetailsProps {
@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     return {
       props: {
-        media: normalizeMediaPayload({ ...detailsResponse?.data, media_type: type }),
+        media: normalizeMediaDetailsPayload({ ...detailsResponse?.data, media_type: type }),
         providers: BRProviders?.[Object.keys(BRProviders)[1]] || [],
         cast: creditsResponse?.data?.cast || []
       }
