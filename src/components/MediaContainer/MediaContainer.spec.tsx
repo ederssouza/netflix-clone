@@ -1,15 +1,15 @@
 import { act, render } from '@testing-library/react'
 
-import { MoviesContainer } from '.'
+import { MediaContainer } from '.'
 
-describe('MoviesContainer component', () => {
+describe('MediaContainer component', () => {
   it('should render left arrow with success', () => {
     jest.useFakeTimers()
 
     render(
-      <MoviesContainer>
+      <MediaContainer>
         <div>content...</div>
-      </MoviesContainer>
+      </MediaContainer>
     )
 
     act(() => jest.advanceTimersByTime(1000))

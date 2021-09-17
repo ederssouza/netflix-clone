@@ -1,4 +1,4 @@
-.moviesCarouselCard {
+.mediaCarouselCard {
   margin: 0 2px;
   border-radius: 4px;
   display: flex;
@@ -22,14 +22,14 @@
         border-radius: 4px 4px 0 0;
       }
 
-      .moviesCarouselCardDetails {
+      .mediaCarouselCardDetails {
         display: flex;
       }
     }
   }
 }
 
-.moviesCarouselCardDetails {
+.mediaCarouselCardDetails {
   border-radius: 0 0 4px 4px;
   background-color: var(--bg-color);
   display: none;
@@ -42,12 +42,12 @@
   box-shadow: 0 0 20px rgba(#000, 0.8);
 }
 
-.moviesCarouselCardTitle {
+.mediaCarouselCardTitle {
   font-size: 0.825rem;
   margin-bottom: 1rem;
 }
 
-.moviesCarouselCardActions {
+.mediaCarouselCardActions {
   display: flex;
   list-style-type: none;
   margin-bottom: 1rem;
@@ -55,7 +55,7 @@
   li {
     margin-right: 0.25rem;
 
-    &.moviesCarouselCardActionActiveItem {
+    &.mediaCarouselCardActionActiveItem {
 
       a {
         border-color: var(--body-text-color);
@@ -83,21 +83,21 @@
   }
 }
 
-.moviesCarouselCardRelevant {
+.mediaCarouselCardRelevant {
   font-size: 0.625rem;
   font-weight: bold;
   line-height: 1;
   margin-bottom: 1rem;
 
-  &.moviesCarouselCardRelevantGreen {
+  &.mediaCarouselCardRelevantGreen {
     color: #00d259;
   }
 
-  &.moviesCarouselCardRelevantYellow {
+  &.mediaCarouselCardRelevantYellow {
     color: #c3c556;
   }
 
-  &.moviesCarouselCardRelevantRed {
+  &.mediaCarouselCardRelevantRed {
     color: #bd5340;
   }
 }

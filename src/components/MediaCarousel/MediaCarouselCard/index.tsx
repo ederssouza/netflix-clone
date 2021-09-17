@@ -9,24 +9,24 @@ interface IMovieProps {
   movie: IMovie
 }
 
-export function MoviesCarouselCard ({ movie }: IMovieProps) {
+export function MediaCarouselCard ({ movie }: IMovieProps) {
   return (
     <div
-      className={styles.moviesCarouselCard}
-      data-testid="movies-carousel-card"
+      className={styles.mediaCarouselCard}
+      data-testid="carousel-card"
     >
       <img src={movie.backdrop_path.w300} alt={movie.title} />
 
-      <div className={styles.moviesCarouselCardDetails}>
-        <h2 className={styles.moviesCarouselCardTitle}>{movie.title}</h2>
+      <div className={styles.mediaCarouselCardDetails}>
+        <h2 className={styles.mediaCarouselCardTitle}>{movie.title}</h2>
 
-        <ul className={styles.moviesCarouselCardActions}>
-          <li className={styles.moviesCarouselCardActionActiveItem}>
+        <ul className={styles.mediaCarouselCardActions}>
+          <li className={styles.mediaCarouselCardActionActiveItem}>
             <a href="#" title=""><IoMdPlay /></a>
           </li>
           <li
-            className={styles.moviesCarouselCardActionItem}
-            data-testid="movies-carousel-more-details"
+            className={styles.mediaCarouselCardActionItem}
+            data-testid="carousel-more-details"
           >
             <Link href={`/details/${movie.media_type}/${movie.id}`} passHref>
               <a title="Ver mais detalhes"><TiInfoLarge /></a>
@@ -34,7 +34,7 @@ export function MoviesCarouselCard ({ movie }: IMovieProps) {
           </li>
         </ul>
 
-        <span className={`${styles.moviesCarouselCardRelevant} ${styles.moviesCarouselCardRelevantGreen}`}>
+        <span className={`${styles.mediaCarouselCardRelevant} ${styles.mediaCarouselCardRelevantGreen}`}>
           {movie?.vote_average ? (movie.vote_average * 10) : 0}% relevante
         </span>
       </div>

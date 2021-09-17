@@ -1,4 +1,4 @@
-.featuredMovie {
+.featuredMedia {
   align-items: center;
   background-position: center;
   background-repeat: no-repeat;
@@ -11,11 +11,11 @@
   }
 }
 
-.featuredMovieGenre {
+.featuredMediaGenre {
   margin-bottom: 1rem;
 }
 
-.featuredMovieInfo {
+.featuredMediaInfo {
   background-image: linear-gradient(to right, rgba(#141414, 1) 20%, transparent);
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   }
 }
 
-.featuredMovieTitle {
+.featuredMediaTitle {
   color: var(--body-text-color);
   font-size: 1.5rem;
   margin: 1vw 0;
@@ -40,7 +40,7 @@
   }
 }
 
-.featuredMovieText {
+.featuredMediaText {
   color: var(--body-text-color);
   font-size: 1rem;
   font-weight: 400;
@@ -53,7 +53,7 @@
   }
 }
 
-.featuredMovieInfoActions {
+.featuredMediaInfoActions {
   display: flex;
   margin-top: 1.5rem;
 

@@ -3,11 +3,11 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 import { IMovie } from '../../@types'
-import { MoviesCarouselArrow } from './MoviesCarouselArrow'
-import { MoviesCarouselCard } from './MoviesCarouselCard'
+import { MediaCarouselArrow } from './MediaCarouselArrow'
+import { MediaCarouselCard } from './MediaCarouselCard'
 import styles from './styles.module.scss'
 
-interface IMoviesCarouselProps {
+interface IMediaCarouselProps {
   title: string
   movies: IMovie[]
 }
@@ -45,7 +45,7 @@ const defaultResponsiveProps = {
   }
 }
 
-const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCarouselProps> = ({ title, movies, ...rest }: IMoviesCarouselProps, ref) => {
+const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarouselProps> = ({ title, movies, ...rest }: IMediaCarouselProps, ref) => {
   const [responsive, setResponsive] = useState({ ...defaultResponsiveProps })
   const [firstLoad, setFirstLoad] = useState(true)
   const sliderRef = useRef(null)
@@ -66,11 +66,11 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
 
   return (
     <div
-      className={`${styles.moviesCarousel} ${firstLoad ? 'carousel-firstload' : ''}`}
-      data-testid="movies-carousel"
+      className={`${styles.mediaCarousel} ${firstLoad ? 'carousel-firstload' : ''}`}
+      data-testid="carousel"
       ref={ref}
     >
-      <h2 className={styles.moviesCarouselTitle}>{title}</h2>
+      <h2 className={styles.mediaCarouselTitle}>{title}</h2>
 
       <Carousel
         ref={sliderRef}
@@ -84,20 +84,20 @@ const MoviesCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMoviesCaro
         // TODO: get dinamicaly (https://stackoverflow.com/questions/67627482/react-multi-carousel-doesnt-do-server-side-render)
         deviceType={'desktop'}
         customLeftArrow={
-          <MoviesCarouselArrow
+          <MediaCarouselArrow
             firstLoad={firstLoad}
             direction="left"
           />
         }
         customRightArrow={
-          <MoviesCarouselArrow direction="right" />
+          <MediaCarouselArrow direction="right" />
         }
         beforeChange={() => scrollCallback()}
       >
-        {movies.map(movie => <MoviesCarouselCard key={movie.id} movie={movie} />)}
+        {movies.map(movie => <MediaCarouselCard key={movie.id} movie={movie} />)}
       </Carousel>
     </div>
   )
 }
 
-export const MoviesCarousel = forwardRef(MoviesCarouselBase)
+export const MediaCarousel = forwardRef(MediaCarouselBase)

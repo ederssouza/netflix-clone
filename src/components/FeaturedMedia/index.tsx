@@ -5,27 +5,27 @@ import { IFeaturedMedia } from '../../@types'
 import { Button } from '../Button'
 import styles from './styles.module.scss'
 
-interface IFeaturedMovieProps {
+interface IFeaturedMediaProps {
   genre?: string
   movie: IFeaturedMedia
 }
 
-export function FeaturedMovie ({ genre, movie }: IFeaturedMovieProps) {
+export function FeaturedMedia ({ genre, movie }: IFeaturedMediaProps) {
   return (
     <div
-      className={styles.featuredMovie}
+      className={styles.featuredMedia}
       style={{ backgroundImage: `url("${movie?.backdrop_path?.original}")` }}
       data-testid="featured-movie"
     >
-      <div className={styles.featuredMovieInfo}>
-        {genre && <h1 className={styles.featuredMovieGenre}>{genre}</h1>}
+      <div className={styles.featuredMediaInfo}>
+        {genre && <h1 className={styles.featuredMediaGenre}>{genre}</h1>}
 
-        <div className={styles.featuredMovieInfoText}>
-          <h1 className={styles.featuredMovieTitle}>{movie.title}</h1>
-          <p className={styles.featuredMovieText}>{movie.overview}</p>
+        <div className={styles.featuredMediaInfoText}>
+          <h1 className={styles.featuredMediaTitle}>{movie.title}</h1>
+          <p className={styles.featuredMediaText}>{movie.overview}</p>
         </div>
 
-        <div className={styles.featuredMovieInfoActions}>
+        <div className={styles.featuredMediaInfoActions}>
           <Button color="primary" icon={<IoMdPlay />}>
             Trailer
           </Button>

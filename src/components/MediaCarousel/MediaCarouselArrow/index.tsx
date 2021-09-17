@@ -1,17 +1,17 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { ArrowProps } from 'react-multi-carousel'
 
-interface IMoviesCarouselArrowProps extends ArrowProps {
+interface IMediaCarouselArrowProps extends ArrowProps {
   direction: 'left' | 'right'
   firstLoad?: boolean
 }
 
-export function MoviesCarouselArrow ({ direction, firstLoad = false, onClick, ...rest }: IMoviesCarouselArrowProps) {
+export function MediaCarouselArrow ({ direction, firstLoad = false, onClick, ...rest }: IMediaCarouselArrowProps) {
   if (direction === 'left') {
     return (
       <div
         className={`carouselArrow carouselArrowLeft ${firstLoad ? 'carouselArrow-hidden' : ''}`}
-        data-testid="movies-carousel-arrow"
+        data-testid="carousel-arrow"
         onClick={() => !firstLoad && onClick()}
       >
         {!firstLoad && <MdKeyboardArrowLeft />}
@@ -22,7 +22,7 @@ export function MoviesCarouselArrow ({ direction, firstLoad = false, onClick, ..
   return (
     <div
       className="carouselArrow carouselArrowRight"
-      data-testid="movies-carousel-arrow"
+      data-testid="carousel-arrow"
       onClick={() => onClick()}
     >
       <MdKeyboardArrowRight />

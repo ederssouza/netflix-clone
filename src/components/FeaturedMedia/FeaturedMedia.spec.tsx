@@ -1,23 +1,23 @@
 import { render, screen } from '@testing-library/react'
 
-import { FeaturedMovie } from '.'
+import { FeaturedMedia } from '.'
 import { movies } from '../../tests/mocks/tmdb'
 
 const movieMock = movies[0]
 
-describe('FeaturedMovie component', () => {
+describe('FeaturedMedia component', () => {
   it('should render with success', async () => {
-    render(<FeaturedMovie genre="Drama" movie={movieMock} />)
+    render(<FeaturedMedia genre="Drama" movie={movieMock} />)
 
-    const $featuredMovie = screen.getByTestId('featured-movie')
+    const $featuredMedia = screen.getByTestId('featured-movie')
 
     expect(screen.getByText(movieMock.title)).toBeInTheDocument()
     expect(screen.getByText('Drama')).toBeInTheDocument()
-    expect($featuredMovie).toHaveAttribute('style', `background-image: url(${movieMock.backdrop_path.original});`)
+    expect($featuredMedia).toHaveAttribute('style', `background-image: url(${movieMock.backdrop_path.original});`)
   })
 
   it('should have a href valid attribute', () => {
-    render(<FeaturedMovie movie={movieMock} />)
+    render(<FeaturedMedia movie={movieMock} />)
 
     const $moreDetailsButton = screen.getByTestId('more-details-button')
 
