@@ -20,4 +20,11 @@ list-style-type: none;
     display: inline-block;
     margin-right: 0.25rem;
   }
+
+  a {
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
