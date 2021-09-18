@@ -12,7 +12,7 @@ describe('FeaturedMedia component', () => {
     const $featuredMedia = screen.getByTestId('featured-media')
 
     expect(screen.getByText(mediaMock.title)).toBeInTheDocument()
-    expect(screen.getByText('Drama')).toBeInTheDocument()
+    expect(screen.getByText(/Drama/)).toBeInTheDocument()
     expect($featuredMedia).toHaveAttribute('style', `background-image: url(${mediaMock.backdrop_path.original});`)
   })
 
