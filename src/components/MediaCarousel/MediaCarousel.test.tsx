@@ -8,18 +8,21 @@ describe('MediaCarousel component', () => {
     render(<MediaCarousel title="Adventure" mediaList={mediaList} />)
 
     const $mediaCarousel = screen.getByTestId('carousel')
+    const $mediaCarouselItems = $mediaCarousel.querySelectorAll('.react-multi-carousel-item')
 
     expect(screen.getByText('Adventure')).toBeInTheDocument()
-    expect($mediaCarousel.querySelectorAll('.react-multi-carousel-item').length).toBeGreaterThanOrEqual(mediaList.length)
+    expect($mediaCarouselItems.length).toBeGreaterThanOrEqual(mediaList.length)
   })
 
   it('should render with `carousel-firstload` CSS class on first load', () => {
     render(<MediaCarousel title="Adventure" mediaList={mediaList} />)
+
     const $mediaCarousel = screen.getByTestId('carousel')
+
     expect($mediaCarousel).toHaveClass('carousel-firstload')
   })
 
-  it('should render with out `carousel-firstload` CSS class on click right arrow', () => {
+  it('should render without `carousel-firstload` CSS class on click right arrow', () => {
     render(<MediaCarousel title="Adventure" mediaList={mediaList} />)
 
     const $mediaCarousel = screen.getByTestId('carousel')
