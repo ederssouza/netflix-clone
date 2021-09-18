@@ -18,7 +18,7 @@ export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
       data-testid="featured-media"
     >
       <div className={styles.featuredMediaInfo}>
-        {genre && <h1 className={styles.featuredMediaGenre}>{genre}</h1>}
+        {genre && <h1 className={styles.featuredMediaGenre}>Gênero: {genre}</h1>}
 
         <div className={styles.featuredMediaInfoText}>
           <h1 className={styles.featuredMediaTitle}>{media.title}</h1>
