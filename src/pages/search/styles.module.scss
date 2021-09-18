@@ -1,8 +1,8 @@
 .container {
-  padding: 100px 20px 0;
+  padding: 40px 20px 0;
 
   @media (min-width: 885px) {
-    padding: 120px 60px 0;
+    padding: 60px 60px 0;
   }
 }
 
@@ -33,5 +33,21 @@
 
   @media (min-width: 1400px) {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.emptyState {}
+
+.emptyStateSubtitle {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.emptyStateList {
+  list-style-position: inside;
+  font-size: 0.875rem;
+
+  li {
+    margin: 0.25rem;
   }
 }
