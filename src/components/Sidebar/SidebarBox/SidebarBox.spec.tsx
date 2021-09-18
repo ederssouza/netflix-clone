@@ -12,6 +12,7 @@ describe('SidebarBox component', () => {
     render(<SidebarBox title="Adventure" mediaType="drama" items={genresMock} />)
 
     const $sidebarBoxShowMore = screen.getByTestId('sidebar-box-show-more')
+
     fireEvent.click($sidebarBoxShowMore)
   })
 
@@ -19,6 +20,7 @@ describe('SidebarBox component', () => {
     render(<SidebarBox title="Adventure" mediaType="drama" items={genresMock} />)
 
     const $sidebarBoxShowMore = screen.getByTestId('sidebar-box-show-more')
+
     fireEvent.click($sidebarBoxShowMore)
     fireEvent.click($sidebarBoxShowMore)
   })
