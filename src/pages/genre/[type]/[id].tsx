@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { IGenres, IMedia } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
+import { EmptyState } from '../../../components/EmptyState'
 import { FeaturedMedia } from '../../../components/FeaturedMedia'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
@@ -98,9 +99,10 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         </div>
 
         {statusRequest === 'error' && (
-          <div className={styles.container}>
-            <h1>Ocorreu um erro</h1>
-          </div>
+          <EmptyState
+            title="Ops... Ocorreu um erro"
+            text="Por favor, tente novamente mais tarde."
+          />
         )}
       </main>
 
