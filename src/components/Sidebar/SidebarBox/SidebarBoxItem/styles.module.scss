@@ -1,0 +1,37 @@
+.sidebarBox {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+
+  @media (min-width: 885px) {
+    padding-top: 0;
+  }
+}
+
+.sidebarBoxTitle {
+  color: var(--gray-text-color)
+}
+
+.sidebarBoxItem {
+  display: inline-block;
+  margin-right: 0.25rem;
+
+  a {
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.sidebarBoxListShowMore {
+  color: var(--gray-text-color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8125rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
