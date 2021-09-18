@@ -16,12 +16,12 @@ interface ISectionsProps {
   mediaList: IMedia[]
 }
 
-interface IHomeProps {
+interface ITVProps {
   featured: IMedia
   sections: ISectionsProps[]
 }
 
-export default function Tv ({ featured, sections }: IHomeProps) {
+export default function TV ({ featured, sections }: ITVProps) {
   return (
     <>
       <Head>
@@ -51,7 +51,14 @@ export default function Tv ({ featured, sections }: IHomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const [actionResponse, crimeResponse, dramaResponse, familyResponse, misteryResponse, westernResponse] = await Promise.all([
+    const [
+      actionResponse,
+      crimeResponse,
+      dramaResponse,
+      familyResponse,
+      misteryResponse,
+      westernResponse
+    ] = await Promise.all([
       tmdbService.getGenreById({ type: 'tv', id: '10759', page: 1 }),
       tmdbService.getGenreById({ type: 'tv', id: '80', page: 1 }),
       tmdbService.getGenreById({ type: 'tv', id: '18', page: 2 }),
@@ -66,7 +73,6 @@ export const getStaticProps: GetStaticProps = async () => {
     const family = normalizeMediaSectionList(familyResponse?.data?.results, 'tv')
     const mistery = normalizeMediaSectionList(misteryResponse?.data?.results, 'tv')
     const western = normalizeMediaSectionList(westernResponse?.data?.results, 'tv')
-
     const totalMediaPerPage = actionResponse?.data?.results?.length
 
     const sections = [
