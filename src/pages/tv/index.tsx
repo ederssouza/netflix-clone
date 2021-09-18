@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const totalMediaPerPage = actionResponse?.data?.results?.length
 
     const sections = [
-      { title: 'Action & Adventure', mediaList: [...action] },
+      { title: 'Ação e Aventura', mediaList: [...action] },
       { title: 'Crime', mediaList: [...crime] },
       { title: 'Drama', mediaList: [...drama] },
       { title: 'Família', mediaList: [...family] },
