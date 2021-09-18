@@ -16,12 +16,12 @@ interface ISectionsProps {
   mediaList: IMedia[]
 }
 
-interface IHomeProps {
+interface IMoviesProps {
   featured: IMedia
   sections: ISectionsProps[]
 }
 
-export default function Movies ({ featured, sections }: IHomeProps) {
+export default function Movies ({ featured, sections }: IMoviesProps) {
   return (
     <>
       <Head>
