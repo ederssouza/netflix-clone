@@ -7,17 +7,15 @@ import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import styles from './styles.module.scss'
 
-interface IInternalErrorProps {
+interface IPageInternalErrorProps {
   statusCode?: string
 }
 
-export default function PageInternalError ({ statusCode }: IInternalErrorProps) {
+export default function PagePageInternalError ({ statusCode }: IPageInternalErrorProps) {
   return (
     <>
       <Head>
-        <title>Início | Netflix</title>
-        <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
+        <title>Netflix</title>
       </Head>
 
       <main>

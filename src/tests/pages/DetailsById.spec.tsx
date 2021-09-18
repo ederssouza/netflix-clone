@@ -3,11 +3,11 @@ import { mocked } from 'ts-jest/utils'
 
 import DetailsById, { getServerSideProps } from '../../pages/details/[type]/[id]'
 import { tmdbService } from '../../services/tmdb'
-import { castMock, movies, providersMock, providersResponseMock } from '../mocks/tmdb'
+import { castMock, mediaList, providersMock, providersResponseMock } from '../mocks/tmdb'
 
 jest.mock('../../services/tmdb')
 
-const movieMock = movies[0]
+const mediaMock = mediaList[0]
 
 afterEach(() => {
   jest.clearAllMocks()
@@ -15,8 +15,19 @@ afterEach(() => {
 
 describe('DetailsById page component', () => {
   it('should render with success', () => {
-    render(<DetailsById movie={movieMock} providers={providersMock} cast={castMock} />)
-    expect(screen.getByText(new RegExp(movieMock.title))).toBeInTheDocument()
+    render(<DetailsById media={mediaMock} providers={providersMock} cast={castMock} />)
+    expect(screen.getByText(new RegExp(mediaMock.title))).toBeInTheDocument()
+  })
+
+  it('should render default text when not receive overview', () => {
+    render(
+      <DetailsById
+        media={{ ...mediaMock, overview: null }}
+        providers={providersMock}
+        cast={castMock}
+      />
+    )
+    expect(screen.getByText('Nenhum resumo disponível')).toBeInTheDocument()
   })
 
   it('should render movie data when receive `id` URL param', async () => {
@@ -25,7 +36,7 @@ describe('DetailsById page component', () => {
     const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     } as any)
 
     getWatchProvidersByIdMocked.mockReturnValueOnce({
@@ -42,7 +53,7 @@ describe('DetailsById page component', () => {
 
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     })
 
     expect(getWatchProvidersByIdMocked).toHaveBeenCalledTimes(1)
@@ -62,7 +73,7 @@ describe('DetailsById page component', () => {
     const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     } as any)
 
     getWatchProvidersByIdMocked.mockReturnValueOnce({} as any)
@@ -75,11 +86,11 @@ describe('DetailsById page component', () => {
       params: { type: 'movie', id: 10 }
     } as any)
 
-    const { container } = render(<DetailsById movie={movieMock} providers={[]} cast={castMock} />)
+    const { container } = render(<DetailsById media={mediaMock} providers={[]} cast={castMock} />)
 
     expect(getDetailsByIdMocked).toBeCalled()
     expect(getDetailsByIdMocked).toHaveReturnedWith({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     })
 
     expect(getWatchProvidersByIdMocked).toBeCalledTimes(1)
@@ -99,7 +110,7 @@ describe('DetailsById page component', () => {
     const getCreditsByIdMocked = mocked(tmdbService.getCreditsById)
 
     getDetailsByIdMocked.mockReturnValueOnce({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     } as any)
 
     getWatchProvidersByIdMocked.mockReturnValueOnce({
@@ -112,11 +123,11 @@ describe('DetailsById page component', () => {
       params: { type: 'movie', id: 10 }
     } as any)
 
-    const { container } = render(<DetailsById movie={movieMock} providers={providersMock} cast={[]} />)
+    const { container } = render(<DetailsById media={mediaMock} providers={providersMock} cast={[]} />)
 
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
-      data: { ...movieMock }
+      data: { ...mediaMock }
     })
 
     expect(getWatchProvidersByIdMocked).toHaveBeenCalledTimes(1)
@@ -142,10 +153,7 @@ describe('DetailsById page component', () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        redirect: expect.objectContaining({
-          permanent: false,
-          destination: '/NotFound'
-        })
+        notFound: true
       })
     )
   })

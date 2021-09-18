@@ -2,16 +2,17 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
-import { IGenres, IMovie } from '../../../@types'
+import { IGenres, IMedia } from '../../../@types'
 import { CardsSkeletonLoader } from '../../../components/CardsSkeletonLoader'
-import { FeaturedMovie } from '../../../components/FeaturedMovie'
+import { EmptyState } from '../../../components/EmptyState'
+import { FeaturedMedia } from '../../../components/FeaturedMedia'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
-import { MoviesCarouselCard } from '../../../components/MoviesCarousel/MoviesCarouselCard'
-import { MoviesContainer } from '../../../components/MoviesContainer'
+import { MediaCarouselCard } from '../../../components/MediaCarousel/MediaCarouselCard'
+import { MediaContainer } from '../../../components/MediaContainer'
 import { useOnScreen } from '../../../hooks/useOnScreen'
 import { tmdbService } from '../../../services/tmdb'
-import { normalizeMoviePayload } from '../../../utils/functions'
+import { normalizeMediaPayload } from '../../../utils/functions'
 import styles from './styles.module.scss'
 
 interface IGenreByIdProps {
@@ -22,7 +23,7 @@ interface IGenreByIdProps {
 
 export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   const [currentPage, setCurrentPage] = useState(1)
-  const [movies, setMovies] = useState([])
+  const [mediaList, setMediaList] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
@@ -32,10 +33,11 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
     const fetchData = async () => {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
-        const res = await tmdbService.getGenreById({ type, id, page: currentPage })
-        const movies = res.data.results.map((movie: IMovie) => normalizeMoviePayload(movie))
 
-        setMovies((oldMovies) => [...oldMovies, ...movies.slice(0, 18)])
+        const res = await tmdbService.getGenreById({ type, id, page: currentPage })
+        const results = res.data.results.map((media: IMedia) => normalizeMediaPayload(media))
+
+        setMediaList((oldMediaList) => [...oldMediaList, ...results.slice(0, 18)])
         setHasMore(currentPage <= res.data.total_pages)
         setTimeout(() => setStatusRequest('success'), 500)
       } catch (error) {
@@ -55,9 +57,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   return (
     <>
       <Head>
-        <title>Busca | Netflix</title>
-        <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
+        <title>{genre} | Netflix</title>
       </Head>
 
       <main>
@@ -66,25 +66,25 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         <div>
           {(statusRequest === 'success' || statusRequest === 'loadmore') && (
             <>
-              {movies.length && (
-                <FeaturedMovie
+              {mediaList.length > 0 && (
+                <FeaturedMedia
                   genre={genre}
-                  movie={{ ...movies[4], media_type: type }}
+                  media={{ ...mediaList[4], media_type: type }}
                 />
               )}
 
-              <MoviesContainer>
+              <MediaContainer>
                 <div className={styles.container}>
                   <div className={styles.grid}>
-                    {movies.map((movie, index) => (
-                      <MoviesCarouselCard
-                        key={`${movie.id}${index}`}
-                        movie={{ ...movie, media_type: type }}
+                    {mediaList.map((media, index) => (
+                      <MediaCarouselCard
+                        key={`${media.id}${index}`}
+                        media={{ ...media, media_type: type }}
                       />
                     ))}
                   </div>
                 </div>
-              </MoviesContainer>
+              </MediaContainer>
             </>
           )}
 
@@ -99,15 +99,18 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         </div>
 
         {statusRequest === 'error' && (
-          <div className={styles.container}>
-            <h1>Ocorreu um erro</h1>
-          </div>
+          <EmptyState
+            title="Ops... Ocorreu um erro"
+            text="Por favor, tente novamente mais tarde."
+          />
         )}
       </main>
 
-      <div ref={footerRef}>
-        <Footer />
-      </div>
+      {mediaList?.length > 0 && statusRequest !== 'loading' && statusRequest !== 'loadmore' && (
+        <div ref={footerRef}>
+          <Footer />
+        </div>
+      )}
     </>
   )
 }
@@ -143,10 +146,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     if (statusCode === 404) {
       return {
-        redirect: {
-          permanent: false,
-          destination: '/NotFound'
-        }
+        notFound: true
       }
     }
 

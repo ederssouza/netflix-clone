@@ -3,7 +3,7 @@ import { mocked } from 'ts-jest/utils'
 
 import Genre, { getServerSideProps } from '../../pages/genre/[type]/[id]'
 import { tmdbService } from '../../services/tmdb'
-import { movies, genresMock } from '../mocks/tmdb'
+import { mediaList, genresMock } from '../mocks/tmdb'
 import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
 jest.mock('../../services/tmdb')
@@ -36,17 +36,17 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
 
-    render(<Genre genre="Drama" type="movie" id="18" />)
+    render(<Genre genre="Adventure" type="movie" id="18" />)
 
     expect(response).toEqual(
       expect.objectContaining({
         props: expect.objectContaining({
-          genre: 'Drama',
+          genre: 'Adventure',
           type: 'movie',
           id: '18'
         })
@@ -54,7 +54,7 @@ describe('Search page component', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText(/Drama/)).toBeInTheDocument()
+      expect(screen.getByText(/Adventure/)).toBeInTheDocument()
     }, { timeout: 1000 })
 
     act(() => jest.advanceTimersByTime(500))
@@ -62,7 +62,7 @@ describe('Search page component', () => {
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     })
@@ -90,7 +90,7 @@ describe('Search page component', () => {
     render(<Genre genre="Drama" type="movie" id="18" />)
 
     await waitFor(() => {
-      expect(screen.getByText('Ocorreu um erro')).toBeInTheDocument()
+      expect(screen.getByText('Ops... Ocorreu um erro')).toBeInTheDocument()
     }, { timeout: 1000 })
   })
 
@@ -113,17 +113,17 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
 
-    render(<Genre genre="Drama" type="movie" id="18" />)
+    render(<Genre genre="Adventure" type="movie" id="18" />)
 
     expect(response).toEqual(
       expect.objectContaining({
         props: expect.objectContaining({
-          genre: 'Drama',
+          genre: 'Adventure',
           type: 'movie',
           id: '18'
         })
@@ -133,7 +133,7 @@ describe('Search page component', () => {
     await waitFor(() => {
       expect(getDetailsByIdMocked).toHaveReturnedWith({
         data: {
-          results: [...movies.slice(0, 2)],
+          results: [...mediaList.slice(0, 2)],
           total_pages: 10
         }
       })
@@ -176,10 +176,7 @@ describe('Search page component', () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        redirect: expect.objectContaining({
-          permanent: false,
-          destination: '/NotFound'
-        })
+        notFound: true
       })
     )
   })

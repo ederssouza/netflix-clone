@@ -1,23 +1,23 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { IMovie } from '../@types'
-import { FeaturedMovie } from '../components/FeaturedMovie'
+import { IFeaturedMedia, IMedia } from '../@types'
+import { FeaturedMedia } from '../components/FeaturedMedia'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
-import { MoviesCarousel } from '../components/MoviesCarousel'
-import { MoviesContainer } from '../components/MoviesContainer'
+import { MediaCarousel } from '../components/MediaCarousel'
+import { MediaContainer } from '../components/MediaContainer'
 import { tmdbService } from '../services/tmdb'
 import { normalizeMediaSectionList } from '../utils/functions'
 import styles from './home.module.scss'
 
 interface ISectionsProps {
   title: string
-  movies: IMovie[]
+  mediaList: IMedia[]
 }
 
 interface IHomeProps {
-  featured: IMovie
+  featured: IFeaturedMedia
   sections: ISectionsProps[]
 }
 
@@ -26,23 +26,21 @@ export default function Home ({ featured, sections }: IHomeProps) {
     <>
       <Head>
         <title>Início | Netflix</title>
-        <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
       </Head>
 
       <main className={styles.container}>
         <Header />
-        <FeaturedMovie movie={featured} />
+        <FeaturedMedia media={featured} />
 
-        <MoviesContainer>
+        <MediaContainer>
           {sections.map(section => (
-            <MoviesCarousel
+            <MediaCarousel
               key={section.title}
               title={section.title}
-              movies={section.movies}
+              mediaList={section.mediaList}
             />
           ))}
-        </MoviesContainer>
+        </MediaContainer>
 
         <Footer />
       </main>
@@ -77,34 +75,31 @@ export const getStaticProps: GetStaticProps = async () => {
     const totalMediaPerPage = netflixResponse?.data?.results?.length
 
     const sections = [
-      { title: 'Populares Netflix', movies: [...netflix] },
-      { title: 'Em alta', movies: [...topRated] },
-      { title: 'Ação', movies: [...action] },
-      { title: 'Aventura', movies: [...adventure] },
-      { title: 'Comédia', movies: [...comedy] },
-      { title: 'Documentário', movies: [...documentaries] }
+      { title: 'Populares Netflix', mediaList: [...netflix] },
+      { title: 'Em alta', mediaList: [...topRated] },
+      { title: 'Ação', mediaList: [...action] },
+      { title: 'Aventura', mediaList: [...adventure] },
+      { title: 'Comédia', mediaList: [...comedy] },
+      { title: 'Documentário', mediaList: [...documentaries] }
     ]
 
-    const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
-    const movieIndexAleatory = Math.floor(Math.random() * totalMediaPerPage)
-    const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
+    const sectionAleatoryIndex = Math.floor(Math.random() * sections.length)
+    const mediaAleatoryIndex = Math.floor(Math.random() * totalMediaPerPage)
+    const featured = sections[sectionAleatoryIndex].mediaList[mediaAleatoryIndex]
 
     return {
       props: {
         featured,
         sections
       },
-      revalidate: 60 * 60 * 0.5 // seconds * minutes * hours = 30 minutes
+      revalidate: 60 * 30 // 30 minutes
     }
   } catch (error) {
     const statusCode = error?.response?.status
 
     if (statusCode === 404) {
       return {
-        redirect: {
-          permanent: false,
-          destination: '/NotFound'
-        }
+        notFound: true
       }
     }
 

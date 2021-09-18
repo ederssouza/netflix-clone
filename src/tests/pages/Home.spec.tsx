@@ -42,12 +42,12 @@ beforeEach(() => {
 
 describe('Home page component', () => {
   it('should render with success', async () => {
-    const netflixResponseMocked = mocked(tmdbService.getNetflixList)
-    const trendingsResponseMocked = mocked(tmdbService.getTrendings)
-    const actionResponseMocked = mocked(tmdbService.getGenreById)
-    const adventureResponseMocked = mocked(tmdbService.getGenreById)
-    const comedyResponseMocked = mocked(tmdbService.getGenreById)
-    const documentariesResponseMocked = mocked(tmdbService.getGenreById)
+    const mediaList1Mock = mocked(tmdbService.getNetflixList)
+    const mediaList2Mock = mocked(tmdbService.getTrendings)
+    const mediaList3Mock = mocked(tmdbService.getGenreById)
+    const mediaList4Mock = mocked(tmdbService.getGenreById)
+    const mediaList5Mock = mocked(tmdbService.getGenreById)
+    const mediaList6Mock = mocked(tmdbService.getGenreById)
     const defaultResponse = {
       data: {
         page: 1,
@@ -57,26 +57,26 @@ describe('Home page component', () => {
       }
     }
 
-    netflixResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    trendingsResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    actionResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    adventureResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    comedyResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
-    documentariesResponseMocked.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList1Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList2Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList3Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList4Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList5Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList6Mock.mockReturnValueOnce({ ...defaultResponse } as any)
 
     const response = await getStaticProps({} as any)
     const sections = [
-      { title: 'Populares Netflix', movies: [...tvListNormalizedMock] },
-      { title: 'Em alta', movies: [...tvListNormalizedMock] },
-      { title: 'Ação', movies: [...movieListNormalizedMock] },
-      { title: 'Aventura', movies: [...movieListNormalizedMock] },
-      { title: 'Comédia', movies: [...movieListNormalizedMock] },
-      { title: 'Documentário', movies: [...tvListNormalizedMock] }
+      { title: 'Populares Netflix', mediaList: [...tvListNormalizedMock] },
+      { title: 'Em alta', mediaList: [...tvListNormalizedMock] },
+      { title: 'Ação', mediaList: [...movieListNormalizedMock] },
+      { title: 'Aventura', mediaList: [...movieListNormalizedMock] },
+      { title: 'Comédia', mediaList: [...movieListNormalizedMock] },
+      { title: 'Documentário', mediaList: [...tvListNormalizedMock] }
     ]
 
     const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
-    const movieIndexAleatory = Math.floor(Math.random() * sections[0].movies.length)
-    const featured = sections[sectionIndexAleatory].movies[movieIndexAleatory]
+    const mediaIndexAleatory = Math.floor(Math.random() * sections[0].mediaList.length)
+    const featured = sections[sectionIndexAleatory].mediaList[mediaIndexAleatory]
 
     render(<Home featured={featured} sections={sections} />)
 
@@ -101,10 +101,7 @@ describe('Home page component', () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        redirect: expect.objectContaining({
-          permanent: false,
-          destination: '/NotFound'
-        })
+        notFound: true
       })
     )
   })

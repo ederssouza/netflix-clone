@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
 
-import DetailsType, { getServerSideProps } from '../../pages/details/[type]'
+import GenreType, { getServerSideProps } from '../../pages/genre/[type]'
 
-describe('Details page component', () => {
+describe('GenreType page component', () => {
   it('should redirect to home when URL does not have `id` param', async () => {
     const response = await getServerSideProps({} as any)
 
-    render(<DetailsType />)
+    render(<GenreType />)
 
     expect(response).toEqual(
       expect.objectContaining({

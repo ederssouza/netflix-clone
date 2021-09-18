@@ -22,7 +22,12 @@ A simple Netflix clone with React JS and Next.js
 
 ### API integration
 
-- [ ] Home page
+- [x] Home page
 - [ ] Genres page
 - [x] Search page
 - [x] Detail page
+
+### Fix
+
+- [ ] Change to getStaticProps => pages > return null
+- [ ] Implement component: <h1>Ocorreu um erro</h1>

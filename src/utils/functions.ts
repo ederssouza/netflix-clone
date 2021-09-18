@@ -1,5 +1,9 @@
 import { TMDB_BASE_URL_IMAGE } from '../services/tmdb'
 
+const renderURIImage = (backdrop_path: string, size = 'original') => backdrop_path
+  ? `${TMDB_BASE_URL_IMAGE}/${size}${backdrop_path}`
+  : '/assets/img/banner.jpeg'
+
 export function timeConvert (num: number) {
   if (!num) return null
 
@@ -7,6 +11,7 @@ export function timeConvert (num: number) {
   const minutes = num % 60
   const hoursStr = hours ? `${hours}h` : ''
   const minutesStr = minutes ? ` ${minutes}m` : ''
+
   return hoursStr + minutesStr
 }
 
@@ -14,12 +19,8 @@ export function isValidArray (value: any) {
   return Array.isArray(value) && value.length
 }
 
-export function normalizeMoviePayload (data: any) {
+export function normalizeMediaDetailsPayload (data: any) {
   if (!data) return {}
-
-  const renderURIImage = (size = 'original') => data?.backdrop_path
-    ? `${TMDB_BASE_URL_IMAGE}/${size}${data.backdrop_path}`
-    : '/assets/img/banner.jpeg'
 
   const release_date = data?.release_date || data?.first_air_date
   const original_language = data?.original_language || (data?.episode_run_time?.length ? data?.episode_run_time[0] : null)
@@ -29,12 +30,12 @@ export function normalizeMoviePayload (data: any) {
     id: data?.id,
     media_type: data?.media_type,
     title: data?.title || data?.name,
-    overview: data?.overview || 'Nenhum resumo disponível',
+    overview: data?.overview || null,
     backdrop_path: {
-      w300: renderURIImage('w300'),
-      w780: renderURIImage('w780'),
-      w1280: renderURIImage('w1280'),
-      original: renderURIImage('original')
+      w300: renderURIImage(data.backdrop_path, 'w300'),
+      w780: renderURIImage(data.backdrop_path, 'w780'),
+      w1280: renderURIImage(data.backdrop_path, 'w1280'),
+      original: renderURIImage(data.backdrop_path, 'original')
     },
     vote_average: data?.vote_average,
     release_date: release_date ? new Date(release_date).getFullYear() : null,
@@ -47,19 +48,15 @@ export function normalizeMoviePayload (data: any) {
 export function normalizeMediaPayload (data: any) {
   if (!data) return {}
 
-  const renderURIImage = (size = 'original') => data?.backdrop_path
-    ? `${TMDB_BASE_URL_IMAGE}/${size}${data.backdrop_path}`
-    : '/assets/img/banner.jpeg'
-
   return {
     id: data?.id,
     title: data?.title || data?.name,
-    overview: data?.overview || 'Nenhum resumo disponível',
+    overview: data?.overview || null,
     backdrop_path: {
-      w300: renderURIImage('w300'),
-      w780: renderURIImage('w780'),
-      w1280: renderURIImage('w1280'),
-      original: renderURIImage('original')
+      w300: renderURIImage(data.backdrop_path, 'w300'),
+      w780: renderURIImage(data.backdrop_path, 'w780'),
+      w1280: renderURIImage(data.backdrop_path, 'w1280'),
+      original: renderURIImage(data.backdrop_path, 'original')
     },
     media_type: data?.media_type,
     vote_average: data?.vote_average
