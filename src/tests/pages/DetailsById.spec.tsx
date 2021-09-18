@@ -19,6 +19,17 @@ describe('DetailsById page component', () => {
     expect(screen.getByText(new RegExp(mediaMock.title))).toBeInTheDocument()
   })
 
+  it('should render default text when not receive overview', () => {
+    render(
+      <DetailsById
+        media={{ ...mediaMock, overview: null }}
+        providers={providersMock}
+        cast={castMock}
+      />
+    )
+    expect(screen.getByText('Nenhum resumo disponível')).toBeInTheDocument()
+  })
+
   it('should render movie data when receive `id` URL param', async () => {
     const getDetailsByIdMocked = mocked(tmdbService.getDetailsById)
     const getWatchProvidersByIdMocked = mocked(tmdbService.getWatchProvidersById)
