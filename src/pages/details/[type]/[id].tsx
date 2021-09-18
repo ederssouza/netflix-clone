@@ -2,10 +2,10 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 import { ICast, IMedia, IProvider } from '../../../@types'
-import { Banner } from '../../../components/Banner'
 import { Details } from '../../../components/Details'
 import { Footer } from '../../../components/Footer'
 import { Header } from '../../../components/Header'
+import { MediaBanner } from '../../../components/MediaBanner'
 import { Sidebar } from '../../../components/Sidebar'
 import { tmdbService } from '../../../services/tmdb'
 import { normalizeMediaDetailsPayload } from '../../../utils/functions'
@@ -28,7 +28,7 @@ export default function DetailsById ({ media, cast, providers }: IDetailsProps) 
       <div data-testid="details">
         <Header />
 
-        <Banner media={media} />
+        <MediaBanner media={media} />
 
         <section>
           <div className={styles.container}>

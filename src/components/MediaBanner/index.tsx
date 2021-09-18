@@ -1,15 +1,12 @@
-import { IoMdPlay } from 'react-icons/io'
-
 import { IMedia } from '../../@types'
-import { Button } from '../Button'
 import { ProgressChart } from '../ProgressChart'
 import styles from './styles.module.scss'
 
-interface IBannerProps {
+interface IMediaBannerProps {
   media: Omit<IMedia, 'overview'>
 }
 
-export function Banner ({ media }: IBannerProps) {
+export function MediaBanner ({ media }: IMediaBannerProps) {
   return (
     <section
       className={styles.banner}
@@ -33,10 +30,6 @@ export function Banner ({ media }: IBannerProps) {
                 {media?.runtime && media.runtime}
               </span>
             </div>
-
-            <Button color="primary" icon={<IoMdPlay />}>
-              Trailer
-            </Button>
           </div>
         </div>
       </div>
