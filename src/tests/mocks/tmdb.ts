@@ -58,7 +58,11 @@ export const castMock = [
 ]
 
 export const genresMock = [
-  { id: 10759, name: 'Ação e Aventura' },
-  { id: 18, name: 'Drama' },
-  { id: 10765, name: 'Sci-Fi & Fantasy' }
+  { id: 10759, name: 'Action' },
+  { id: 18, name: 'Adventure' },
+  { id: 10765, name: 'Animation' },
+  { id: 10766, name: 'Comedy' },
+  { id: 10767, name: 'Crime' },
+  { id: 10768, name: 'Documentary' },
+  { id: 10769, name: 'Drama' }
 ]
