@@ -30,7 +30,7 @@ export function normalizeMediaDetailsPayload (data: any) {
     id: data?.id,
     media_type: data?.media_type,
     title: data?.title || data?.name,
-    overview: data?.overview || 'Nenhum resumo disponível',
+    overview: data?.overview || null,
     backdrop_path: {
       w300: renderURIImage(data.backdrop_path, 'w300'),
       w780: renderURIImage(data.backdrop_path, 'w780'),
@@ -51,7 +51,7 @@ export function normalizeMediaPayload (data: any) {
   return {
     id: data?.id,
     title: data?.title || data?.name,
-    overview: data?.overview || 'Nenhum resumo disponível',
+    overview: data?.overview || null,
     backdrop_path: {
       w300: renderURIImage(data.backdrop_path, 'w300'),
       w780: renderURIImage(data.backdrop_path, 'w780'),
