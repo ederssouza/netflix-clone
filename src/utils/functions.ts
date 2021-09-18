@@ -11,6 +11,7 @@ export function timeConvert (num: number) {
   const minutes = num % 60
   const hoursStr = hours ? `${hours}h` : ''
   const minutesStr = minutes ? ` ${minutes}m` : ''
+
   return hoursStr + minutesStr
 }
 
