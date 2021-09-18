@@ -42,11 +42,16 @@
 
 .featuredMediaText {
   color: var(--body-text-color);
+  display: -webkit-box;
   font-size: 1rem;
   font-weight: 400;
   line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
   width: 100%;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 
   @media (min-width: 885px) {
     font-size: 1.25rem;
