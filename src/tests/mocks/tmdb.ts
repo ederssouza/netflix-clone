@@ -1,3 +1,16 @@
+const getVoteAverage = (index) => {
+  switch (index) {
+    case 0:
+      return 6.1
+
+    case 1:
+      return 7.1
+
+    default:
+      return 8.1
+  }
+}
+
 export const mediaList = Array.from({ length: 20 }).map((_, index) => {
   return {
     id: 1402 + index,
@@ -10,7 +23,7 @@ export const mediaList = Array.from({ length: 20 }).map((_, index) => {
       w1280: 'https://image.tmdb.org/t/p/w1280/wvdWb5kTQipdMDqCclC6Y3zr4j3.jpg',
       original: 'https://image.tmdb.org/t/p/original/wvdWb5kTQipdMDqCclC6Y3zr4j3.jpg'
     },
-    vote_average: 8.1,
+    vote_average: getVoteAverage(index),
     release_date: '2010',
     original_language: 'EN',
     runtime: 60,
