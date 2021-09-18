@@ -20,7 +20,7 @@ export interface IMedia {
   id: number
   media_type: string
   title: string
-  overview: string
+  overview?: string
   backdrop_path: {
     w300: string
     w780: string
