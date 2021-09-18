@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { IoMdPlay } from 'react-icons/io'
+import { useEffect, useState } from 'react'
 import { TiInfoLarge } from 'react-icons/ti'
 
 import { IMedia } from '../../../@types'
@@ -10,6 +10,8 @@ interface IMediaCarouselCardProps {
 }
 
 export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
+  const [relevantColor, setRelevantColor] = useState('')
+
   function handleMouseEnter (e) {
     const $carousel = e.target.closest('.react-multi-carousel-track')
     const $carouselActiveItems = $carousel.querySelectorAll('.react-multi-carousel-item--active')
@@ -30,6 +32,15 @@ export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
     }
   }
 
+  useEffect(() => {
+    let color = 'mediaCarouselCardRelevantGreen'
+
+    if (media.vote_average < 6) color = 'mediaCarouselCardRelevantRed'
+    if (media.vote_average >= 6 && media.vote_average < 7) color = 'mediaCarouselCardRelevantYellow'
+
+    setRelevantColor(color)
+  }, [media.vote_average])
+
   return (
     <div
       className={styles.mediaCarouselCard}
@@ -38,27 +49,25 @@ export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
     >
       <img src={media.backdrop_path.w300} alt={media.title} />
 
-      <div className={styles.mediaCarouselCardDetails}>
+      <div className={styles.mediaCarouselCardContent}>
         <h2 className={styles.mediaCarouselCardTitle}>{media.title}</h2>
 
-        <ul className={styles.mediaCarouselCardActions}>
-          <li className={styles.mediaCarouselCardActionActiveItem}>
-            <a href="#" title=""><IoMdPlay /></a>
-          </li>
+        <div className={styles.mediaCarouselDetails}>
+          <ul className={styles.mediaCarouselCardActions}>
+            <li
+              className={styles.mediaCarouselCardActionItem}
+              data-testid="carousel-more-details"
+            >
+              <Link href={`/details/${media.media_type}/${media.id}`} passHref>
+                <a title="Ver mais detalhes"><TiInfoLarge /></a>
+              </Link>
+            </li>
+          </ul>
 
-          <li
-            className={styles.mediaCarouselCardActionItem}
-            data-testid="carousel-more-details"
-          >
-            <Link href={`/details/${media.media_type}/${media.id}`} passHref>
-              <a title="Ver mais detalhes"><TiInfoLarge /></a>
-            </Link>
-          </li>
-        </ul>
-
-        <span className={`${styles.mediaCarouselCardRelevant} ${styles.mediaCarouselCardRelevantGreen}`}>
-          {media?.vote_average ? (media.vote_average * 10) : 0}% relevante
-        </span>
+          <span className={`${styles.mediaCarouselCardRelevant} ${styles[relevantColor]}`}>
+            {media?.vote_average ? (media.vote_average * 10) : 0}% relevante
+          </span>
+        </div>
       </div>
     </div>
   )
