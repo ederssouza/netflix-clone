@@ -11,7 +11,7 @@ interface ISidebarProps {
 
 export function Sidebar ({ cast, genres }: ISidebarProps) {
   const router = useRouter()
-  const mediaType = router?.query?.type
+  const mediaType = router?.query?.type ? String(router.query.type) : null
 
   return (
     <aside className={styles.sidebar}>
