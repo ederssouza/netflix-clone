@@ -32,6 +32,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
     const fetchData = async () => {
       try {
         currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
+
         const res = await tmdbService.getGenreById({ type, id, page: currentPage })
         const results = res.data.results.map((media: IMedia) => normalizeMediaPayload(media))
 
