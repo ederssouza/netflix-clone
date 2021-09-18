@@ -90,7 +90,7 @@ describe('Search page component', () => {
     render(<Genre genre="Drama" type="movie" id="18" />)
 
     await waitFor(() => {
-      expect(screen.getByText('Ocorreu um erro')).toBeInTheDocument()
+      expect(screen.getByText('Ops... Ocorreu um erro')).toBeInTheDocument()
     }, { timeout: 1000 })
   })
 

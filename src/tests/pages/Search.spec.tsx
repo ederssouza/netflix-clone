@@ -51,6 +51,29 @@ describe('Search page component', () => {
     })
   })
 
+  it('should render empty state when search does not return results', async () => {
+    const searchTerm = 'Movie 1'
+
+    await getServerSideProps({
+      query: { q: searchTerm }
+    } as any)
+
+    const getDetailsByIdMocked = mocked(tmdbService.search)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: {
+        results: [],
+        total_pages: 0
+      }
+    } as any)
+
+    render(<Search q={searchTerm} />)
+
+    await waitFor(() => {
+      expect(screen.getByText(new RegExp(`Não encontramos resultados para "${searchTerm}"`))).toBeInTheDocument()
+    }, { timeout: 1000 })
+  })
+
   it('should render error message when occured an error on request', async () => {
     const searchTerm = 'Movie 1'
     await getServerSideProps({
@@ -66,7 +89,7 @@ describe('Search page component', () => {
     render(<Search q={searchTerm} />)
 
     await waitFor(() => {
-      expect(screen.getByText('Ocorreu um erro')).toBeInTheDocument()
+      expect(screen.getByText(/Ops... Ocorreu um erro/)).toBeInTheDocument()
     }, { timeout: 1000 })
   })
 
