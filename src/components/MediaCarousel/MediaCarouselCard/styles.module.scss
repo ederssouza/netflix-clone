@@ -11,20 +11,17 @@
   }
 
   &:hover {
+    box-shadow: 0 0 10px rgba(#000, 0.8);
+    transform: scale(1.3) translateY(-40%);
+    z-index: 2;
 
-    @media (min-width: 885px) {
-      box-shadow: 0 0 10px rgba(#000, 0.8);
-      transform: scale(1.3) translateY(-40%);
-      z-index: 2;
+    img {
+      position: relative;
+      border-radius: 4px 4px 0 0;
+    }
 
-      img {
-        position: relative;
-        border-radius: 4px 4px 0 0;
-      }
-
-      .mediaCarouselCardDetails {
-        display: flex;
-      }
+    .mediaCarouselCardDetails {
+      display: flex;
     }
   }
 }
