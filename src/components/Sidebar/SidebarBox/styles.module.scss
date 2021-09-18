@@ -13,18 +13,25 @@
   color: var(--gray-text-color)
 }
 
-.sidebarBoxList {
-list-style-type: none;
-
-  li {
-    display: inline-block;
-    margin-right: 0.25rem;
-  }
+.sidebarBoxItem {
+  display: inline-block;
+  margin-right: 0.25rem;
 
   a {
 
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.sidebarBoxListShowMore {
+  color: var(--gray-text-color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8125rem;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
