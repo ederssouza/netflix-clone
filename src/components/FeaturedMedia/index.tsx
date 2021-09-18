@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { IoMdPlay, IoMdInformationCircleOutline } from 'react-icons/io'
+import { IoMdInformationCircleOutline } from 'react-icons/io'
 
 import { IFeaturedMedia } from '../../@types'
 import { Button } from '../Button'
@@ -26,10 +26,6 @@ export function FeaturedMedia ({ genre, media }: IFeaturedMediaProps) {
         </div>
 
         <div className={styles.featuredMediaInfoActions}>
-          <Button color="primary" icon={<IoMdPlay />}>
-            Trailer
-          </Button>
-
           <Link
             href={`/details/${media.media_type}/${media.id}`}
             passHref
