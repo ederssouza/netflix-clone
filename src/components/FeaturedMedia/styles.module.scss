@@ -4,10 +4,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 41px);
 
-  @media (min-width: 420px) {
-    height: 100vh;
+  @media (min-width: 885px) {
+    height: calc(100vh - 68px);
   }
 }
 
