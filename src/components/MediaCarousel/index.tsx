@@ -94,7 +94,7 @@ const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarous
         }
         beforeChange={() => scrollCallback()}
       >
-        {mediaList.map(media => <MediaCarouselCard key={media.id} media={media} />)}
+        {mediaList.map(media => <MediaCarouselCard key={media.id} media={media} adjustOnMouseEnterEvent />)}
       </Carousel>
     </div>
   )

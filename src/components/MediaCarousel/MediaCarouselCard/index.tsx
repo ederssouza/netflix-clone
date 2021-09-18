@@ -7,9 +7,10 @@ import styles from './styles.module.scss'
 
 interface IMediaCarouselCardProps {
   media: IMedia
+  adjustOnMouseEnterEvent?: boolean
 }
 
-export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
+export function MediaCarouselCard ({ media, adjustOnMouseEnterEvent = false }: IMediaCarouselCardProps) {
   const [relevantColor, setRelevantColor] = useState('')
 
   function handleMouseEnter (e) {
@@ -45,7 +46,7 @@ export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
     <div
       className={styles.mediaCarouselCard}
       data-testid="carousel-card"
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={(e) => adjustOnMouseEnterEvent && handleMouseEnter(e)}
     >
       <img src={media.backdrop_path.w300} alt={media.title} />
 
