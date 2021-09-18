@@ -15,7 +15,7 @@ export const mediaList = Array.from({ length: 20 }).map((_, index) => {
     original_language: 'EN',
     runtime: 60,
     genres: [
-      { id: 10759, name: 'Action & Adventure' },
+      { id: 10759, name: 'Ação e Aventura' },
       { id: 18, name: 'Drama' },
       { id: 10765, name: 'Sci-Fi & Fantasy' }
     ]
@@ -45,7 +45,7 @@ export const castMock = [
 ]
 
 export const genresMock = [
-  { id: 10759, name: 'Action & Adventure' },
+  { id: 10759, name: 'Ação e Aventura' },
   { id: 18, name: 'Drama' },
   { id: 10765, name: 'Sci-Fi & Fantasy' }
 ]
