@@ -12,11 +12,10 @@
   grid-template-columns: repeat(2, 1fr);
 
   > div {
-
-    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
 
     @media (min-width: 885px) {
-      margin-bottom: 4rem;
+      margin-top: 4rem;
     }
   }
 
