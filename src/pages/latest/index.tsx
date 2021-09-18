@@ -55,7 +55,7 @@ export default function Latest () {
   return (
     <>
       <Head>
-        <title>Busca | Netflix</title>
+        <title>Bombando | Netflix</title>
       </Head>
 
       <main className={styles.container}>
