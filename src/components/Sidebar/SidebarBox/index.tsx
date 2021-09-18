@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { SidebarBoxItem } from './SidebarBoxItem'
 import styles from './styles.module.scss'
 
 interface IItems {
@@ -34,32 +34,9 @@ export function SidebarBox ({ title, mediaType, items }: ISidebarBoxProps) {
       {title && <h4 className={styles.sidebarBoxTitle}>{title}</h4>}
 
       {mediaType
-        ? (
-          <>
-            {list.map((item, index, arr) => {
-              const coma = index + 1 < arr.length ? ', ' : ''
-
-              return (
-                <span className={styles.sidebarBoxItem} key={item.id}>
-                  <Link href={`/genre/${mediaType}/${item.id}`}>{item.name}</Link>{coma}
-                </span>
-              )
-            })}
-          </>
-          )
-        : (
-          <>
-          {list.map((item, index, arr) => {
-            const coma = index + 1 < arr.length ? ', ' : ''
-
-            return (
-              <span className={styles.sidebarBoxItem} key={item.id}>
-                {item.name}{coma}
-              </span>
-            )
-          })}
-          </>
-          )}
+        ? <SidebarBoxItem mediaType={mediaType} items={list} />
+        : <SidebarBoxItem items={list} />
+      }
 
       {items.length > limit && (
         <a
