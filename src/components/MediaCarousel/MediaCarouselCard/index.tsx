@@ -10,10 +10,31 @@ interface IMediaCarouselCardProps {
 }
 
 export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
+  function handleMouseEnter (e) {
+    const $carousel = e.target.closest('.react-multi-carousel-track')
+    const $carouselActiveItems = $carousel.querySelectorAll('.react-multi-carousel-item--active')
+    const $firstCarouselActiveItem = $carouselActiveItems[0]
+    const $firstCarouselActiveItemIndex = $firstCarouselActiveItem.getAttribute('data-index')
+    const $lastCarouselActiveItem = $carouselActiveItems[$carouselActiveItems.length - 1]
+    const $lastCarouselActiveItemIndex = $lastCarouselActiveItem.getAttribute('data-index')
+    const $target = e.target.closest('.react-multi-carousel-item')
+    const $targetCard = e.target.closest('.react-multi-carousel-item > div')
+    const $targetIndex = $target.getAttribute('data-index')
+
+    if ($firstCarouselActiveItemIndex === $targetIndex) {
+      $targetCard.classList.add('mediaCarouselFirstActiveCard')
+    }
+
+    if ($lastCarouselActiveItemIndex === $targetIndex) {
+      $targetCard.classList.add('mediaCarouselLastActiveCard')
+    }
+  }
+
   return (
     <div
       className={styles.mediaCarouselCard}
       data-testid="carousel-card"
+      onMouseEnter={handleMouseEnter}
     >
       <img src={media.backdrop_path.w300} alt={media.title} />
 
