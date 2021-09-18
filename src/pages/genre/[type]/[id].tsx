@@ -106,9 +106,11 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         )}
       </main>
 
-      <div ref={footerRef}>
-        <Footer />
-      </div>
+      {mediaList?.length > 0 && statusRequest !== 'loading' && statusRequest !== 'loadmore' && (
+        <div ref={footerRef}>
+          <Footer />
+        </div>
+      )}
     </>
   )
 }
