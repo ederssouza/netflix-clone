@@ -41,12 +41,12 @@ describe('Search page component', () => {
       }
     } as any)
 
-    render(<Genre genre="Drama" type="movie" id="18" />)
+    render(<Genre genre="Adventure" type="movie" id="18" />)
 
     expect(response).toEqual(
       expect.objectContaining({
         props: expect.objectContaining({
-          genre: 'Drama',
+          genre: 'Adventure',
           type: 'movie',
           id: '18'
         })
@@ -54,7 +54,7 @@ describe('Search page component', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByText(/Drama/)).toBeInTheDocument()
+      expect(screen.getByText(/Adventure/)).toBeInTheDocument()
     }, { timeout: 1000 })
 
     act(() => jest.advanceTimersByTime(500))
@@ -118,12 +118,12 @@ describe('Search page component', () => {
       }
     } as any)
 
-    render(<Genre genre="Drama" type="movie" id="18" />)
+    render(<Genre genre="Adventure" type="movie" id="18" />)
 
     expect(response).toEqual(
       expect.objectContaining({
         props: expect.objectContaining({
-          genre: 'Drama',
+          genre: 'Adventure',
           type: 'movie',
           id: '18'
         })
