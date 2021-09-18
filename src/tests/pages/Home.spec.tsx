@@ -42,12 +42,12 @@ beforeEach(() => {
 
 describe('Home page component', () => {
   it('should render with success', async () => {
-    const medisList1 = mocked(tmdbService.getNetflixList)
-    const medisList2 = mocked(tmdbService.getTrendings)
-    const medisList3 = mocked(tmdbService.getGenreById)
-    const medisList4 = mocked(tmdbService.getGenreById)
-    const medisList5 = mocked(tmdbService.getGenreById)
-    const medisList6 = mocked(tmdbService.getGenreById)
+    const mediaList1Mock = mocked(tmdbService.getNetflixList)
+    const mediaList2Mock = mocked(tmdbService.getTrendings)
+    const mediaList3Mock = mocked(tmdbService.getGenreById)
+    const mediaList4Mock = mocked(tmdbService.getGenreById)
+    const mediaList5Mock = mocked(tmdbService.getGenreById)
+    const mediaList6Mock = mocked(tmdbService.getGenreById)
     const defaultResponse = {
       data: {
         page: 1,
@@ -57,12 +57,12 @@ describe('Home page component', () => {
       }
     }
 
-    medisList1.mockReturnValueOnce({ ...defaultResponse } as any)
-    medisList2.mockReturnValueOnce({ ...defaultResponse } as any)
-    medisList3.mockReturnValueOnce({ ...defaultResponse } as any)
-    medisList4.mockReturnValueOnce({ ...defaultResponse } as any)
-    medisList5.mockReturnValueOnce({ ...defaultResponse } as any)
-    medisList6.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList1Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList2Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList3Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList4Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList5Mock.mockReturnValueOnce({ ...defaultResponse } as any)
+    mediaList6Mock.mockReturnValueOnce({ ...defaultResponse } as any)
 
     const response = await getStaticProps({} as any)
     const sections = [

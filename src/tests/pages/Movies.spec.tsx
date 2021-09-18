@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
-import TV, { getStaticProps } from '../../pages/tv'
+import Movies, { getStaticProps } from '../../pages/movies'
 import { tmdbService } from '../../services/tmdb'
 import { normalizeMediaPayload } from '../../utils/functions'
 
@@ -32,14 +32,14 @@ const mediaListMock = [
   }
 ]
 
-const tvListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+const movieListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
 
 beforeEach(() => {
   const randomMock = jest.spyOn(global.Math, 'random')
   randomMock.mockReturnValue(0)
 })
 
-describe('TV page component', () => {
+describe('Movies page component', () => {
   it('should render with success', async () => {
     const mediaList1Mock = mocked(tmdbService.getGenreById)
     const mediaList2Mock = mocked(tmdbService.getGenreById)
@@ -65,19 +65,19 @@ describe('TV page component', () => {
 
     const response = await getStaticProps({} as any)
     const sections = [
-      { title: 'Ação e Aventura', mediaList: [...tvListNormalizedMock] },
-      { title: 'Crime', mediaList: [...tvListNormalizedMock] },
-      { title: 'Drama', mediaList: [...tvListNormalizedMock] },
-      { title: 'Família', mediaList: [...tvListNormalizedMock] },
-      { title: 'Mistério', mediaList: [...tvListNormalizedMock] },
-      { title: 'Faroeste', mediaList: [...tvListNormalizedMock] }
+      { title: 'Ação', mediaList: [...movieListNormalizedMock] },
+      { title: 'Animação', mediaList: [...movieListNormalizedMock] },
+      { title: 'Drama', mediaList: [...movieListNormalizedMock] },
+      { title: 'Terror', mediaList: [...movieListNormalizedMock] },
+      { title: 'Guerra', mediaList: [...movieListNormalizedMock] },
+      { title: 'Faroeste', mediaList: [...movieListNormalizedMock] }
     ]
 
     const sectionIndexAleatory = Math.floor(Math.random() * sections.length)
     const mediaIndexAleatory = Math.floor(Math.random() * sections[0].mediaList.length)
     const featured = sections[sectionIndexAleatory].mediaList[mediaIndexAleatory]
 
-    render(<TV featured={featured} sections={sections} />)
+    render(<Movies featured={featured} sections={sections} />)
 
     expect(response).toEqual(
       expect.objectContaining({
