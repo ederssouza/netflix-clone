@@ -10,8 +10,7 @@ export default function PageNotFound () {
   return (
     <>
       <Head>
-        <title>Início | Netflix</title>
-        <meta name="description" content="..." />
+        <title>Página não encontrada | Netflix</title>
       </Head>
 
       <main>

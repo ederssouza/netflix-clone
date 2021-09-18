@@ -56,8 +56,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   return (
     <>
       <Head>
-        <title>Busca | Netflix</title>
-        <meta name="description" content="..." />
+        <title>{genre} | Netflix</title>
       </Head>
 
       <main>

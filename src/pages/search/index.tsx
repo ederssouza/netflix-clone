@@ -66,7 +66,6 @@ export default function Search ({ q }: ISearchProps) {
     <>
       <Head>
         <title>Busca | Netflix</title>
-        <meta name="description" content="..." />
       </Head>
 
       <main className={styles.container}>

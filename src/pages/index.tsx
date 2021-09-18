@@ -26,7 +26,6 @@ export default function Home ({ featured, sections }: IHomeProps) {
     <>
       <Head>
         <title>Início | Netflix</title>
-        <meta name="description" content="..." />
       </Head>
 
       <main className={styles.container}>

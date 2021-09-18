@@ -15,8 +15,7 @@ export default function PagePageInternalError ({ statusCode }: IPageInternalErro
   return (
     <>
       <Head>
-        <title>Início | Netflix</title>
-        <meta name="description" content="..." />
+        <title>Netflix</title>
       </Head>
 
       <main>

@@ -26,7 +26,6 @@ export default function Movies ({ featured, sections }: IMoviesProps) {
     <>
       <Head>
         <title>Filmes | Netflix</title>
-        <meta name="description" content="..." />
       </Head>
 
       <main className={styles.container}>

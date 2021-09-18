@@ -25,8 +25,7 @@ export default function TV ({ featured, sections }: ITVProps) {
   return (
     <>
       <Head>
-        <title>Series | Netflix</title>
-        <meta name="description" content="..." />
+        <title>Séries | Netflix</title>
       </Head>
 
       <main className={styles.container}>
