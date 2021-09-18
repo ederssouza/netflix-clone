@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { IMedia } from '../../@types'
 import { CardsSkeletonLoader } from '../../components/CardsSkeletonLoader'
+import { EmptyState } from '../../components/EmptyState'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { MediaCarouselCard } from '../../components/MediaCarousel/MediaCarouselCard'
@@ -70,7 +71,6 @@ export default function Search ({ q }: ISearchProps) {
 
       <main className={styles.container}>
         <Header />
-        <h1>Buscar por: {q} {currentPage}</h1>
 
         {(statusRequest === 'success' || statusRequest === 'loadmore') && (
           <div className={styles.grid}>
@@ -78,11 +78,24 @@ export default function Search ({ q }: ISearchProps) {
           </div>
         )}
 
+        {statusRequest === 'success' && !mediaList?.length && (
+          <EmptyState title={`Não encontramos resultados para "${q}"`}>
+            <div className={styles.emptyState}>
+              <p className={styles.emptyStateSubtitle}>Sugestões:</p>
+              <ul className={styles.emptyStateList}>
+                <li>Tente palavras-chave diferentes</li>
+                <li>Procurando um filme ou série?</li>
+                <li>Experimente buscar por filme ou série</li>
+              </ul>
+            </div>
+          </EmptyState>
+        )}
+
         {statusRequest === 'error' && (
-          <div>
-            {/* TODO: create component */}
-            <h1>Ocorreu um erro</h1>
-          </div>
+          <EmptyState
+            title="Ops... Ocorreu um erro"
+            text="Por favor, tente novamente mais tarde."
+          />
         )}
 
         {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
@@ -95,9 +108,11 @@ export default function Search ({ q }: ISearchProps) {
         )}
       </main>
 
-      <div ref={footerRef}>
-        <Footer />
-      </div>
+      {mediaList?.length > 0 && statusRequest !== 'loading' && statusRequest !== 'loadmore' && (
+        <div ref={footerRef}>
+          <Footer />
+        </div>
+      )}
     </>
   )
 }
