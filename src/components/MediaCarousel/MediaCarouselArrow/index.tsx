@@ -6,7 +6,12 @@ interface IMediaCarouselArrowProps extends ArrowProps {
   firstLoad?: boolean
 }
 
-export function MediaCarouselArrow ({ direction, firstLoad = false, onClick, ...rest }: IMediaCarouselArrowProps) {
+export function MediaCarouselArrow ({
+  direction,
+  firstLoad = false,
+  onClick,
+  ...rest
+}: IMediaCarouselArrowProps) {
   if (direction === 'left') {
     return (
       <div

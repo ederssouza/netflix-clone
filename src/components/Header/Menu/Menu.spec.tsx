@@ -3,14 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Menu } from '.'
 
 const menuItems = [
-  {
-    href: '/',
-    title: 'Home'
-  },
-  {
-    href: '/genre/1',
-    title: 'Movies'
-  }
+  { href: '/', title: 'Home' },
+  { href: '/genre/1', title: 'Movies' }
 ]
 
 jest.mock('next/router', () => {

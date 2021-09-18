@@ -21,19 +21,30 @@ export function ProgressChart ({ value }: IProgressChartProps) {
   return (
     <div className={styles.progressChartWrapper}>
       <div className={styles.progressChartSingleChart}>
-        <svg viewBox="0 0 36 36" className={`${styles.circularChart} ${styles[color]}`}>
-          <path className={styles.progressChartCircleBg}
+        <svg
+          className={`${styles.circularChart} ${styles[color]}`}
+          viewBox="0 0 36 36"
+        >
+          <path
+            className={styles.progressChartCircleBg}
             d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
           />
-          <path className={styles.progressChartCircle}
+
+          <path
+            className={styles.progressChartCircle}
             strokeDasharray={`${value}, 100`}
             d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
           />
-          <text x="18" y="20.35" className={styles.progressChartPercentage}>
+
+          <text
+            className={styles.progressChartPercentage}
+            x="18"
+            y="20.35"
+          >
             {value}%
           </text>
         </svg>

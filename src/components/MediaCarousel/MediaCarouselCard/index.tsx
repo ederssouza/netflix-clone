@@ -24,6 +24,7 @@ export function MediaCarouselCard ({ media }: IMediaCarouselCardProps) {
           <li className={styles.mediaCarouselCardActionActiveItem}>
             <a href="#" title=""><IoMdPlay /></a>
           </li>
+
           <li
             className={styles.mediaCarouselCardActionItem}
             data-testid="carousel-more-details"

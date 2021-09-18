@@ -25,8 +25,8 @@ export function MediaContainer ({ children }: IMediaContainerProps) {
   return (
     <div
       style={{ marginTop: containerMarginTop }}
-      data-testid="container"
       ref={refMediaCarousel}
+      data-testid="container"
     >
       {children}
     </div>
