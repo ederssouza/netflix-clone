@@ -2,12 +2,12 @@ import { ICast, IGenres } from '../../@types'
 import { SidebarBox } from './SidebarBox'
 import styles from './styles.module.scss'
 
-interface IBannerProps {
+interface ISidebarProps {
   cast: ICast[]
   genres: IGenres[]
 }
 
-export function Sidebar ({ cast, genres }: IBannerProps) {
+export function Sidebar ({ cast, genres }: ISidebarProps) {
   return (
     <aside className={styles.sidebar}>
       {cast?.length > 0 && (
