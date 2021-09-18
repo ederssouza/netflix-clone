@@ -26,3 +26,8 @@ A simple Netflix clone with React JS and Next.js
 - [ ] Genres page
 - [x] Search page
 - [x] Detail page
+
+### Fix
+
+- [ ] Change to getStaticProps => pages > return null
+- [ ] Implement component: <h1>Ocorreu um erro</h1>
