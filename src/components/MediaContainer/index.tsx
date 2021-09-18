@@ -10,8 +10,8 @@ export function MediaContainer ({ children }: IMediaContainerProps) {
 
   function handleContainerMarginTop () {
     setTimeout(() => {
-      const $elem = refMediaCarousel.current.querySelector('[data-testid="carousel"]') || refMediaCarousel.current.querySelector('[data-testid="carousel-card"]')
-      const containerheight = $elem?.clientHeight
+      const $elem = refMediaCarousel?.current?.querySelector('[data-testid="carousel"]') || refMediaCarousel?.current?.querySelector('[data-testid="carousel-card"]')
+      const containerheight = $elem?.clientHeight || 0
       setContainerMarginTop(`-${containerheight}px`)
     }, 800)
   }
