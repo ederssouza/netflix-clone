@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
-import DetailsById, { getServerSideProps } from '../../pages/details/[type]/[id]'
+import DetailsById, { getStaticProps, getStaticPaths } from '../../pages/details/[type]/[id]'
 import { tmdbService } from '../../services/tmdb'
 import { castMock, mediaList, providersMock, providersResponseMock } from '../mocks/tmdb'
 
@@ -47,7 +47,7 @@ describe('DetailsById page component', () => {
       data: { cast: [...castMock] }
     } as any)
 
-    await getServerSideProps({
+    await getStaticProps({
       params: { type: 'movie', id: 10 }
     } as any)
 
@@ -82,7 +82,7 @@ describe('DetailsById page component', () => {
       data: { cast: [...castMock] }
     } as any)
 
-    await getServerSideProps({
+    await getStaticProps({
       params: { type: 'movie', id: 10 }
     } as any)
 
@@ -119,7 +119,7 @@ describe('DetailsById page component', () => {
 
     getCreditsByIdMocked.mockReturnValueOnce({} as any)
 
-    await getServerSideProps({
+    await getStaticProps({
       params: { type: 'movie', id: 10 }
     } as any)
 
@@ -147,7 +147,7 @@ describe('DetailsById page component', () => {
       response: { status: 404 }
     })
 
-    const response = await getServerSideProps({
+    const response = await getStaticProps({
       params: { type: 'movie', id: 0 }
     } as any)
 
@@ -165,7 +165,7 @@ describe('DetailsById page component', () => {
       response: { status: 500 }
     })
 
-    const response = await getServerSideProps({
+    const response = await getStaticProps({
       params: { type: 'movie', id: 0 }
     } as any)
 
@@ -186,7 +186,7 @@ describe('DetailsById page component', () => {
       response: {}
     })
 
-    const response = await getServerSideProps({
+    const response = await getStaticProps({
       params: { type: 'movie', id: 0 }
     } as any)
 
@@ -196,6 +196,20 @@ describe('DetailsById page component', () => {
           permanent: false,
           destination: '/internal-error'
         })
+      })
+    )
+  })
+
+  it('should return default `getStaticPaths` payload', async () => {
+    const response = await getStaticPaths({
+      paths: [],
+      fallback: 'blocking'
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        paths: [],
+        fallback: 'blocking'
       })
     )
   })
