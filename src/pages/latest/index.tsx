@@ -23,7 +23,7 @@ export default function Latest ({ mediaFirstList = [] }: ILatestProps) {
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const { isIntersecting } = useOnScreen(footerRef)
+  const { isIntersecting } = useOnScreen(footerRef, 500)
 
   function resetList () {
     setCurrentPage(2)
@@ -99,15 +99,34 @@ export default function Latest ({ mediaFirstList = [] }: ILatestProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await tmdbService.getTrendings({ page: 1 })
-  const results = res?.data?.results?.length
-    ? res.data.results.slice(0, 18)
-    : []
-  const mediaFirstList = results.map((media: IMedia) => normalizeMediaPayload(media))
+  try {
+    const res = await tmdbService.getTrendings({ page: 1 })
+    const results = res?.data?.results?.length
+      ? res.data.results.slice(0, 18)
+      : []
+    const mediaFirstList = results.map((media: IMedia) => normalizeMediaPayload(media))
 
-  return {
-    props: {
-      mediaFirstList
+    return {
+      props: {
+        mediaFirstList
+      }
+    }
+  } catch (error) {
+    const statusCode = error?.response?.status
+
+    if (statusCode === 404) {
+      return {
+        notFound: true
+      }
+    }
+
+    const destination = statusCode ? `/internal-error?code=${statusCode}` : '/internal-error'
+
+    return {
+      redirect: {
+        permanent: false,
+        destination
+      }
     }
   }
 }
