@@ -200,7 +200,43 @@ describe('DetailsById page component', () => {
     )
   })
 
-  it('should return default `getStaticPaths` payload', async () => {
+  it('should return `getStaticPaths` payload with trendings list', async () => {
+    const getTrendingsMocked = mocked(tmdbService.getTrendings)
+
+    getTrendingsMocked.mockReturnValueOnce({
+      data: {
+        results: [...mediaList.slice(0, 2)],
+        total_pages: 10
+      }
+    } as any)
+
+    const paths = mediaList.slice(0, 2).map((item) => {
+      const type = item.media_type
+      const id = String(item.id)
+
+      return { params: { type, id } }
+    })
+
+    const response = await getStaticPaths({
+      paths,
+      fallback: 'blocking'
+    } as any)
+
+    expect(response).toEqual(
+      expect.objectContaining({
+        paths,
+        fallback: 'blocking'
+      })
+    )
+  })
+
+  it('should return `getStaticPaths` payload with empty trendings list', async () => {
+    const getTrendingsMocked = mocked(tmdbService.getTrendings)
+
+    getTrendingsMocked.mockReturnValueOnce({
+      data: {}
+    } as any)
+
     const response = await getStaticPaths({
       paths: [],
       fallback: 'blocking'
