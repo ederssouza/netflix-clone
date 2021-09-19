@@ -13,5 +13,15 @@ export function useOnScreen (ref: MutableRefObject<Element>) {
     return () => intersectionObserver.disconnect()
   })
 
+  useEffect(() => {
+    function toggleBodyOverflow (value: 'hidden' | 'initial') {
+      document.body.style.overflow = value
+    }
+
+    isIntersecting
+      ? toggleBodyOverflow('hidden')
+      : setTimeout(() => toggleBodyOverflow('initial'), 500)
+  }, [isIntersecting])
+
   return { isIntersecting }
 }
