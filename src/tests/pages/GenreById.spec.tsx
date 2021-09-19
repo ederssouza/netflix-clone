@@ -8,17 +8,13 @@ import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
 jest.mock('../../services/tmdb')
 
-beforeAll(() => {
-  intersectionObserverMock([{ isIntersecting: false }])
-})
-
 afterEach(() => {
   jest.clearAllMocks()
 })
 
 describe('Search page component', () => {
   it('should render with success', async () => {
-    jest.useFakeTimers()
+    intersectionObserverMock([{ isIntersecting: false }])
 
     const getGenresMocked = mocked(tmdbService.getGenres)
 
@@ -57,8 +53,6 @@ describe('Search page component', () => {
       expect(screen.getByText(/Adventure/)).toBeInTheDocument()
     }, { timeout: 1000 })
 
-    act(() => jest.advanceTimersByTime(500))
-
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
@@ -69,6 +63,8 @@ describe('Search page component', () => {
   })
 
   it('should render error message when occured an error on request', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
@@ -95,6 +91,8 @@ describe('Search page component', () => {
   })
 
   it('should load next page when the footer element is showing', async () => {
+    jest.useFakeTimers()
+
     intersectionObserverMock([{ isIntersecting: true }])
 
     const getGenresMocked = mocked(tmdbService.getGenres)
@@ -120,6 +118,8 @@ describe('Search page component', () => {
 
     render(<Genre genre="Adventure" type="movie" id="18" />)
 
+    act(() => jest.advanceTimersByTime(500))
+
     expect(response).toEqual(
       expect.objectContaining({
         props: expect.objectContaining({
@@ -141,6 +141,8 @@ describe('Search page component', () => {
   })
 
   it('should redirect home whe dont receive genres list', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockReturnValueOnce({
@@ -164,6 +166,8 @@ describe('Search page component', () => {
   })
 
   it('should redirect to NotFound page when movie not exists', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({
@@ -182,6 +186,8 @@ describe('Search page component', () => {
   })
 
   it('should render generic error page when status code error is different of 404', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({
@@ -203,6 +209,8 @@ describe('Search page component', () => {
   })
 
   it('should render generic text error when not receive status code', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const getGenresMocked = mocked(tmdbService.getGenres)
 
     getGenresMocked.mockRejectedValueOnce({

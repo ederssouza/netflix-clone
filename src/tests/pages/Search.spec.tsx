@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
 import Search, { getServerSideProps } from '../../pages/search'
@@ -8,12 +8,10 @@ import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
 jest.mock('../../services/tmdb')
 
-beforeAll(() => {
-  intersectionObserverMock([{ isIntersecting: false }])
-})
-
 describe('Search page component', () => {
   it('should render with success', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const searchTerm = 'Movie 1'
     const response = await getServerSideProps({
       query: { q: searchTerm }
@@ -52,6 +50,8 @@ describe('Search page component', () => {
   })
 
   it('should render empty state when search does not return results', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const searchTerm = 'Movie 1'
 
     await getServerSideProps({
@@ -75,7 +75,10 @@ describe('Search page component', () => {
   })
 
   it('should render error message when occured an error on request', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const searchTerm = 'Movie 1'
+
     await getServerSideProps({
       query: { q: searchTerm }
     } as any)
@@ -94,6 +97,8 @@ describe('Search page component', () => {
   })
 
   it('should redirect whe dont receive `q` query param', async () => {
+    intersectionObserverMock([{ isIntersecting: false }])
+
     const response = await getServerSideProps({
       query: {}
     } as any)
@@ -108,7 +113,11 @@ describe('Search page component', () => {
   })
 
   it('should load next page when the footer element is showing', async () => {
+    jest.useFakeTimers()
+
     intersectionObserverMock([{ isIntersecting: true }])
+
+    act(() => jest.advanceTimersByTime(500))
 
     const searchTerm = 'Movie 1'
     const response = await getServerSideProps({
@@ -135,6 +144,7 @@ describe('Search page component', () => {
     )
 
     await waitFor(() => {
+      expect(screen.getByText(searchTerm)).toBeInTheDocument()
       expect(getDetailsByIdMocked).toHaveReturnedWith({
         data: {
           results: mediaList.slice(0, 2),
