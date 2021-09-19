@@ -1,5 +1,5 @@
 @mixin skeleton {
-  background-color: #1f1f1f;
+  background-color: var(--bg-color);
   overflow: hidden;
   position: relative;
 
