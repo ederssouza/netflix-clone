@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* ... */}
+          <link rel="icon" href="/assets/img/favicon.ico" />
         </Head>
 
         <body>

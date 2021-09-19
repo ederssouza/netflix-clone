@@ -1,13 +1,26 @@
+export interface IFeaturedMedia {
+  id: number
+  media_type: string
+  title: string
+  overview?: string
+  backdrop_path: {
+    w300: string
+    w780: string
+    w1280: string
+    original: string
+  }
+}
+
 export interface IGenres {
   id: number
   name: string
 }
 
-export interface IMovie {
+export interface IMedia {
   id: number
   media_type: string
   title: string
-  overview: string
+  overview?: string
   backdrop_path: {
     w300: string
     w780: string

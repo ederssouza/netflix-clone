@@ -1,0 +1,125 @@
+.mediaCarouselCard {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2px;
+  position: relative;
+  transition: all 0.26s;
+
+  img {
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(#222, 1);
+    transform: scale(1.3) translateY(-35%);
+    z-index: 2;
+
+    img {
+      position: relative;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .mediaCarouselCardContent {
+      display: flex;
+    }
+  }
+}
+
+.mediaCarouselCardContent {
+  background-color: var(--bg-color);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 10px 5px rgba(#222, 1);
+  display: none;
+  flex-direction: column;
+  left: 0;
+  padding: 0.75rem;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 0;
+
+  @media (min-width: 885px) {
+    padding: 1rem;
+  }
+}
+
+.mediaCarouselCardTitle {
+  font-size: 0.65rem;
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 885px) {
+    font-size: 0.825rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.mediaCarouselDetails {
+  align-items: center;
+  display: flex;
+}
+
+.mediaCarouselCardActions {
+  display: flex;
+  list-style-type: none;
+
+  li {
+    margin-right: 0.5rem;
+
+    &.mediaCarouselCardActionActiveItem {
+
+      a {
+        border-color: var(--body-text-color);
+        background-color: var(--body-text-color);
+        color: var(--bg-color);
+      }
+    }
+  }
+
+  a {
+    align-items: center;
+    background-color: var(--bg-color);
+    border: 1px solid var(--gray-text-color);
+    border-radius: 50%;
+    display: flex;
+    font-size: 0.6875rem;
+    height: 20px;
+    justify-content: center;
+    transition: border 0.2s;
+    width: 20px;
+
+    @media (min-width: 885px) {
+      font-size: 0.75rem;
+      height: 24px;
+      width: 24px;
+    }
+
+    &:hover {
+      border-color: var(--body-text-color);
+    }
+  }
+}
+
+.mediaCarouselCardRelevant {
+  font-size: 0.5625rem;
+  font-weight: bold;
+  line-height: 1;
+
+  @media (min-width: 885px) {
+    font-size: 0.625rem;
+  }
+
+  &.mediaCarouselCardRelevantGreen {
+    color: var(--success-text-color);
+  }
+
+  &.mediaCarouselCardRelevantYellow {
+    color: var(--warning-text-color);
+  }
+
+  &.mediaCarouselCardRelevantRed {
+    color: var(--danger-text-color);
+  }
+}

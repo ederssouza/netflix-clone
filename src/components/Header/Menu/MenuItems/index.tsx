@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import styles from '../styles.module.scss'
 
@@ -13,22 +14,26 @@ export interface IMenuProps {
 }
 
 export function MenuItems ({ items }: IMenuProps) {
+  const [currentAsPath, setCurrentAsPath] = useState(null)
   const router = useRouter()
-  const asPath = router?.asPath || null
+
+  useEffect(() => {
+    setCurrentAsPath(router?.asPath)
+  }, [router])
 
   return (
     <ul className={styles.menuItems}>
       {items.map(link => {
-        const className = asPath === link.href
+        const className = currentAsPath === link.href
           ? styles.menuItemsActiveItem
           : null
 
         return (
           <li
             key={link.title}
-            className={link.href === asPath ? className : null}
+            className={link.href === currentAsPath ? className : null}
           >
-            <Link href={link.href}>
+            <Link href={link.href} passHref>
               <a title={link.title}>{link.title}</a>
             </Link>
           </li>

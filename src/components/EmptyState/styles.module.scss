@@ -1,0 +1,16 @@
+.emptyState {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  justify-content: center;
+}
+
+.emptyStateTitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: 885px) {
+    font-size: 2rem;
+  }
+}

@@ -2,11 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 
 import Search, { getServerSideProps } from '../../pages/search'
-import { api } from '../../services/api'
-import { movies } from '../mocks/tmdb'
-import { intersectionObserverMock } from '../utils/IntersectionObserverMock'
+import { tmdbService } from '../../services/tmdb'
+import { mediaList } from '../mocks/tmdb'
+import { intersectionObserverMock } from '../utils/intersectionObserverMock'
 
-jest.mock('../../services/api')
+jest.mock('../../services/tmdb')
 
 beforeAll(() => {
   intersectionObserverMock([{ isIntersecting: false }])
@@ -19,11 +19,11 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
@@ -45,10 +45,33 @@ describe('Search page component', () => {
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     })
+  })
+
+  it('should render empty state when search does not return results', async () => {
+    const searchTerm = 'Movie 1'
+
+    await getServerSideProps({
+      query: { q: searchTerm }
+    } as any)
+
+    const getDetailsByIdMocked = mocked(tmdbService.search)
+
+    getDetailsByIdMocked.mockReturnValueOnce({
+      data: {
+        results: [],
+        total_pages: 0
+      }
+    } as any)
+
+    render(<Search q={searchTerm} />)
+
+    await waitFor(() => {
+      expect(screen.getByText(new RegExp(`Não encontramos resultados para "${searchTerm}"`))).toBeInTheDocument()
+    }, { timeout: 1000 })
   })
 
   it('should render error message when occured an error on request', async () => {
@@ -57,7 +80,7 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockRejectedValueOnce({
       response: { status: 404 }
@@ -66,7 +89,7 @@ describe('Search page component', () => {
     render(<Search q={searchTerm} />)
 
     await waitFor(() => {
-      expect(screen.getByText('Ocorreu um erro')).toBeInTheDocument()
+      expect(screen.getByText(/Ops... Ocorreu um erro/)).toBeInTheDocument()
     }, { timeout: 1000 })
   })
 
@@ -92,11 +115,11 @@ describe('Search page component', () => {
       query: { q: searchTerm }
     } as any)
 
-    const getDetailsByIdMocked = mocked(api.search)
+    const getDetailsByIdMocked = mocked(tmdbService.search)
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...movies.slice(0, 2)],
+        results: [...mediaList.slice(0, 2)],
         total_pages: 10
       }
     } as any)
@@ -114,7 +137,7 @@ describe('Search page component', () => {
     await waitFor(() => {
       expect(getDetailsByIdMocked).toHaveReturnedWith({
         data: {
-          results: [...movies.slice(0, 2)],
+          results: [...mediaList.slice(0, 2)],
           total_pages: 10
         }
       })

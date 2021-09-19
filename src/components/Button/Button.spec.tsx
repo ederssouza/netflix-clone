@@ -8,6 +8,7 @@ describe('Button component', () => {
     render(<Button>Primary button</Button>)
 
     const component = screen.getByText('Primary button')
+
     expect(component).toBeInTheDocument()
     expect(component).toHaveClass('buttonPrimary')
   })
@@ -16,6 +17,7 @@ describe('Button component', () => {
     render(<Button>Primary button</Button>)
 
     const component = screen.getByText('Primary button')
+
     expect(component).toHaveClass('buttonPrimary')
   })
 
@@ -27,10 +29,11 @@ describe('Button component', () => {
     )
 
     const component = screen.getByText('Secondary button')
+
     expect(component).toHaveClass('buttonSecondary')
   })
 
-  it('should render button with an icon when receiving `icon` prop', () => {
+  it('should render button with an icon component when receiving `icon` prop', () => {
     const { container } = render(
       <Button icon={<IoMdPlay />}>
         Play movie

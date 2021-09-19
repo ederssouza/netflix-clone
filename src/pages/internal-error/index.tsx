@@ -7,17 +7,15 @@ import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import styles from './styles.module.scss'
 
-interface IInternalErrorProps {
+interface IPageInternalErrorProps {
   statusCode?: string
 }
 
-export default function PageInternalError ({ statusCode }: IInternalErrorProps) {
+export default function PagePageInternalError ({ statusCode }: IPageInternalErrorProps) {
   return (
     <>
       <Head>
-        <title>Início | Netflix</title>
-        <meta name="description" content="..." />
-        <link rel="icon" href="/assets/img/favicon.ico" />
+        <title>Netflix</title>
       </Head>
 
       <main>
@@ -25,7 +23,9 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
 
         <div className={styles.banner}>
           <div className={styles.bannerContent}>
-            <h1 className={styles.bannerTitle}>Erro {statusCode}</h1>
+            <h1 className={styles.bannerTitle}>
+              {statusCode ? `Erro ${statusCode}` : 'Ocorreu um erro'}
+            </h1>
             <p className={styles.bannerText}>
               Ops... Parece que algo deu errado.<br />
               Tente novamente mais tarde.
@@ -44,11 +44,9 @@ export default function PageInternalError ({ statusCode }: IInternalErrorProps) 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { code } = query
-
   return {
     props: {
-      statusCode: code
+      statusCode: query?.code || null
     }
   }
 }

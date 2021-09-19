@@ -20,19 +20,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 56px);
+  min-height: 100vh;
   justify-content: center;
   position: relative;
   text-align: center;
   z-index: 2;
-
-  @media (max-width: 420px) {
-    min-height: 100vh;
-  }
-
-  @media (min-width: 885px) {
-    font-size: 2.5rem;
-  }
 }
 
 .bannerTitle {

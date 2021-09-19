@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 export function Menu ({ items }: IMenuProps) {
   const [menuMobileClassName, setMenuMobileClassName] = useState(styles.menuMobile)
 
-  function handleOpenMobileMenu (e) {
+  function handleOpenMobileMenu (e: Event & { target: HTMLElement}) {
     const elemClasslist = e?.target?.classList
     const isMenuMobile = elemClasslist?.contains(styles.menuMobile)
     const isOpenMenuMobile = elemClasslist?.contains(styles.menuMobileOpen)

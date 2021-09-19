@@ -1,0 +1,32 @@
+.mediaCarousel {
+  margin-bottom: 0.75rem;
+  overflow: initial;
+
+  @media (min-width: 885px) {
+    margin-bottom: 4rem;
+  }
+
+  + .mediaCarousel {
+    margin-bottom: 0.75rem;
+
+    @media (min-width: 885px) {
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.mediaCarouselTitle {
+  color: var(--body-text-color);
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1rem;
+  padding: 0.25rem 20px 0.5rem;
+  min-width: 6rem;
+  text-decoration: none;
+
+  @media (min-width: 885px) {
+    font-size: 1.5rem;
+    padding: 0.5rem 0 1rem 60px;
+  }
+}
