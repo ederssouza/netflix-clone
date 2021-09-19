@@ -20,18 +20,25 @@
   </a>
 </p>
 
+<p align="center">
+  <img src="./docs/netflix-app-preview.gif" alt="Preview" />
+</p>
+
 ## About
 
-A simple Netflix clone with React JS and Next.js
+A simple Netflix clone with React JS and Next.js.
+
+**App URL:** [netflix-app-clone.vercel.app](https://netflix-app-clone.vercel.app)
 
 ## Built Using
 
-- [Next.js](https://nextjs.org) The React Framework for Production
-- [React JS](https://reactjs.org) JavaScript library
-- [TypeScript](https://www.typescriptlang.org) JavaScript With Syntax For Types.
-- [Jest](https://jestjs.io) JavaScript Testing Framework
-- [React Testing Library](https://testing-library.com) Testing utilities
-- [Sass](https://sass-lang.com) Syntactically Awesome Style Sheets
+- [Next.js](https://nextjs.org): The React Framework for Production
+- [React JS](https://reactjs.org): JavaScript library
+- [TypeScript](https://www.typescriptlang.org): JavaScript With Syntax For Types.
+- [Jest](https://jestjs.io): JavaScript Testing Framework
+- [React Testing Library](https://testing-library.com): Testing utilities
+- [Sass](https://sass-lang.com): Syntactically Awesome Style Sheets
+- [TMDB API](https://www.themoviedb.org/documentation/api): The Movie Database (TMDB)
 
 ## Getting Started
 
@@ -122,4 +129,5 @@ npm run test:coverage:watch
 ```
 
 ----
+
 Develop by Eder Sampaio 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/ederssouza).
