@@ -36,7 +36,7 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     } as any)
@@ -62,7 +62,7 @@ describe('Search page component', () => {
     expect(getDetailsByIdMocked).toHaveBeenCalledTimes(1)
     expect(getDetailsByIdMocked).toHaveReturnedWith({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     })
@@ -113,7 +113,7 @@ describe('Search page component', () => {
 
     getDetailsByIdMocked.mockReturnValueOnce({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     } as any)
@@ -133,7 +133,7 @@ describe('Search page component', () => {
     await waitFor(() => {
       expect(getDetailsByIdMocked).toHaveReturnedWith({
         data: {
-          results: [...mediaList.slice(0, 2)],
+          results: mediaList.slice(0, 2),
           total_pages: 10
         }
       })

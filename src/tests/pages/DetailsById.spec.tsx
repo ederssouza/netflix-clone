@@ -205,7 +205,7 @@ describe('DetailsById page component', () => {
 
     getTrendingsMocked.mockReturnValueOnce({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     } as any)

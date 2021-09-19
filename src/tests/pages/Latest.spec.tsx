@@ -20,7 +20,7 @@ describe('Latest page component', () => {
 
     getTrendingsMocked.mockReturnValueOnce({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     } as any)
@@ -36,7 +36,7 @@ describe('Latest page component', () => {
     expect(getTrendingsMocked).toHaveBeenCalledTimes(1)
     expect(getTrendingsMocked).toHaveReturnedWith({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     })
@@ -49,7 +49,7 @@ describe('Latest page component', () => {
 
     getTrendingsMocked.mockReturnValueOnce({
       data: {
-        results: [...mediaList.slice(0, 2)],
+        results: mediaList.slice(0, 2),
         total_pages: 10
       }
     } as any)
@@ -59,7 +59,7 @@ describe('Latest page component', () => {
     await waitFor(() => {
       expect(getTrendingsMocked).toHaveReturnedWith({
         data: {
-          results: [...mediaList.slice(0, 2)],
+          results: mediaList.slice(0, 2),
           total_pages: 10
         }
       })
