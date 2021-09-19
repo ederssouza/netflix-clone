@@ -46,8 +46,17 @@ export default function DetailsById ({ media, cast, providers }: IDetailsProps) 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await tmdbService.getTrendings({ page: 1 })
+  const results = res?.data?.results || []
+  const paths = results.map((item: IMedia) => {
+    const type = item.media_type
+    const id = String(item.id)
+
+    return { params: { type, id } }
+  })
+
   return {
-    paths: [],
+    paths,
     fallback: 'blocking'
   }
 }
