@@ -89,7 +89,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
           )}
 
           {(statusRequest === 'loading' || statusRequest === 'loadmore') && (
-            <div className={styles.container}>
+            <div className={statusRequest === 'loading' ? styles.containerPaddingTop : styles.container}>
               <CardsSkeletonLoader />
               <CardsSkeletonLoader />
               <CardsSkeletonLoader />
@@ -106,7 +106,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
         )}
       </main>
 
-      {mediaList?.length > 0 && statusRequest !== 'loading' && statusRequest !== 'loadmore' && (
+      {statusRequest === 'success' && mediaList?.length > 0 && (
         <div ref={footerRef}>
           <Footer />
         </div>

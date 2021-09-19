@@ -2,12 +2,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 41px);
+  height: calc(100vh - 100px);
   justify-content: center;
-
-  @media (min-width: 885px) {
-    height: calc(100vh - 68px);
-  }
 }
 
 .emptyStateTitle {

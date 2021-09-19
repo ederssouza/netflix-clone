@@ -84,7 +84,7 @@ export default function Latest () {
         )}
       </main>
 
-      {mediaList?.length > 0 && statusRequest !== 'loading' && statusRequest !== 'loadmore' && (
+      {statusRequest === 'success' && mediaList?.length > 0 && (
         <div ref={footerRef}>
           <Footer />
         </div>
