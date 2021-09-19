@@ -65,6 +65,6 @@ export function normalizeMediaPayload (data: any) {
 
 export function normalizeMediaSectionList (arr = [], media_type: 'movie' | 'tv') {
   return isValidArray(arr)
-    ? arr.map(item => normalizeMediaPayload({ ...item, media_type }))
+    ? arr.map(item => normalizeMediaPayload({ ...item, media_type: item.media_type || media_type }))
     : []
 }
