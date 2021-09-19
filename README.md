@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/ederssouza/netflix-clone">
-    <img src="https://travis-ci.org/ederssouza/netflix-clone.svg?branch=master" alt="Build Status" />
+  <a href="https://app.travis-ci.com/ederssouza/netflix-clone">
+    <img src="https://app.travis-ci.com/ederssouza/netflix-clone.svg?branch=master" alt="Build Status" />
   </a>
 
   <a href="https://coveralls.io/github/ederssouza/netflix-clone">
