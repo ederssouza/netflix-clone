@@ -24,10 +24,11 @@ interface IGenreByIdProps {
 export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const [mediaList, setMediaList] = useState([])
+  const [featuredMedia, setFeaturedMedia] = useState(null)
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const { isIntersecting } = useOnScreen(footerRef)
+  const { isIntersecting } = useOnScreen(footerRef, 500)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +55,12 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
     }
   }, [isIntersecting, hasMore])
 
+  useEffect(() => {
+    const mediaAleatoryIndex = Math.floor(Math.random() * mediaList.length)
+    const featured = mediaList[mediaAleatoryIndex]
+    setFeaturedMedia({ ...featured, media_type: type })
+  }, [mediaList, type])
+
   return (
     <>
       <Head>
@@ -69,7 +76,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
               {mediaList.length > 0 && (
                 <FeaturedMedia
                   genre={genre}
-                  media={{ ...mediaList[4], media_type: type }}
+                  media={featuredMedia}
                 />
               )}
 

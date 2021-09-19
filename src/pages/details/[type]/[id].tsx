@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { ICast, IMedia, IProvider } from '../../../@types'
@@ -45,7 +45,23 @@ export default function DetailsById ({ media, cast, providers }: IDetailsProps) 
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await tmdbService.getTrendings({ page: 1 })
+  const results = res?.data?.results || []
+  const paths = results.map((item: IMedia) => {
+    const type = item.media_type
+    const id = String(item.id)
+
+    return { params: { type, id } }
+  })
+
+  return {
+    paths,
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const { type, id } = params
     const objRequestParams = { type: String(type), id: String(id) }
@@ -62,7 +78,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         media: normalizeMediaDetailsPayload({ ...detailsResponse?.data, media_type: type }),
         providers: BRProviders?.[Object.keys(BRProviders)[1]] || [],
         cast: creditsResponse?.data?.cast || []
-      }
+      },
+      revalidate: 60 * 60 * 24 * 7 // 1 week
     }
   } catch (error) {
     const statusCode = error?.response?.status

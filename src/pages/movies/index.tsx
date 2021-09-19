@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async () => {
         featured,
         sections
       },
-      revalidate: 60 * 30 // 30 minutes
+      revalidate: 60 * 60 * 24 // 1 day
     }
   } catch (error) {
     const statusCode = error?.response?.status

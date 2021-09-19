@@ -3,37 +3,9 @@ import { mocked } from 'ts-jest/utils'
 
 import Home, { getStaticProps } from '../../pages/index'
 import { tmdbService } from '../../services/tmdb'
-import { normalizeMediaPayload } from '../../utils/functions'
+import { mediaRequestPayloadMock, movieListNormalizedMock, tvListNormalizedMock } from '../mocks/tmdb'
 
 jest.mock('../../services/tmdb')
-
-const mediaListMock = [
-  {
-    backdrop_path: '/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg',
-    first_air_date: '2021-08-11',
-    genre_ids: [16, 10759, 10765],
-    id: 91363,
-    name: 'What If...?',
-    origin_country: ['US'],
-    original_language: 'en',
-    overview: 'Baseada nos populares quadrinhos homônimos, a produção explorará histórias hipotéticas que poderiam ter mudado completamente o rumo do universo cinematográfico da editora.',
-    vote_average: 8.6
-  },
-  {
-    backdrop_path: '/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg',
-    first_air_date: '2021-08-11',
-    genre_ids: [16, 10759, 10765],
-    id: 91364,
-    name: 'What If...?',
-    origin_country: ['US'],
-    original_language: 'en',
-    overview: 'Baseada nos populares quadrinhos homônimos, a produção explorará histórias hipotéticas que poderiam ter mudado completamente o rumo do universo cinematográfico da editora.',
-    vote_average: 8.6
-  }
-]
-
-const tvListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
-const movieListNormalizedMock = mediaListMock.map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
 
 beforeEach(() => {
   const randomMock = jest.spyOn(global.Math, 'random')
@@ -51,7 +23,7 @@ describe('Home page component', () => {
     const defaultResponse = {
       data: {
         page: 1,
-        results: [...mediaListMock],
+        results: [...mediaRequestPayloadMock],
         total_pages: 1,
         total_results: 2
       }

@@ -1,3 +1,5 @@
+import { normalizeMediaPayload } from '../../utils/functions'
+
 const getVoteAverage = (index) => {
   switch (index) {
     case 0:
@@ -34,6 +36,37 @@ export const mediaList = Array.from({ length: 20 }).map((_, index) => {
     ]
   }
 })
+
+export const mediaRequestPayloadMock = [
+  {
+    backdrop_path: '/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg',
+    first_air_date: '2021-08-11',
+    genre_ids: [16, 10759, 10765],
+    id: 91363,
+    name: 'What If...?',
+    origin_country: ['US'],
+    original_language: 'en',
+    overview: 'Baseada nos populares quadrinhos homônimos, a produção explorará histórias hipotéticas que poderiam ter mudado completamente o rumo do universo cinematográfico da editora.',
+    vote_average: 8.6
+  },
+  {
+    backdrop_path: '/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg',
+    first_air_date: '2021-08-11',
+    genre_ids: [16, 10759, 10765],
+    id: 91364,
+    name: 'What If...?',
+    origin_country: ['US'],
+    original_language: 'en',
+    overview: 'Baseada nos populares quadrinhos homônimos, a produção explorará histórias hipotéticas que poderiam ter mudado completamente o rumo do universo cinematográfico da editora.',
+    vote_average: 8.6
+  }
+]
+
+export const tvListNormalizedMock = mediaRequestPayloadMock
+  .map(item => normalizeMediaPayload({ ...item, media_type: 'tv' }))
+
+export const movieListNormalizedMock = mediaRequestPayloadMock
+  .map(item => normalizeMediaPayload({ ...item, media_type: 'movie' }))
 
 export const providersMock = [
   {

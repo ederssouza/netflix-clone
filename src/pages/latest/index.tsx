@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 
@@ -12,16 +13,20 @@ import { tmdbService } from '../../services/tmdb'
 import { normalizeMediaPayload } from '../../utils/functions'
 import styles from './styles.module.scss'
 
-export default function Latest () {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [mediaList, setMediaList] = useState([])
+interface ILatestProps {
+  mediaFirstList?: IMedia[]
+}
+
+export default function Latest ({ mediaFirstList = [] }: ILatestProps) {
+  const [currentPage, setCurrentPage] = useState(2)
+  const [mediaList, setMediaList] = useState(mediaFirstList)
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const { isIntersecting } = useOnScreen(footerRef)
+  const { isIntersecting } = useOnScreen(footerRef, 500)
 
   function resetList () {
-    setCurrentPage(1)
+    setCurrentPage(2)
     setMediaList([])
     setHasMore(false)
   }
@@ -29,7 +34,7 @@ export default function Latest () {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        currentPage === 1 ? setStatusRequest('loading') : setStatusRequest('loadmore')
+        currentPage === 2 ? setStatusRequest('loading') : setStatusRequest('loadmore')
 
         const res = await tmdbService.getTrendings({ page: currentPage })
         const results = res.data.results.map((media: IMedia) => normalizeMediaPayload(media))
@@ -91,4 +96,37 @@ export default function Latest () {
       )}
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const res = await tmdbService.getTrendings({ page: 1 })
+    const results = res?.data?.results?.length
+      ? res.data.results.slice(0, 18)
+      : []
+    const mediaFirstList = results.map((media: IMedia) => normalizeMediaPayload(media))
+
+    return {
+      props: {
+        mediaFirstList
+      }
+    }
+  } catch (error) {
+    const statusCode = error?.response?.status
+
+    if (statusCode === 404) {
+      return {
+        notFound: true
+      }
+    }
+
+    const destination = statusCode ? `/internal-error?code=${statusCode}` : '/internal-error'
+
+    return {
+      redirect: {
+        permanent: false,
+        destination
+      }
+    }
+  }
 }

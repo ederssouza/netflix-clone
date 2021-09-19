@@ -31,6 +31,7 @@ A simple Netflix clone with React JS and Next.js
 - [TypeScript](https://www.typescriptlang.org) JavaScript With Syntax For Types.
 - [Jest](https://jestjs.io) JavaScript Testing Framework
 - [React Testing Library](https://testing-library.com) Testing utilities
+- [Sass](https://sass-lang.com) Syntactically Awesome Style Sheets
 
 ## Getting Started
 

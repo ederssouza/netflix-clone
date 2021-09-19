@@ -75,8 +75,8 @@ const MediaCarouselBase: ForwardRefRenderFunction<HTMLInputElement, IMediaCarous
       <Carousel
         ref={sliderRef}
         infinite={true}
-        customTransition="all 1.5s"
-        transitionDuration={1000}
+        customTransition="transform 400ms ease-in-out"
+        transitionDuration={400}
         partialVisible={true}
         draggable={false}
         responsive={responsive}
