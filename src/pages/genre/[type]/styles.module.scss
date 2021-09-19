@@ -6,16 +6,24 @@
   }
 }
 
+.containerPaddingTop {
+  padding: 100px 20px 0;
+
+  @media (min-width: 885px) {
+    padding: 100px 60px 0;
+  }
+}
+
 .grid {
   display: grid;
   grid-column-gap: 4px;
   grid-template-columns: repeat(2, 1fr);
 
   > div {
-    padding-top: 0.75rem;
+    margin-bottom: 0.75rem;
 
     @media (min-width: 885px) {
-      padding-top: 4rem;
+      margin-bottom: 4rem;
     }
   }
 
