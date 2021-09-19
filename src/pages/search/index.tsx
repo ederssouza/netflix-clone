@@ -25,7 +25,7 @@ export default function Search ({ q }: ISearchProps) {
   const [statusRequest, setStatusRequest] = useState('loading')
   const prevQuery = usePrevious(q)
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const { isIntersecting } = useOnScreen(footerRef)
+  const { isIntersecting } = useOnScreen(footerRef, 500)
 
   function resetList () {
     setCurrentPage(1)

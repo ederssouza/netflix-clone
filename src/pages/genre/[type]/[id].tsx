@@ -27,7 +27,7 @@ export default function GenreById ({ genre, type, id }: IGenreByIdProps) {
   const [hasMore, setHasMore] = useState(true)
   const [statusRequest, setStatusRequest] = useState('loading')
   const footerRef = useRef<HTMLDivElement | null>(null)
-  const { isIntersecting } = useOnScreen(footerRef)
+  const { isIntersecting } = useOnScreen(footerRef, 500)
 
   useEffect(() => {
     const fetchData = async () => {
