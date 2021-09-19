@@ -14,6 +14,10 @@
   <a href="https://coveralls.io/github/ederssouza/netflix-clone">
     <img src="https://coveralls.io/repos/github/ederssouza/netflix-clone/badge.svg" alt="Coverage Status" />
   </a>
+
+  <a href="https://github.com/ederssouza/netflix-clone/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="Coverage Status" />
+  </a>
 </p>
 
 ## About
