@@ -11,8 +11,8 @@
     <img src="https://app.travis-ci.com/ederssouza/netflix-clone.svg?branch=master" alt="Build Status" />
   </a>
 
-  <a href="https://coveralls.io/github/ederssouza/netflix-clone">
-    <img src="https://coveralls.io/repos/github/ederssouza/netflix-clone/badge.svg" alt="Coverage Status" />
+  <a href='https://coveralls.io/github/ederssouza/netflix-clone?branch=master'>
+    <img src='https://coveralls.io/repos/github/ederssouza/netflix-clone/badge.svg?branch=master' alt='Coverage Status' />
   </a>
 
   <a href="https://github.com/ederssouza/netflix-clone/blob/master/LICENSE.md">
