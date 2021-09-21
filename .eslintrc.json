@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "next/core-web-vitals",
@@ -23,14 +24,6 @@
     "eslint-plugin-import-helpers"
   ],
   "globals": {
-    "jest": true,
-    "describe": true,
-    "it": true,
-    "expect": true,
-    "beforeEach": true,
-    "beforeAll": true,
-    "afterEach": true,
-    "afterAll": true
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
