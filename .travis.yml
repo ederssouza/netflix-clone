@@ -8,7 +8,7 @@ cache:
     "node_modules"
 
 before_script:
-  - npm run test:coverage
+  - npm run test
 
 after_success:
-  - "cat ./coverage/lcov.info"
+  - "cat ./coverage/lcov.info | npm run test:coverage"
